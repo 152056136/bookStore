@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 设置步骤
+	1、添加spring的约束文件
+	2、需要处理的事：
+		生产mybatis工厂
+		得到整个项目的xml文件
+		起别名
+		扫描mapper文件；		
+ -->
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc 
+     http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx 
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<!-- mybatis sessionFactory配置，生产工厂 -->
+	<bean  id="sqlsessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--引入数据源，生成sessionFactory -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 扫描xml文件 -->
+		<!-- 暂时，扫描整个包，不止是对xml进行扫描 -->
+		<property name="mapperLocations" value="classpath:mapping/*.xml"></property>
+		<!-- 起别名，对pojo类 -->                    
+		<property name="typeAliasesPackage" value="com.nsc.backend.entity"></property>
+		
+	</bean>
+	<!-- 扫描mapper.java包 -->
+	<bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.nsc.backend.mapper"></property>
+		
+	</bean>
+	
+	
+	
+	</beans>

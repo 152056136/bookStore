@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.CartMapper">
+	
+	<!-- 配置查找出cart，外键user，book一对一的resultMap -->
+	<resultMap type="cart" id="cartResultMap">
+		<id column="cart_id" property="cartId" />
+		<result column="cart_joinCartTime" property="cartJoinTime"/>		
+		<result column="cart_totalUndiscount" property="cartTotalUndiscount"/>		
+		<result column="cart_unitPrice" property="cartUnitPrice"/>		
+		<result column="cart_count" property="cartCount"/>
+		<!-- 封装user信息 -->
+		<association property="user" javaType="com.nsc.backend.entity.User">
+			<id column="user_id" property="userId"/>
+			<id column="user_openId" property="userOpenId"/>
+			<id column="user_nickName" property="userNickName"/>
+		</association>
+		<!-- 如果存在可以不进行封装 -->		
+		<association property="book" javaType="com.nsc.backend.entity.Book">
+			<id column="book_id" property="bookId"/>
+			<result column="book_ISBN" property="bookISBN"/>
+			<result column="book_name" property="bookName"/>
+			<result column="book_unitPrice" property="bookUnitPrice"/>
+			<result column="book_preface" property="bookPreface"/>
+			<result column="book_conBrief" property="bookConBrief"/>
+			<result column="book_authorBrief" property="bookAuthorBrief"/>
+			<result column="book_catalog" property="bookCatalog"/>
+			<result column="book_author" property="bookAuthor"/>
+			<result column="book_press" property="bookPress"/>
+			<result column="book_pubTime" property="bookPubTime"/>
+			<result column="book_priTime" property="bookPriTime"/>
+			<result column="book_paper" property="bookPaper"/>
+			<result column="book_packing" property="bookPacking"/>
+			<result column="book_suit" property="bookSuit"/>
+			<result column="book_stock" property="bookStock"/>
+			<result column="book_validityPeriod" property="bookValidityPeriod"/>
+		</association>		
+	</resultMap>
+	<!-- 查找出bookId关联的cart表，如果不存在，创建新的cart保存，存在只需要改变count一个属性 -->
+	<select id="getCartByBookId"  resultMap="cartResultMap">
+		select 
+		cart.* ,
+		user.user_openId,
+		user.user_id,
+		book.book_id,
+		book.book_name
+		from cart ,user,book
+		where cart.book_id = #{0}  	     
+		and 	cart.user_openId = #{1}  
+		
+	</select>
+	
+	<!-- 根据cartId的list集合，将List<Cart>查询出来 -->
+	<select id="findCartByList" resultMap="cartResultMap">
+		SELECT
+		cart.*,
+		book.*,
+		user.*
+		from cart
+		LEFT  JOIN book
+		on cart.book_id = book.book_id
+		LEFT  JOIN user
+		on  cart.user_openId = user.user_openId
+		where cart.cart_id  in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}			
+		</foreach>
+	</select>
+	
+	<!-- cartid查找出cart -->
+	<select id="findCartByCartId" parameterType="Integer" resultMap="cartResultMap">
+			select 
+			cart.* from cart
+			where cart_id = #{cartId}
+	</select>
+	<!--当用户修改购物车数量，更新购物车信息 -->	
+	<update id="updateBookCount" parameterType="cart">
+		update cart 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="cartJoinTime!=null">cart_joinCartTime = #{cartJoinTime} ,</if>
+			<if test="cartCount!=null"> cart_count= #{cartCount} ,</if>
+			<if test="cartUnitPrice">cart_unitPrice = #{cartUnitPrice},</if>
+			<if test="cartTotalUndiscount">cart_totalUndiscount = #{cartTotalUndiscount} ,</if>
+			<if test="book!=null">book_id = #{book.bookId} ,</if>
+			<if test="user!=null">user_openId = #{user.userOpenId} ,</if>
+		</trim>
+		where cart_id = #{cartId}
+	</update>
+	<!-- 更新数据库中购物车信息 -->
+	<update id="updateCart" parameterType="cart" >
+		update cart 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="cartJoinTime!=null">cart_joinCartTime = #{cartJoinTime} ,</if>
+			<if test="cartCount!=null"> cart_count= #{cartCount} ,</if>
+			<if test="cartUnitPrice">cart_unitPrice = #{cartUnitPrice},</if>
+			<if test="cartTotalUndiscount">cart_totalUndiscount = #{cartTotalUndiscount} ,</if>
+			<if test="book!=null">book_id = #{book.bookId} ,</if>
+			<if test="user!=null">user_openId = #{user.userOpenId} ,</if>
+		</trim>
+		where book_id = #{book.bookId}
+		and user_openId = #{user.userOpenId}
+	</update>
+	<!-- 保存购车信息到数据库 -->
+	<insert id="saveCart" parameterType="cart" >
+	  <selectKey resultType="Integer" order="AFTER" keyProperty="cartId">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+		insert into cart
+		<trim prefix="("  suffix=")"  suffixOverrides=",">
+			<!-- cart_id 不先进行测试  -->
+			<if test="cartId !=null">
+				cart_id,
+			</if>
+			<if test="cartCount !=null">
+				cart_count,
+			</if>
+			<if test="cartUnitPrice !=null">
+				cart_unitPrice,
+			</if>
+			<if test="cartTotalUndiscount !=null">
+				cart_totalUndiscount,
+			</if>
+			<if test="cartJoinTime !=null">
+				cart_joinCartTime,
+			</if>
+			<if test="book!=null">
+				book_id,
+			</if>
+			<if test="user!=null">
+				user_openId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cartId !=null">
+				#{cartId },
+			</if>
+			<if test="cartCount !=null">
+				#{cartCount },
+			</if>			
+			<if test="cartUnitPrice !=null">
+				#{cartUnitPrice },
+			</if>
+			<if test="cartTotalUndiscount !=null">
+				#{cartTotalUndiscount },
+			</if>
+			<if test="cartJoinTime !=null">
+				#{ cartJoinTime},
+			</if>
+			<if test="book !=null">
+				#{book.bookId },
+			</if>
+			<if test="user!=null">
+				#{user.userOpenId },
+			</if>
+		</trim>
+	</insert>
+	<!--根据用户id将此用户的购物信息，查找出来 -->
+	<select id="showCart" parameterType="String" resultMap="cartResultMap">
+		select 
+		c.*,
+		b.book_ISBN,
+		b.book_name,
+		b.book_unitPrice,
+		b.book_press,
+		b.book_author,
+		b.book_pubTime
+		from cart c
+		left join book b
+		on c.book_id = b.book_id
+		where user_openId = #{openId}
+	</select>
+		
+	<!--将list传向持久层，删除购物车信息 -->
+	<delete id="deleteCart" >
+		delete 
+		from cart 
+		where cart_id in
+		<foreach collection="list" item="item"  open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	
+</mapper>
+
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.BookMapper">
+	
+	<!-- 关联book类别的resultMap -->
+	<resultMap type="book" id="bookResultMap">
+		<id column="book_id" property="bookId"/>
+		<result column="book_ISBN" property="bookISBN"/>
+		<result column="book_name" property="bookName"/>
+		<result column="book_unitPrice" property="bookUnitPrice"/>
+		<result column="book_preface" property="bookPreface"/>
+		<result column="book_conBrief" property="bookConBrief"/>
+		<result column="book_authorBrief" property="bookAuthorBrief"/>
+		<result column="book_catalog" property="bookCatalog"/>
+		<result column="book_author" property="bookAuthor"/>
+		<result column="book_press" property="bookPress"/>
+		<result column="book_pubTime" property="bookPubTime"/>
+		<result column="book_priTime" property="bookPriTime"/>
+		<result column="book_edition" property="bookEdition"/>
+		<result column="book_paper" property="bookPaper"/>
+		<result column="book_packing" property="bookPacking"/>
+		<result column="book_suit" property="bookSuit"/>
+		<result column="book_stock" property="bookStock"/>
+		<result column="book_validityPeriod" property="bookValidityPeriod"/>
+		<result column="book_originalPrice" property="bookOriginalPrice"/>
+		<result column="book_discount" property="bookDiscount"/>
+		
+		<!-- 作为book类外键 ,封装到book表中返回-->
+		<!--  -->
+		<association property="secondCate" javaType="com.nsc.backend.entity.SecondCategory" >
+				<id property="secondCateId" column="secondCate_id"/>
+				<result property="secondCateName" column="secondCate_name"/>
+		</association>		
+	</resultMap>
+	<!-- 根据secondCateId查找出secondCateName -->
+	<select id="findsecCateIdByName" parameterType="Integer" resultType="String">
+		select 
+		sec.secondCate_name
+		from secondcategory sec
+		where sec.secondCate_id = #{secondCateId}
+	</select>
+	<!-- 根据二级分类id，查询出二级分类下面的全部books -->
+	<!-- 直接访问，数据库表的外键，secondCate_name,与hibernate的区别 -->
+	<select id="findCountBySecondCateId" parameterType="String" resultType="Integer">
+		select 	count(*) 
+		from book 
+		where book.secondCate_name = #{secondCateName}
+	</select>
+	
+	<!-- 根据 secondCateId查找书籍，分页显示 -->
+	<select id="findBooksBySecondCateId"  resultMap="bookResultMap">
+		select 
+		book.*
+		from book
+		where book.secondCate_name = #{0}
+		limit #{1},#{2}
+	</select>
+	<!--根据bookid查找到book -->
+	<select id="findBookById" parameterType="Integer" resultMap="bookResultMap">
+		
+		select 
+		book.*
+		from book
+		where book.book_id = #{bookId}
+	</select>
+	
+</mapper>
+
+
