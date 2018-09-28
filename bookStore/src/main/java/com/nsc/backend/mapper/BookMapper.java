@@ -14,8 +14,10 @@ public interface BookMapper {
 	List<Book> findBooksBySecondCateId(String secondCateName, int begin, int limit);
 	//根据secondId查找出secondName
 	String findsecCateIdByName(Integer secondCateId);
+
 	//根据bookid查找到book
 	Book findBookById(Integer bookId);
+<<<<<<< HEAD
 	//根据出版社查找并返回书的所有数据
 	ArrayList<Book> findBookByPress();
 	//畅销的查看全部
@@ -34,4 +36,10 @@ public interface BookMapper {
 	ArrayList<Book> education(String secondCateName);
 	//IT科技的查看全部
 	ArrayList<Book> technology(String cateName);
+=======
+	
+	//查找出版社并返回书的所有数据
+	ArrayList<Book> findBookByPress();
+	
+>>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 }

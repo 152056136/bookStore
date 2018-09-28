@@ -33,7 +33,10 @@ import com.nsc.web.util.page.PageBean;
 @Controller
 @RequestMapping("/book")
 public class BookController {
+<<<<<<< HEAD
 
+=======
+>>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 	@Autowired
 	private IBookService bookServiceImpl;
 	@Autowired
@@ -44,14 +47,22 @@ public class BookController {
 	private IAddressService addressService; 
 	
 	//点击二级分类，图书信息显示，使用分页	
+<<<<<<< HEAD
 	@RequestMapping("bySecondCateId")//Y-get
+=======
+	@RequestMapping("bySecondCateId")
+>>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 	public @ResponseBody PageBean  findBooksBySecondCaeId(Integer secondCateId,Integer currentPageNum){
 		//根据传递的二级分类id，分页查找相应的书籍
 	 	PageBean<Book> pageBean = bookServiceImpl.findBooksBySecondCaeId(secondCateId,currentPageNum);
 		return pageBean;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("bySecondCateIdName")//N
+=======
+	@RequestMapping("bySecondCateIdName")
+>>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 	public @ResponseBody PageBean  findBooksBySecondCaeId_Name(Integer secondCateId,String secondCateName,Integer currentPageNum){
 		//根据传递的二级分类id，分页查找相应的书籍
 	 	PageBean<Book> pageBean = bookServiceImpl.findBooksBySecondCaeId_Name(secondCateId,secondCateName,currentPageNum);	 	

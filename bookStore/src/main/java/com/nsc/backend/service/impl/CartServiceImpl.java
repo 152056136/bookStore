@@ -35,6 +35,7 @@ public class CartServiceImpl implements ICartService{
 	}
 	//根据用户id将此用户的购物信息，查找出来
 	public List<Cart> showCart(String openId) {
+		System.out.println("============");
 		List<Cart> carts = cartMapper.showCart(openId);
 		return carts;
 	}
