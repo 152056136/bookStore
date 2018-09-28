@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 关联book类别的resultMap -->
 	<resultMap type="book" id="bookResultMap">
-		<id column="book_id" property="bookId"/>
+		<id     column="book_id" property="bookId"/>
 		<result column="book_ISBN" property="bookISBN"/>
 		<result column="book_name" property="bookName"/>
 		<result column="book_unitPrice" property="bookUnitPrice"/>
@@ -15,18 +15,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="book_authorBrief" property="bookAuthorBrief"/>
 		<result column="book_catalog" property="bookCatalog"/>
 		<result column="book_author" property="bookAuthor"/>
-		<result column="book_press" property="bookPress"/>
 		<result column="book_pubTime" property="bookPubTime"/>
 		<result column="book_priTime" property="bookPriTime"/>
-		<result column="book_edition" property="bookEdition"/>
+		<result column="book_edtion" property="bookEdtion"/>
+		<result column="book_impression" property="bookImpression"/>
+		<result column="book_size" property="bookSize"/>
 		<result column="book_paper" property="bookPaper"/>
 		<result column="book_packing" property="bookPacking"/>
 		<result column="book_suit" property="bookSuit"/>
+		<result column="book_imgUrl" property="bookImgUrl"/>
 		<result column="book_stock" property="bookStock"/>
 		<result column="book_validityPeriod" property="bookValidityPeriod"/>
 		<result column="book_originalPrice" property="bookOriginalPrice"/>
+		<result column="book_isDetele" property="bookIsDetele"/>
+		<result column="book_keyWord1" property="bookKeyWord1"/>
+		<result column="book_keyWord2" property="bookKeyWord2"/>
+		<result column="book_seriesAb" property="bookSeriesAb"/>
+		<result column="book_publicSort" property="bookPublicSort"/>
+		<result column="book_code" property="bookCode"/>
+		<result column="book_titles" property="bookTitles"/>
+		<result column="book_measurementUnit" property="bookMeasurementUnit"/>
+		<result column="book_scores" property="bookScores"/>
 		<result column="book_discount" property="bookDiscount"/>
-		
+		<result column="book_note" property="bookNote"/>
 		<!-- 作为book类外键 ,封装到book表中返回-->
 		<!--  -->
 		<association property="secondCate" javaType="com.nsc.backend.entity.SecondCategory" >
@@ -34,6 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<result property="secondCateName" column="secondCate_name"/>
 		</association>		
 	</resultMap>
+	
+	
 	<!-- 根据secondCateId查找出secondCateName -->
 	<select id="findsecCateIdByName" parameterType="Integer" resultType="String">
 		select 
@@ -46,8 +59,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findCountBySecondCateId" parameterType="String" resultType="Integer">
 		select 	count(*) 
 		from book 
-		where book.secondCate_name = #{secondCateName}
+		where book.secondCate_name = #{0}
 	</select>
+	
+	<select id="findCountBySecondCateIdName" parameterType="String" resultType="Integer">
+		select 	count(*) 
+		from book 
+		where book.secondCate_name = #{1}
+		and   book.secondCate_Id=#{0}
+	</select>
+	
+	
 	
 	<!-- 根据 secondCateId查找书籍，分页显示 -->
 	<select id="findBooksBySecondCateId"  resultMap="bookResultMap">
@@ -66,6 +88,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where book.book_id = #{bookId}
 	</select>
 	
+	<!-- 根据出版社查找并返回书的所有数据 -->
+	<select id="findBookByPress" resultMap="bookResultMap">
+	   select 
+	   book.*
+	   from book
+	</select>
+	
+	<!-- 畅销的查看全部 -->
+	<select id="bestSelling" resultMap="bookResultMap">
+	    select 
+	    book.*
+	    from book,orderitem
+	    where orderitem.book_id=book.book_id
+	    order by orderitem.oitem_count DESC
+	</select>
+	
+	<!-- 根据三级分类Id查找三级分类名 -->
+	<select id="findthirdCateNameById" resultMap="bookResultMap">
+	   select
+	   thirdcategory.thirdCate_name
+	   from thirdcategory
+	   where thirdcategory.thirdCate_id=#{thirdCate_id}
+	</select>
+	
+	<!-- 文学小说的查看全部 -->
+	<select id="literaryNovel" resultMap="bookResultMap">
+	    select 
+	    book.*
+	    from book
+	    where book.cate_name=#{cateName}
+	    
+	</select>
+	
+	<!-- 根据一级分类id查找一级分类名 -->
+	<select id="findCateNameById" parameterType="Integer" resultType="String">
+	    select 
+	    category.cate_name
+	    from category
+	    where category.cate_id=#{cateId}
+	</select>
+	
+	<!-- 人文历史的查看全部 -->
+	<select id="socialScience" resultMap="bookResultMap">
+	   select 
+	   book.*
+	   from book
+	   where book.cate_name=#{cateName}
+	</select>
+	
+	
+	<!-- 经济管理的查看全部 -->
+	<select id="economicManagement" resultMap="bookResultMap">
+	   select 
+	   book.*
+	   from book
+	   where book.cate_name=#{cateName}
+	</select>
+	
+	
+	<!-- 教育学习的查看全部 -->
+	<select id="education" resultMap="bookResultMap">
+	   select 
+	   book.*
+	   from book
+	   where book.secondCate_name=#{secondCateName}
+	</select>
+	
+	
+	<!-- IT科技的查看全部 -->
+	<select id="technology" resultMap="bookResultMap">
+	   select 
+	   book.*
+	   from book
+	   where book.cate_name=#{cateName}
+	</select>
 </mapper>
 
 

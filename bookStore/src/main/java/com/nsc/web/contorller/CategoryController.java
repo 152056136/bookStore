@@ -25,7 +25,7 @@ public class CategoryController {
 	private ICategoryService cateServiceImpl;
 	
 	//首先查找总分类，返回小程序页面（默认返回第一个 总分类的子分类）
-	@RequestMapping("findCategories")
+	@RequestMapping("findCategories")//Y-post
 	public @ResponseBody List<Category> findCategories(){
 		
 		//首先查找出所有一级分类，并将一级分类的第一个的子类全部封装
@@ -46,7 +46,7 @@ public class CategoryController {
 		return cateList;
 	}
 	//点击一级分类，显示相应的二级分类
-	@RequestMapping("secCatesById")
+	@RequestMapping("secCatesById")//Y-get
 	public @ResponseBody List<SecondCategory> findsecCatesById( Integer cateId ){
 		List<SecondCategory> secList = cateServiceImpl.findsecCatesById(cateId);
 		int length = secList.size();

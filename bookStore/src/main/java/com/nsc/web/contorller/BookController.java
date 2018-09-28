@@ -33,8 +33,7 @@ import com.nsc.web.util.page.PageBean;
 @Controller
 @RequestMapping("/book")
 public class BookController {
-	
-	
+
 	@Autowired
 	private IBookService bookServiceImpl;
 	@Autowired
@@ -44,13 +43,19 @@ public class BookController {
 	@Autowired
 	private IAddressService addressService; 
 	
-	//点击二级分类，图书信息显示，使用分页
-	@RequestMapping("bySecondCateId")
+	//点击二级分类，图书信息显示，使用分页	
+	@RequestMapping("bySecondCateId")//Y-get
 	public @ResponseBody PageBean  findBooksBySecondCaeId(Integer secondCateId,Integer currentPageNum){
 		//根据传递的二级分类id，分页查找相应的书籍
 	 	PageBean<Book> pageBean = bookServiceImpl.findBooksBySecondCaeId(secondCateId,currentPageNum);
-	 	
 		return pageBean;
+	}
+	
+	@RequestMapping("bySecondCateIdName")//N
+	public @ResponseBody PageBean  findBooksBySecondCaeId_Name(Integer secondCateId,String secondCateName,Integer currentPageNum){
+		//根据传递的二级分类id，分页查找相应的书籍
+	 	PageBean<Book> pageBean = bookServiceImpl.findBooksBySecondCaeId_Name(secondCateId,secondCateName,currentPageNum);	 	
+		return pageBean;	
 	}
 	
 	/**
@@ -59,7 +64,7 @@ public class BookController {
 	 * @param bookId
 	 * @param count
 	 */
-	@RequestMapping("addBookToOrder")
+	@RequestMapping("addBookToOrder")//N
 	@ResponseBody 
 	public BackState addBookToOrder( @RequestBody String para){
 		JSONObject json = JSONObject.parseObject(para);
@@ -77,8 +82,7 @@ public class BookController {
 		//设置当前时间，保存订单
 		Date parse = null;
 		
-		
-		
+
 		try {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat();

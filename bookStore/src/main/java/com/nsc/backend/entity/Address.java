@@ -83,6 +83,13 @@ public class Address {
 	public void setAddDefault(Boolean addDefault) {
 		this.addDefault = addDefault;
 	}
+	@Override
+	public String toString() {
+		return "Address [addId=" + addId + ", addUserName=" + addUserName + ", addPostalCode=" + addPostalCode
+				+ ", addCounty=" + addCounty + ", addProvince=" + addProvince + ", addCity=" + addCity
+				+ ", addDetailInfo=" + addDetailInfo + ", addNationalCode=" + addNationalCode + ", addTele=" + addTele
+				+ ", addDefault=" + addDefault + ", user=" + user + "]";
+	}
 	
 	
 }

@@ -53,7 +53,7 @@ public class CartController {
 	 * @param unitPrice
 	 * @param count
 	 */
-	@RequestMapping("addToCart")
+	@RequestMapping("addToCart")//N
 	@ResponseBody
 	public BackState addToCart(String openId,Integer bookId,Double unitPrice,Integer count){
 		/**

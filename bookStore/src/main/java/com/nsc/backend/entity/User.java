@@ -7,12 +7,12 @@ package com.nsc.backend.entity;
 public class User {
 	private Integer userId;
 	private String  userOpenId;
-	private String  userNickName;
-	private String 	userGender;
+	private String  userNickName;//用户昵称
+	private String 	userGender;//用户性别
 	private String 	userCity;
 	private String	userProvince;
 	private String	userCountry;
-	private String 	userAvatarUrl;
+	private String 	userAvatarUrl;//用户名
 	
 	
 	@Override

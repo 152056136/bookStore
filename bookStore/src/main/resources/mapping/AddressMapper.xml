@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="add_tele" property="addTele"/>		
 			<result column="add_default" property="addDefault"/>		
 		</resultMap>
+		
 		<!--接受用户的收货的地址 -->
 		<insert id="saveWeiAdd" parameterType="address">
 			<selectKey resultType="Integer" order="AFTER" keyProperty="addId">
