@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserByopenId" parameterType="String" resultMap="userResultMap">
 		select
 		user.user_id,
-		user.user_nickName ,
+		user.user_nickName,
 		user.user_openId
 		from  user
 		where user.user_openId = #{openId}

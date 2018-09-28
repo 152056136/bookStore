@@ -19,19 +19,32 @@ public class Book {
 		private String bookAuthorBrief;
 		private String bookCatalog;
 		private String bookAuthor;
-		private String bookPress;
+		//private String bookPress;
 		private Date bookPubTime;
 		private Date bookPriTime;
-		private String bookEdition;
+		private String bookEdtion;
 		private String bookImpression;
+		private String bookSize;
 		private String bookPaper;
 		private String bookPacking;
 		private String bookSuit;
 		private String bookImgUrl;
 		private Integer bookStock;
 		private Date  bookValidityPeriod;
-		private Double bookOriginalPrice;
-		private Double bookDiscount;
+		private String bookOriginalPrice;
+		private int bookIsDetele;
+		private String bookKeyWord1;
+		private String bookKeyWord2;
+		private String bookSeriesAb;
+		private String bookPublicSort;
+		private String bookCode;
+		private String bookTitles;
+		private String bookMeasurementUnit;
+		private String bookScores;
+		private Integer bookDiscount;
+		private String bookNote;
+		
+		
 		//关联外键属性,一本书根据之前的数据，设计两个外键,可以直接关联一级也可以关联二级分类
 		private  Category category;
 		private  SecondCategory  secondCate;
@@ -64,12 +77,7 @@ public class Book {
 		public void setBookName(String bookName) {
 			this.bookName = bookName;
 		}
-		public Double getBookUnitPrice() {
-			return bookUnitPrice;
-		}
-		public void setBookUnitPrice(Double bookUnitPrice) {
-			this.bookUnitPrice = bookUnitPrice;
-		}
+		
 		public String getBookPreface() {
 			return bookPreface;
 		}
@@ -100,12 +108,7 @@ public class Book {
 		public void setBookAuthor(String bookAuthor) {
 			this.bookAuthor = bookAuthor;
 		}
-		public String getBookPress() {
-			return bookPress;
-		}
-		public void setBookPress(String bookPress) {
-			this.bookPress = bookPress;
-		}
+		
 		public Date getBookPubTime() {
 			return bookPubTime;
 		}
@@ -118,12 +121,7 @@ public class Book {
 		public void setBookPriTime(Date bookPriTime) {
 			this.bookPriTime = bookPriTime;
 		}
-		public String getBookEdition() {
-			return bookEdition;
-		}
-		public void setBookEdition(String bookEdition) {
-			this.bookEdition = bookEdition;
-		}
+		
 		public String getBookImpression() {
 			return bookImpression;
 		}
@@ -166,23 +164,104 @@ public class Book {
 		public void setBookValidityPeriod(Date bookValidityPeriod) {
 			this.bookValidityPeriod = bookValidityPeriod;
 		}
-		public Double getBookOriginalPrice() {
-			return bookOriginalPrice;
-		}
-		public void setBookOriginalPrice(Double bookOriginalPrice) {
-			this.bookOriginalPrice = bookOriginalPrice;
-		}
-		public Double getBookDiscount() {
-			return bookDiscount;
-		}
-		public void setBookDiscount(Double bookDiscount) {
-			this.bookDiscount = bookDiscount;
-		}
+		
+		
 		public Category getCategory() {
 			return category;
 		}
 		public void setCategory(Category category) {
 			this.category = category;
+		}
+		
+		public Double getBookUnitPrice() {
+			return bookUnitPrice;
+		}
+		public void setBookUnitPrice(Double bookUnitPrice) {
+			this.bookUnitPrice = bookUnitPrice;
+		}
+		public String getBookEdtion() {
+			return bookEdtion;
+		}
+		public void setBookEdtion(String bookEdtion) {
+			this.bookEdtion = bookEdtion;
+		}
+		public String getBookSize() {
+			return bookSize;
+		}
+		public void setBookSize(String bookSize) {
+			this.bookSize = bookSize;
+		}
+		public String getBookOriginalPrice() {
+			return bookOriginalPrice;
+		}
+		public void setBookOriginalPrice(String bookOriginalPrice) {
+			this.bookOriginalPrice = bookOriginalPrice;
+		}
+		public int getBookIsDetele() {
+			return bookIsDetele;
+		}
+		public void setBookIsDetele(int bookIsDetele) {
+			this.bookIsDetele = bookIsDetele;
+		}
+		public String getBookKeyWord1() {
+			return bookKeyWord1;
+		}
+		public void setBookKeyWord1(String bookKeyWord1) {
+			this.bookKeyWord1 = bookKeyWord1;
+		}
+		public String getBookKeyWord2() {
+			return bookKeyWord2;
+		}
+		public void setBookKeyWord2(String bookKeyWord2) {
+			this.bookKeyWord2 = bookKeyWord2;
+		}
+		public String getBookSeriesAb() {
+			return bookSeriesAb;
+		}
+		public void setBookSeriesAb(String bookSeriesAb) {
+			this.bookSeriesAb = bookSeriesAb;
+		}
+		public String getBookPublicSort() {
+			return bookPublicSort;
+		}
+		public void setBookPublicSort(String bookPublicSort) {
+			this.bookPublicSort = bookPublicSort;
+		}
+		public String getBookCode() {
+			return bookCode;
+		}
+		public void setBookCode(String bookCode) {
+			this.bookCode = bookCode;
+		}
+		public String getBookTitles() {
+			return bookTitles;
+		}
+		public void setBookTitles(String bookTitles) {
+			this.bookTitles = bookTitles;
+		}
+		public String getBookMeasurementUnit() {
+			return bookMeasurementUnit;
+		}
+		public void setBookMeasurementUnit(String bookMeasurementUnit) {
+			this.bookMeasurementUnit = bookMeasurementUnit;
+		}
+		public String getBookScores() {
+			return bookScores;
+		}
+		public void setBookScores(String bookScores) {
+			this.bookScores = bookScores;
+		}
+		public Integer getBookDiscount() {
+			return bookDiscount;
+		}
+		public void setBookDiscount(Integer bookDiscount) {
+			this.bookDiscount = bookDiscount;
+		}
+		public String getBookNote() {
+			return bookNote;
+		}
+		public void setBookNote(String bookNote) {
+			this.bookNote = bookNote;
 		}
 		public SecondCategory getSecondCate() {
 			return secondCate;

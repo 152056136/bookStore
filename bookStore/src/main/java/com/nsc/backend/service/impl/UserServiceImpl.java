@@ -17,7 +17,9 @@ public class UserServiceImpl implements IUserService {
 	
 	//根据openId查找出用户
 	public User findUserByopenId(String openId) {
+		System.out.println("IML========"+openId);
 		User user = userMapper.findUserByopenId(openId);
+		System.out.println("======++++====="+user);
 		return user;
 	}
 	//将用户的openId保存到数据库

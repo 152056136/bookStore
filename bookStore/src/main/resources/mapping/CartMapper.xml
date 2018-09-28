@@ -28,7 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="book_authorBrief" property="bookAuthorBrief"/>
 			<result column="book_catalog" property="bookCatalog"/>
 			<result column="book_author" property="bookAuthor"/>
-			<result column="book_press" property="bookPress"/>
 			<result column="book_pubTime" property="bookPubTime"/>
 			<result column="book_priTime" property="bookPriTime"/>
 			<result column="book_paper" property="bookPaper"/>
@@ -36,7 +35,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="book_suit" property="bookSuit"/>
 			<result column="book_stock" property="bookStock"/>
 			<result column="book_validityPeriod" property="bookValidityPeriod"/>
-		</association>		
+		</association>	
+		<!-- 封装distributor信息 -->
+		<association property="distributor" javaType="com.nsc.backend.entity.Distributor">
+			<id column="distributor_id" property="disId"/>
+			<result column="distributor_press" property="disPress"/>
+			<result column="distributor_province" property="disProvince"/>
+			<result column="distributor_city" property="disCity"/>
+			<result column="distributor_contact" property="disContact"/>
+			<result column="distributor_conPhone" property="disConphone"/>
+			<result column="distributor_landline" property="disLandline"/>
+			<result column="distributor_note" property="disNote"/>
+		</association>			
 	</resultMap>
 	<!-- 查找出bookId关联的cart表，如果不存在，创建新的cart保存，存在只需要改变count一个属性 -->
 	<select id="getCartByBookId"  resultMap="cartResultMap">
@@ -48,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		book.book_name
 		from cart ,user,book
 		where cart.book_id = #{0}  	     
-		and 	cart.user_openId = #{1}  
+		and cart.user_openId = #{1}  
 		
 	</select>
 	
@@ -163,13 +173,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		b.book_ISBN,
 		b.book_name,
 		b.book_unitPrice,
-		b.book_press,
+		d.distributor_press,
 		b.book_author,
 		b.book_pubTime
-		from cart c
-		left join book b
-		on c.book_id = b.book_id
-		where user_openId = #{openId}
+		from cart c, book b, distributor d
+		where user_openId = #{openId} 
+		and c.book_id = b.book_id 
+		and b.distributor_id = d.distributor_id
 	</select>
 		
 	<!--将list传向持久层，删除购物车信息 -->

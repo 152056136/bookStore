@@ -26,7 +26,7 @@ import com.nsc.backend.service.IOrderService;
 import com.nsc.backend.service.IUserService;
 import com.nsc.web.util.backstate.BackState;
 
-/**
+/**    
  * 将购物车，提交生成订单
  * @author Lenovo
  */
@@ -161,6 +161,7 @@ public class OrderController {
 		User user  = userServiceImpl.findUserByopenId(openId);
 		List<Order> olist = orderServiceImpl.findOrders(user.getUserId(),state);
 		//将order的id封装为一个list，根据
+		System.out.println("showOrders is Success");
 		return olist;
 	}
 	
