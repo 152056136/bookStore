@@ -246,12 +246,6 @@ public class CartController {
 	public @ResponseBody List<Cart> showCart(String openId){
 		//根据用户id将此用户的购物信息，查找出来
 		List<Cart> carts = cartServiceImpl.showCart(openId);
-		System.out.println("=============\n");
-		for(Cart c: carts) {
-			
-			System.out.println(c.getDistributor().getDisPress());
-			
-		}
 		return carts ;
 	}
 	

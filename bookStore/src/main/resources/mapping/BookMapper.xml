@@ -60,7 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select 	count(*) 
 		from book 
 		where book.secondCate_name = #{0}
-<<<<<<< HEAD
 	</select>
 	
 	<select id="findCountBySecondCateIdName" parameterType="String" resultType="Integer">
@@ -70,17 +69,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and   book.secondCate_Id=#{0}
 	</select>
 	
-=======
-	</select>
 	
-	<select id="findCountBySecondCateIdName" parameterType="String" resultType="Integer">
+	<!-- <select id="findCountBySecondCateIdName" parameterType="String" resultType="Integer">
 		select 	count(*) 
 		from book 
 		where book.secondCate_name = #{1}
 		and   book.secondCate_Id=#{0}
-	</select>
-	
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
+	</select> -->
 	
 	
 	<!-- 根据 secondCateId查找书籍，分页显示 -->
@@ -100,17 +95,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where book.book_id = #{bookId}
 	</select>
 	
-<<<<<<< HEAD
 	<!-- 根据出版社查找并返回书的所有数据 -->
-=======
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 	<select id="findBookByPress" resultMap="bookResultMap">
 	   select 
 	   book.*
 	   from book
 	</select>
 	
-<<<<<<< HEAD
 	<!-- 畅销的查看全部 -->
 	<select id="bestSelling" resultMap="bookResultMap">
 	    select 
@@ -179,9 +170,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   from book
 	   where book.cate_name=#{cateName}
 	</select>
-=======
-	
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 </mapper>
 
 

@@ -14,7 +14,6 @@ public interface IBookService {
 	Book findBookById(Integer bookId);
 	//查找出版社并返回书的所有数据
 	ArrayList<Book> findBookByPress();
-<<<<<<< HEAD
     //畅销的查看全部
 	ArrayList<Book> bestSelling();
 	//降价的查看全部
@@ -29,7 +28,6 @@ public interface IBookService {
     ArrayList<Book> education(Integer secondCateId);
     //IT科技的查看全部
     ArrayList<Book> technology(Integer cateId);
-=======
-
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
+    
+    
 }

@@ -28,10 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="book_authorBrief" property="bookAuthorBrief"/>
 			<result column="book_catalog" property="bookCatalog"/>
 			<result column="book_author" property="bookAuthor"/>
-<<<<<<< HEAD
+
 			<!-- <result column="book_press" property="bookPress"/> -->
-=======
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
+
 			<result column="book_pubTime" property="bookPubTime"/>
 			<result column="book_priTime" property="bookPriTime"/>
 			<result column="book_paper" property="bookPaper"/>

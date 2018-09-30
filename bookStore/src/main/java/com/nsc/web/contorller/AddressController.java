@@ -19,7 +19,7 @@ import com.nsc.web.util.backstate.BackState;
 
 //管理用户收货地址
 @Controller
-@RequestMapping("/address")
+@RequestMapping("address")
 public class AddressController {
 	
 	@Autowired
@@ -28,11 +28,7 @@ public class AddressController {
 	private IUserService userServiceImpl;
 	
 		//接受微信授权地址，并且如果能够接受到的话，设为默认地址
-<<<<<<< HEAD
 		@RequestMapping("saveWeiAdd")//Y-get
-=======
-		@RequestMapping("saveWeiAdd")//true
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 		@ResponseBody
 		public BackState  addWeiAdd(String openId,String userName,String postalCode,String provinceName,String cityName
 				,String countyName,String detailInfo,String nationalCode,String telNumber){
@@ -60,11 +56,7 @@ public class AddressController {
 		}
 		
 		//接受微信授权地址，并且如果能够接受到的话，设为默认地址
-<<<<<<< HEAD
 		@RequestMapping("addAddress")//Y-post
-=======
-		@RequestMapping("addAddress")//true
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 		@ResponseBody
 		public BackState  addAddress(@RequestBody String para){
 			    System.out.println("para============"+para);
@@ -112,7 +104,6 @@ public class AddressController {
 		}
 		
 		//展示用户的所有收货地址
-<<<<<<< HEAD
 		@RequestMapping("showAddress")//Y-post
 		@ResponseBody
 		public List<Address> showAddress( @RequestBody String openId){
@@ -121,16 +112,6 @@ public class AddressController {
 			System.out.println("json="+json);
 			String id = (String) json.get("openId");
 			System.out.println("id="+id);
-=======
-		@RequestMapping("showAddress")//true
-		@ResponseBody
-		public List<Address> showAddress( @RequestBody String openId){
-			System.out.println("Start==="+openId+"===End");
-			JSONObject json = JSONObject.parseObject(openId);
-			System.out.println("json==="+json+"===End");
-			String id = (String) json.get("openId");
-			System.out.println("id="+id+"===End");
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 			User userByopenId = userServiceImpl.findUserByopenId(id);
 			List<Address> list = addressServiceImpl.findAllAddress(userByopenId.getUserId());
 			System.out.println("showAddress success");
@@ -138,11 +119,7 @@ public class AddressController {
 		}
 		
 		//修改用户的默认地址
-<<<<<<< HEAD
 		@RequestMapping("modifyDeAdd")//N   缺order表
-=======
-		@RequestMapping("modifyDeAdd")//缺order表
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 		@ResponseBody
 		public BackState  modifyDeAdd(String openId,Integer addId){
 			System.out.println("openId="+openId+" addId="+addId);
@@ -153,7 +130,6 @@ public class AddressController {
 			Iterator<Address> it = list.iterator();
 			while(it.hasNext()){
 				Address add = it.next();
-				System.out.println(add);
 				if(add.getAddDefault()){
 					add.setAddDefault(false);
 					addressServiceImpl.updateAddress(add);
@@ -170,11 +146,7 @@ public class AddressController {
 		}
 		
 		//加载用户的默认地址
-<<<<<<< HEAD
 		@RequestMapping("showDeAddress")//Y-post
-=======
-		@RequestMapping("showDeAddress")//true
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 		@ResponseBody
 		public Address findDeAddress(@RequestBody String openId){
 			JSONObject json = JSONObject.parseObject(openId);

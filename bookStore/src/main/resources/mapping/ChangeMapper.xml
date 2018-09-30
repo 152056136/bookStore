@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.ChangeMapper">
+
+     <!--畅销 换一换  -->
+      <select id="cBestSelling" resultType="java.util.Map">
+           select
+           book.*
+           from book,orderitem
+           where orderitem.book_id=book.book_id
+           order by orderitem.oitem_count DESC
+           limit #{0},#{1}
+      </select>
+      
+      <!-- 降价-换一换 -->
+      <select id="cPrice" resultType="java.util.Map">
+           select
+           book.*
+           from book
+           order by book.book_id DESC
+           limit #{0},#{1}
+      </select>
+      
+      <!-- 文学小说-换一换 -->
+      <select id="cNovel" resultType="java.util.Map">
+           select 
+           book.*
+           from book
+           where book.cate_name=#{0}
+           order by book.book_id DESC
+           limit #{1},#{2}
+      </select>
+      
+      <!-- 人文历史-换一换 -->
+      <select id="cHistory" resultType="java.util.Map">
+           select 
+           book.*
+           from book
+           where book.cate_name=#{0}
+           order by book.book_id DESC
+           limit #{1},#{2}
+      </select>
+      
+      <!-- 经济管理-换一换 -->
+      <select id="cEconomic" resultType="java.util.Map">
+           select 
+           book.*
+           from book
+           where book.cate_name=#{0}
+           order by book.book_id DESC
+           limit #{1},#{2}
+      </select>
+      
+       <!-- 教育学习-换一换 -->
+       <select id="cEducation" resultType="java.util.Map">
+           select 
+           book.*
+           from book
+           where book.secondCate_name=#{0}
+           order by book.book_id DESC
+           limit #{1},#{2}
+      </select>
+
+         <!-- IT科技-换一换 -->
+       <select id="cTechnology" resultType="java.util.Map">
+           select 
+           book.*
+           from book
+           where book.cate_name=#{0}
+           order by book.book_id DESC
+           limit #{1},#{2}
+      </select>
+
+
+</mapper>

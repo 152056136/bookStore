@@ -48,41 +48,6 @@ public class BookServiceImpl implements IBookService {
 		int begin = (pageNum-1)*limit;
 		System.out.println("begin================="+begin);
 		System.out.println("limit================="+limit);
-<<<<<<< HEAD
-		List<Book> list= bookMapper.findBooksBySecondCateId(secondCateName,begin,limit);
-		pageBean.setList(list);
-		return pageBean;
-	}
-	
-	//根据传递的二级分类id，二级分类名,分页查找相应的书籍
-	public PageBean<Book> findBooksBySecondCaeId_Name(Integer secondCateId, String secondCateName, Integer pageNum) {
-		// TODO Auto-generated method stub
-		PageBean<Book> pageBean = new PageBean<Book>();
-		//设置当前页码
-		pageBean.setCurrentPageNum(pageNum);
-		//设置每页显示记录数
-		int limit = 8;
-		pageBean.setLimit(limit);
-		//设置总的记录数
-		int totalCount = 0;
-		//因为暂时关联的外键是，secondCateName，所以先根据id查找出name
-		totalCount = bookMapper.findCountBySecondCateIdName(secondCateId,secondCateName);
-		pageBean.setTotalCount(totalCount);
-		System.out.println("总的数目是+++=================="+totalCount);
-		//设置总页数
-		int totalPage=0;
-		if(totalCount%limit==0){
-			totalPage=totalCount/limit;
-		}else{
-			totalPage=totalCount/limit+1;
-		}
-		pageBean.setTotalPageNum(totalPage);
-		//填充每页显示的数据集合
-		//从第几个元素开始查询
-		int begin = (pageNum-1)*limit;
-		System.out.println("begin======"+begin);
-=======
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 		List<Book> list= bookMapper.findBooksBySecondCateId(secondCateName,begin,limit);
 		pageBean.setList(list);
 		return pageBean;
@@ -126,10 +91,7 @@ public class BookServiceImpl implements IBookService {
 		return book;
 	}
 
-<<<<<<< HEAD
 	//根据出版社查找并返回书的全部数据
-=======
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 	public ArrayList<Book> findBookByPress() {
 		// TODO Auto-generated method stub
 		ArrayList<Book> arrbook=new ArrayList<Book>();
@@ -137,7 +99,6 @@ public class BookServiceImpl implements IBookService {
 		return arrbook;
 	}
 
-<<<<<<< HEAD
 	//畅销的查看全部
 	public ArrayList<Book> bestSelling() {
 		// TODO Auto-generated method stub
@@ -209,8 +170,6 @@ public class BookServiceImpl implements IBookService {
 		}
 
 		
-=======
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 	
 
 }

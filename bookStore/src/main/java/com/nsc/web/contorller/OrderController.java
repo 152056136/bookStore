@@ -150,6 +150,10 @@ public class OrderController {
 		return bs;
 	}
 	
+	
+	
+	
+	
 	/**
 	 *根据openId和state查询用户的已支付订单和未支付订单等等 
 	 * @param openId
@@ -164,6 +168,8 @@ public class OrderController {
 		System.out.println("showOrders is Success");
 		return olist;
 	}
+	
+	
 	
 	
 }

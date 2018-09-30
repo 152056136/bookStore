@@ -13,7 +13,6 @@ public class Cart {
 	//订单关联的用户,每次加入购物车,只能加入一种商品,加入时先看数据库中是否有次商品，有数量加，没有则创建此商品
 	private User user;
 	private Book book;
-	private Distributor distributor;
 	
 	
 	public Double getCartUnitPrice() {
@@ -30,12 +29,6 @@ public class Cart {
 	}
 	public Book getBook() {
 		return book;
-	}
-	public Distributor getDistributor() {
-		return distributor;
-	}
-	public void setDistributor(Distributor distributor) {
-		this.distributor = distributor;
 	}
 	public void setBook(Book book) {
 		this.book = book;

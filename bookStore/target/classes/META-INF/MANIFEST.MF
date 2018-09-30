@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: linshili
-=======
-Built-By: yy
->>>>>>> e01cb79c991c6795fafd6df2618901bdb031f7c8
 Build-Jdk: 1.8.0_111
 Created-By: Maven Integration for Eclipse
 

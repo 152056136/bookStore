@@ -20,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<!--接受用户的收货的地址 -->
 		<insert id="saveWeiAdd" parameterType="address">
-			<!--设置主键  -->
 			<selectKey resultType="Integer" order="AFTER" keyProperty="addId">
           		SELECT LAST_INSERT_ID()
       		</selectKey>
@@ -123,8 +122,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</trim>
 			where add_id = #{addId}		
 		</update>
-		
-		
 		<!-- 加载用户的默认地址 -->
 		<select id="findDefaultAdd" parameterType="Integer"  resultMap="addResultMap">
 			select 
