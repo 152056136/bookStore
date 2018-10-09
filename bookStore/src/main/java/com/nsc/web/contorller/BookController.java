@@ -64,7 +64,7 @@ public class BookController {
 	 * @param bookId
 	 * @param count
 	 */
-	@RequestMapping("addBookToOrder")//N
+	@RequestMapping("addBookToOrder")//
 	@ResponseBody 
 	public BackState addBookToOrder( @RequestBody String para){
 		JSONObject json = JSONObject.parseObject(para);

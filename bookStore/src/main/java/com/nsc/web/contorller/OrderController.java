@@ -163,6 +163,7 @@ public class OrderController {
 	@ResponseBody
 	public List<Order> showOrders(String openId ,Integer state){
 		User user  = userServiceImpl.findUserByopenId(openId);
+		System.out.println(user.toString());
 		List<Order> olist = orderServiceImpl.findOrders(user.getUserId(),state);
 		//将order的id封装为一个list，根据
 		System.out.println("showOrders is Success");

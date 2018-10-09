@@ -85,6 +85,13 @@ public class Order {
 		public void setOrderState(Integer orderState) {
 			this.orderState = orderState;
 		}
+		@Override
+		public String toString() {
+			return "Order [orderId=" + orderId + ", orderTime=" + orderTime + ", orderPayTime=" + orderPayTime
+					+ ", orderTotalDiscount=" + orderTotalDiscount + ", orderTotalUndiscount=" + orderTotalUndiscount
+					+ ", orderState=" + orderState + ", orderNote=" + orderNote + ", user=" + user + ", address="
+					+ address + ", olist=" + olist + "]";
+		}
 		
 		
 }

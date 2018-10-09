@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="book_measurementUnit" property="bookMeasurementUnit"/>
 		<result column="book_scores" property="bookScores"/>
 		<result column="book_discount" property="bookDiscount"/>
+		<result column="publish_house" property="publish_house"/>
 		<result column="book_note" property="bookNote"/>
 		<!-- 作为book类外键 ,封装到book表中返回-->
 		<!--  -->
@@ -88,7 +89,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!--根据bookid查找到book -->
 	<select id="findBookById" parameterType="Integer" resultMap="bookResultMap">
-		
 		select 
 		book.*
 		from book
@@ -101,14 +101,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   book.*
 	   from book
 	</select>
+
+	<!-- 畅销-查看全部 -->
+	<select id="bestSellingCount" resultType="Integer">
+		select 	count(*) 
+		from book,orderitem
+	    where orderitem.book_id=book.book_id
+	    order by orderitem.oitem_count DESC
+	    
+	</select>
 	
-	<!-- 畅销的查看全部 -->
 	<select id="bestSelling" resultMap="bookResultMap">
-	    select 
+	    select  
 	    book.*
 	    from book,orderitem
 	    where orderitem.book_id=book.book_id
 	    order by orderitem.oitem_count DESC
+	    limit #{0},#{1}
 	</select>
 	
 	<!-- 根据三级分类Id查找三级分类名 -->
@@ -119,13 +128,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   where thirdcategory.thirdCate_id=#{thirdCate_id}
 	</select>
 	
-	<!-- 文学小说的查看全部 -->
-	<select id="literaryNovel" resultMap="bookResultMap">
+	
+	<!-- 降价-查看全部 -->
+	<select id="priceReductionCount" resultType="Integer">
+	    select count(*)
+	    from book
+	</select>
+	
+	<select id="priceReduction" resultMap="bookResultMap">
 	    select 
 	    book.*
 	    from book
+        limit #{0},#{1}
+	</select>
+	
+	
+	<!-- 文学小说的查看全部 -->
+	<select id="literaryNovelCount" parameterType="String" resultType="Integer">
+	    select count(*)
+	    from book
 	    where book.cate_name=#{cateName}
-	    
+	</select>
+	
+	
+	<select id="literaryNovel"  resultMap="bookResultMap">
+	    select 
+	    book.*
+	    from book
+	    where book.cate_name=#{0}
+	    limit #{1},#{2}
 	</select>
 	
 	<!-- 根据一级分类id查找一级分类名 -->
@@ -137,38 +168,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 人文历史的查看全部 -->
-	<select id="socialScience" resultMap="bookResultMap">
+	<select id="socialScienceCount" parameterType="String" resultType="Integer">
+	   select count(*)
+	   from book
+	   where book.cate_name=#{cateName}
+	</select>
+	<select id="socialScience"  resultMap="bookResultMap">
 	   select 
 	   book.*
 	   from book
-	   where book.cate_name=#{cateName}
+	   where book.cate_name=#{0}
+	   limit #{1},#{2}
 	</select>
 	
 	
 	<!-- 经济管理的查看全部 -->
-	<select id="economicManagement" resultMap="bookResultMap">
+	
+	<select id="economicManagementCount" parameterType="String" resultType="Integer">
+	   select count(*)
+	   from book
+	   where book.cate_name=#{cateName}
+	</select>
+	<select id="economicManagement"  resultMap="bookResultMap">
 	   select 
 	   book.*
 	   from book
-	   where book.cate_name=#{cateName}
+	   where book.cate_name=#{0}
+	   limit #{1},#{2}
 	</select>
 	
 	
 	<!-- 教育学习的查看全部 -->
-	<select id="education" resultMap="bookResultMap">
+	<select id="educationCount" parameterType="String" resultType="Integer">
+	   select  count(*)
+	   from book
+	   where book.secondCate_name=#{secondCateName}
+	</select>
+	<select id="education"  resultMap="bookResultMap">
 	   select 
 	   book.*
 	   from book
-	   where book.secondCate_name=#{secondCateName}
+	   where book.secondCate_name=#{0}
+	   limit #{1},#{2}
 	</select>
 	
 	
 	<!-- IT科技的查看全部 -->
-	<select id="technology" resultMap="bookResultMap">
+	<select id="technologyCount" parameterType="String" resultType="Integer">
+	   select count(*)
+	   from book
+	   where book.cate_name=#{cateName}
+	</select>
+	<select id="technology"  resultMap="bookResultMap">
 	   select 
 	   book.*
 	   from book
-	   where book.cate_name=#{cateName}
+	   where book.cate_name=#{0}
+	   limit #{1},#{2}
 	</select>
 </mapper>
 
