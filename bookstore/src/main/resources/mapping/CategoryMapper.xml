@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.CategoryMapper" >
+			
+	  <resultMap id="cateResultMap" type="category" >
+	    <id column="cate_id" property="cateId" jdbcType="INTEGER" />
+	    <result column="cate_alias" property="cateAlias" jdbcType="VARCHAR" />
+	    <result column="cate_name" property="cateName" jdbcType="VARCHAR" />
+	    <result column="IsDeleted" property="isDeleted" jdbcType="VARCHAR" />
+	    <result column="cate_note" property="cateNote" jdbcType="VARCHAR" />
+	  </resultMap>
+	  <resultMap type="secondCategory" id="secCateResultMap">
+	  	<id column="secondCate_id" property="secondCateId"/>
+	  	<result column="secondCate_alias" property="secondCateAlias"/>
+	  	<result column="secondCate_name" property="secondCateName"/>
+	  </resultMap>
+	<!-- 查找出所有一级分类 -->
+		<select id="findCategories" resultMap="cateResultMap">
+			 select 
+			 category.* 
+			 from category order by cate_id ASC
+		</select>
+	<!-- 根据一级分类id将全部 子分类查询出来-->
+		<select id="findsecCatesById" parameterType="Integer" resultMap="secCateResultMap">
+				select 
+				second.secondCate_id,
+				second.secondCate_alias,
+				second.secondCate_name
+				from secondCategory second
+				where second.cate_id = #{cateId}			
+		</select>
+	
+	
+	
+	
+</mapper>

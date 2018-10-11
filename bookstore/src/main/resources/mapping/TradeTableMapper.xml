@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.TradeTableMapper" >
+  <resultMap id="BaseResultMap" type="com.nsc.backend.entity.TradeTable" >
+    <id column="tradeTable_id" property="tradetableId" jdbcType="INTEGER" />
+    <result column="tradeTable_method" property="tradetableMethod" jdbcType="INTEGER" />
+    <result column="tradeTable_number" property="tradetableNumber" jdbcType="VARCHAR" />
+    <result column="tradeTable_merchantNumber" property="tradetableMerchantnumber" jdbcType="VARCHAR" />
+    <result column="tradeTable_BillingClassification" property="tradetableBillingclassification" jdbcType="VARCHAR" />
+    <result column="tradeTable_merchantName" property="tradetableMerchantname" jdbcType="VARCHAR" />	
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tradeTable_id, tradeTable_method, tradeTable_number, tradeTable_merchantNumber, tradeTable_BillingClassification, 
+    tradeTable_merchantName
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from trade_table
+    where tradeTable_id = #{tradetableId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from trade_table
+    where tradeTable_id = #{tradetableId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.nsc.backend.entity.TradeTable" >
+    insert into trade_table (tradeTable_id, tradeTable_method, tradeTable_number, 
+      tradeTable_merchantNumber, tradeTable_BillingClassification, 
+      tradeTable_merchantName, order_id)
+    values (#{tradetableId,jdbcType=INTEGER}, #{tradetableMethod,jdbcType=INTEGER}, #{tradetableNumber,jdbcType=VARCHAR}, 
+      #{tradetableMerchantnumber,jdbcType=VARCHAR}, #{tradetableBillingclassification,jdbcType=VARCHAR}, 
+      #{tradetableMerchantname,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER})
+  </insert>
+  <!-- 插入一条新的交易信息 -->
+  <insert id="insertSelective" parameterType="com.nsc.backend.entity.TradeTable" >
+   	 <selectKey resultType="Integer" order="AFTER" keyProperty="tradetableId">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+    insert into trade_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tradetableId != null" >
+        tradeTable_id,
+      </if>
+      <if test="tradetableMethod != null" >
+        tradeTable_method,
+      </if>
+      <if test="tradetableNumber != null" >
+        tradeTable_number,
+      </if>
+      <if test="tradetableMerchantnumber != null" >
+        tradeTable_merchantNumber,
+      </if>
+      <if test="tradetableBillingclassification != null" >
+        tradeTable_BillingClassification,
+      </if>
+      <if test="tradetableMerchantname != null" >
+        tradeTable_merchantName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tradetableId != null" >
+        #{tradetableId,jdbcType=INTEGER},
+      </if>
+      <if test="tradetableMethod != null" >
+        #{tradetableMethod,jdbcType=INTEGER},
+      </if>
+      <if test="tradetableNumber != null" >
+        #{tradetableNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantnumber != null" >
+        #{tradetableMerchantnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableBillingclassification != null" >
+        #{tradetableBillingclassification,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantname != null" >
+        #{tradetableMerchantname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.nsc.backend.entity.TradeTable" >
+    update trade_table
+    <set >
+      <if test="tradetableMethod != null" >
+        tradeTable_method = #{tradetableMethod,jdbcType=INTEGER},
+      </if>
+      <if test="tradetableNumber != null" >
+        tradeTable_number = #{tradetableNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantnumber != null" >
+        tradeTable_merchantNumber = #{tradetableMerchantnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableBillingclassification != null" >
+        tradeTable_BillingClassification = #{tradetableBillingclassification,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantname != null" >
+        tradeTable_merchantName = #{tradetableMerchantname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tradeTable_id = #{tradetableId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.nsc.backend.entity.TradeTable" >
+    update trade_table
+    set tradeTable_method = #{tradetableMethod,jdbcType=INTEGER},
+      tradeTable_number = #{tradetableNumber,jdbcType=VARCHAR},
+      tradeTable_merchantNumber = #{tradetableMerchantnumber,jdbcType=VARCHAR},
+      tradeTable_BillingClassification = #{tradetableBillingclassification,jdbcType=VARCHAR},
+      tradeTable_merchantName = #{tradetableMerchantname,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER}
+    where tradeTable_id = #{tradetableId,jdbcType=INTEGER}
+  </update>
+</mapper>

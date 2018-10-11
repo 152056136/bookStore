@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.OrderMapper">
+	
+	<!-- 配置resultmap，封装返回的数据 -->
+	<resultMap type="order" id="orderResultMap">
+		<id column="order_id" property="orderId"/>
+		<result column="order_orderTime" property="orderTime"/>
+		<result column="order_payTime" property="orderPayTime"/>
+		<result column="order_totalDiscount" property="orderTotalDiscount"/>
+		<result column="order_totalUndiscount" property="orderTotalUndiscount"/>
+		<result column="order_state" property="orderState"/>
+		<result column="order_note" property="orderNote"/>
+		<association property="address" javaType="com.nsc.backend.entity.Address">
+				<id column="add_id" property="addId"/>
+				<result column="add_userName" property="addUserName"/>
+				<result column="add_postalCode" property="addPostalCode"/>
+				<result column="add_county" property="addCounty"/>
+				<result column="add_province" property="addProvince"/>
+				<result column="add_city" property="addCity"/>
+				<result column="add_detailInfo" property="addDetailInfo"/>
+				<result column="add_nationalCode" property="addNationalCode"/>
+				<result column="add_tele" property="addTele"/>
+				<result column="add_default" property="addDefault"/>
+		</association>
+		<collection property="olist" javaType="list" ofType="OrderItem">
+			<id column="oitem_id" property="oitemId"/>
+			<result column="oitem_unitPrice" property="oitemUnitPrice" />			
+			<result column="oitem_discounted" property="oitemDiscounted" />			
+			<result column="oitem_count" property="oitemCount" />			
+			<result column="oitem_subtotal" property="oitemSubtotal" />			
+			<result column="oitem_note" property="oitemNote" />			
+			<!-- 配置订单项里面包含的book信息 -->
+			<association property="book" javaType="com.nsc.backend.entity.Book" >
+				<id column="book_id" property="bookId"/>
+				<result column="book_ISBN" property="bookISBN"/>
+				<result column="book_name" property="bookName"/>
+				<result column="book_unitPrice" property="bookUnitPrice"/>
+				<result column="book_preface" property="bookPreface"/>
+				<result column="book_conBrief" property="bookConBrief"/>
+				<result column="book_authorBrief" property="bookAuthorBrief"/>
+				<result column="book_catalog" property="bookCatalog"/>
+				<result column="book_author" property="bookAuthor"/>
+				<result column="book_press" property="bookPress"/>
+				<result column="book_pubTime" property="bookPubTime"/>
+			</association>
+		</collection>
+		
+	</resultMap>	
+	<!-- 保存订单到数据库，包含订单项集合 -->
+	<insert id="saveOrder" parameterType="order">
+	  <selectKey resultType="Integer" order="AFTER" keyProperty="orderId">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      insert into bookstore.order 
+		<trim prefix="("  suffix=")"  suffixOverrides=",">
+			<!-- cart_id 不先进行测试  -->
+			<if test="orderId !=null" >
+				order_id,
+			</if>
+			<if test="orderTime != null" >
+				order_orderTime,
+			</if>
+			<if test="orderPayTime!=null">
+				order_payTime,
+			</if>
+			<if test="orderTotalDiscount !=null">
+				order_totalDiscount,
+			</if>
+			<if test="orderTotalUndiscount !=null">
+				order_totalUndiscount,
+			</if>
+			<if test="orderState !=  null">
+				order_state,
+			</if>
+			<if test="orderNote !=null">
+				order_note,
+			</if>
+			<if test="user !=null">
+				user_id,
+			</if>
+			<if test="address !=null">
+				add_id,
+			</if>
+		</trim>
+		<trim prefix=" values (" suffix=")" suffixOverrides=",">
+			<if test="orderId !=null">
+				#{orderId  ,jdbcType=INTEGER},
+			</if>
+			<if test="orderTime != null" >
+				#{orderTime ,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orderPayTime !=null">
+				#{orderPayTime ,jdbcType=TIMESTAMP },
+			</if>
+			<if test="orderTotalDiscount != null">
+				#{orderTotalDiscount ,jdbcType=DOUBLE},
+			</if>
+			<if test="orderTotalUndiscount !=null">
+				#{orderTotalUndiscount ,jdbcType=DOUBLE},
+			</if>
+			<if test="orderState !=null">
+				#{orderState ,jdbcType=INTEGER },
+			</if>
+			<if test="orderNote !=null">
+				#{orderNote ,jdbcType=VARCHAR},
+			</if>
+			<if test="user !=null">
+				#{user.userId ,jdbcType=INTEGER},
+			</if>
+			<if test="address !=null">
+				#{address.addId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<!-- 将用户的直接购买的一个书籍，添加到数据库 -->
+	<insert id="saveOrderItem"  parameterType="orderItem">
+		<selectKey resultType="Integer" order="AFTER" keyProperty="oitemId">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      insert into bookstore.orderitem 
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+     		<if test="oitemUnitPrice !=null">
+     			oitem_unitPrice,
+     		</if>
+      		<if test=" oitemDiscounted !=null">
+     			oitem_discounted ,
+     		</if>
+     		<if test=" oitemCount!=null">
+     			oitem_count,
+     		</if>
+     		<if test="oitemSubtotal !=null">
+     			oitem_subtotal,
+     		</if>
+     		<if test=" book!=null">
+     			book_id,
+     		</if>
+     		<if test=" order !=null">
+     			order_id,
+     		</if>
+     		<if test=" distributor!=null">
+     			dis_id,
+     		</if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+      		<if test="oitemUnitPrice !=null">
+     			#{oitemUnitPrice},
+     		</if>
+      		<if test=" oitemDiscounted !=null">
+     			#{oitemDiscounted},
+     		</if>
+     		<if test=" oitemCount !=null">
+     			#{oitemCount},
+     		</if>
+     		<if test="oitemSubtotal !=null">
+     			#{oitemSubtotal},
+     		</if>
+     		<if test=" book!=null">
+     			#{book.bookId},
+     		</if>
+     		<if test=" order !=null">
+     			#{order.orderId},
+     		</if>
+     		<if test=" distributor!=null">
+     			#{distributor.disId},
+     		</if>
+      </trim>
+	</insert>
+	
+	<!-- 逻辑删除，orders -->
+	<update id="deleteOrders" >
+		update  bookstore.order
+	    set order_delete = false
+		where order_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 根据用户openId和state，查询出订单信息 -->
+	<select id="findOrders" resultMap="orderResultMap" >
+		select 
+		bookstore.order.*,
+		bookstore.orderitem.*,
+		bookstore.book.*,
+		address.*
+		from 
+		address,
+		book,
+		bookstore.order  
+		left join 
+		bookstore.orderitem 
+		on bookstore.order.order_id = orderitem.order_id
+		where bookstore.order.user_id =#{0} and bookstore.order.order_state=#{1}
+		and book.book_id = orderitem.book_id 
+		and bookstore.order.order_delete= 1
+		and bookstore.order.add_id = address.add_id
+	</select>
+	
+	
+</mapper>
+
+
+ 

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+	<mapper namespace="com.nsc.backend.mapper.AddressMapper">
+		<!-- 基本的resultmap -->
+		<resultMap type="address" id="addResultMap">
+			<id column="add_id" property="addId"/>
+			<result column="add_userName" property="addUserName"/>		
+			<result column="add_postalCode" property="addPostalCode"/>		
+			<result column="add_county" property="addCounty"/>		
+			<result column="add_province" property="addProvince"/>		
+			<result column="add_city" property="addCity"/>		
+			<result column="add_detailInfo" property="addDetailInfo"/>		
+			<result column="add_nationalCode" property="addNationalCode"/>		
+			<result column="add_tele" property="addTele"/>		
+			<result column="add_default" property="addDefault"/>		
+		</resultMap>
+		
+		<!--接受用户的收货的地址 -->
+		<insert id="saveWeiAdd" parameterType="address">
+			<selectKey resultType="Integer" order="AFTER" keyProperty="addId">
+          		SELECT LAST_INSERT_ID()
+      		</selectKey>
+			insert into address
+		<trim prefix="("  suffix=")"  suffixOverrides=",">
+			<!-- cart_id 不先进行测试  -->
+			<if test="addId !=null">
+				add_id,
+			</if>
+			<if test="addUserName !=null">
+				add_userName,
+			</if>
+			<if test="addPostalCode !=null">
+				add_postalCode,
+			</if>
+			<if test="addCounty !=null">
+				add_county,
+			</if>
+			<if test="addProvince !=null">
+				add_province,
+			</if>
+			<if test="addCity!=null">
+				add_city,
+			</if>
+			<if test="addDetailInfo !=null">
+				add_detailInfo,
+			</if>
+			<if test="addNationalCode !=null">
+				add_nationalCode,
+			</if>
+			<if test="addTele !=null">
+				add_tele,
+			</if>
+			<if test="addDefault !=null">
+				add_default,
+			</if>
+			<if test="user !=null">
+				user_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="addId !=null">
+				#{addId},
+			</if>
+			<if test="addUserName !=null">
+				#{addUserName },
+			</if>
+			<if test="addPostalCode !=null">
+					#{ addPostalCode},
+			</if>
+			<if test="addCounty !=null">
+					#{ addCounty},
+			</if>
+			<if test="addProvince !=null">
+					#{ addProvince},
+			</if>
+			<if test="addCity !=null">
+					#{addCity },
+			</if>
+			<if test="addDetailInfo !=null">
+					#{ addDetailInfo},
+			</if>
+			<if test="addNationalCode !=null">
+					#{addNationalCode },
+			</if>
+			<if test="addTele !=null">
+					#{addTele },
+			</if>
+			<if test="addDefault !=null">
+					#{ addDefault},
+			</if>
+			<if test="user !=null">
+				    #{user.userId},
+			</if>
+		</trim>
+		</insert>
+		
+		<!-- 展示用户的所有收货地址 -->
+		<select id="findAllAddress" parameterType="Integer" resultMap="addResultMap">
+			select 
+			address.*
+			from address
+			where user_id = #{userId}	
+		</select>
+		
+		<!-- 修改用户收货地址 -->
+		<update id="updateAddress" parameterType="address">
+			update address
+		<trim prefix="set" suffixOverrides=",">
+			<if test="addUserName !=null">add_userName = #{addUserName} ,</if>
+			<if test="addPostalCode !=null"> add_postalCode= #{addPostalCode} ,</if>
+			<if test="addCounty !=null">add_county = #{addCounty},</if>
+			<if test="addProvince !=null" >add_province = #{addProvince} ,</if>
+			<if test="addCity !=null">add_city = #{addCity} ,</if>
+			<if test="addDetailInfo !=null">add_detailInfo = #{addDetailInfo} ,</if>
+			<if test="addNationalCode !=null">add_nationalCode = #{addNationalCode} ,</if>
+			<if test="addTele !=null">add_tele = #{addTele} ,</if>
+			<if test="addDefault !=null">add_default = #{addDefault} ,</if>
+			<if test="user !=null">user_id = #{user.userId} ,</if>
+		</trim>
+			where add_id = #{addId}		
+		</update>
+		<!-- 加载用户的默认地址 -->
+		<select id="findDefaultAdd" parameterType="Integer"  resultMap="addResultMap">
+			select 
+			address.*
+			from address
+			where add_default = true
+			and user_id = #{userId}
+		</select>
+		
+		<!-- 查找出address -->
+		<select id="findAddressById" parameterType="Integer"  resultMap="addResultMap">
+			select 
+			address.*
+			from address
+			where 
+			 add_id = #{addId}
+		</select>
+	</mapper>
+
+
+
+

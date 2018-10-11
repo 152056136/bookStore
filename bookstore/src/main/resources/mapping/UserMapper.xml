@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.UserMapper">
+	<!-- 配置基本返回用户信息 -->
+	<resultMap type="user" id="userResultMap">
+		<id column="user_id" property="userId"/>
+		<result column="user_openId" property="userOpenId"/>
+		<result column="user_nickName" property="userNickName"/>
+		<result column="user_gender" property="userGender"/>
+		<result column="user_city" property="userCity"/>
+		<result column="user_province" property="userProvince"/>
+		<result column="user_avatarUrl" property="userAvatarUrl"/>
+		<result column="user_telephone" property="userTelephone"/>
+		<result column="user_region" property="userRegion"/>
+		<result column="user_postalCode" property="userPostalCode"/>
+		<result column="user_note" property="userNote"/>
+	</resultMap>
+		
+	<!-- 根据用户openid查找出用户 -->	
+	<select id="findUserByopenId" parameterType="String" resultMap="userResultMap">
+		select
+		user.user_id,
+		user.user_nickName,
+		user.user_openId
+		from  user
+		where user.user_openId = #{openId}
+	</select>
+	
+	<!-- 保存user到数据库 -->
+	<insert id="saveUser" parameterType="user" >
+		insert into 
+		user  (user_openId)
+		values (#{userOpenId})
+	</insert>
+</mapper>
+
+
+
