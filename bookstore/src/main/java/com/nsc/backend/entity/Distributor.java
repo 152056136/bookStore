@@ -6,28 +6,10 @@ public class Distributor {
 	private String disPress;
 	private String disProvince;
 	private String disCity;
-	private String disAddress;
 	private String disContact;
 	private String 	disConphone;
 	private String	disLandline;
-	private Integer disScore;
 	private String 	disNote;
-	
-	
-	
-	
-	public String getDisAddress() {
-		return disAddress;
-	}
-	public void setDisAddress(String disAddress) {
-		this.disAddress = disAddress;
-	}
-	public Integer getDisScore() {
-		return disScore;
-	}
-	public void setDisScore(Integer disScore) {
-		this.disScore = disScore;
-	}
 	public Integer getDisId() {
 		return disId;
 	}

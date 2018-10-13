@@ -12,26 +12,10 @@ public class Category {
 	private Integer cateId;
 	private String cateAlias;
 	private String cateName;
-	private boolean isDeleted;
-	private String cateNote;
-	
 	//配置关联关系，根据一级分类去查找下面的二级分类list
 	private List<SecondCategory> secList = new ArrayList<SecondCategory>();
 	
 	
-	
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-	public String getCateNote() {
-		return cateNote;
-	}
-	public void setCateNote(String cateNote) {
-		this.cateNote = cateNote;
-	}
 	public List<SecondCategory> getSecList() {
 		return secList;
 	}

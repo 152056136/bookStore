@@ -19,6 +19,7 @@ public class Book {
 		private String bookAuthorBrief;
 		private String bookCatalog;
 		private String bookAuthor;
+		//private String bookPress;
 		private Date bookPubTime;
 		private Date bookPriTime;
 		private String bookEdtion;
@@ -41,6 +42,7 @@ public class Book {
 		private String bookMeasurementUnit;
 		private String bookScores;
 		private Integer bookDiscount;
+		private String publish_house;
 		private String bookNote;
 		
 		
@@ -275,7 +277,12 @@ public class Book {
 			this.thirdCate = thirdCate;
 		}
 		
-		
+		public String getPublish_house() {
+			return publish_house;
+		}
+		public void setPublish_house(String publish_house) {
+			this.publish_house = publish_house;
+		}
 		
 		
 		

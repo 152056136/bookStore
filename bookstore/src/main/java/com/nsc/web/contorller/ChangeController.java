@@ -25,7 +25,7 @@ public class ChangeController {
 	/**
 	 * 畅销-换一换
 	 */
-	  @RequestMapping(value="cbestSelling",method = RequestMethod.POST)
+	  @RequestMapping(value="cbestSelling")
 	 public @ResponseBody ArrayList<Book> cBestSelling(Integer start,Integer end){
 		 arrChange=changservice.cBestSelling(start,end);
 		 return arrChange;
@@ -34,7 +34,7 @@ public class ChangeController {
 	  /**
 	   * 降价-换一换
 	   */
-	  @RequestMapping(value="cPrice",method = RequestMethod.POST)
+	  @RequestMapping(value="cPrice")
 		 public @ResponseBody ArrayList<Book> cPrice(Integer start,Integer end){
 			 arrChange=changservice.cPrice(start,end);
 			 return arrChange;
@@ -45,7 +45,7 @@ public class ChangeController {
 	   * 文学小说-换一换
 	   */
 	  
-	     @RequestMapping(value="cNovel",method = RequestMethod.POST)
+	     @RequestMapping(value="cNovel")
 		 public @ResponseBody ArrayList<Book> cNovel(Integer cateId ,Integer start,Integer end){
 			 arrChange=changservice.cNovel(cateId,start,end);
 			 return arrChange;
@@ -55,7 +55,7 @@ public class ChangeController {
 	    /**
 	     * 人文历史-换一换
 	     */
-	     @RequestMapping(value="/cHistory",method = RequestMethod.POST)
+	     @RequestMapping(value="/cHistory")
 	 	public @ResponseBody ArrayList<Book> cHistory(Integer cateId ,Integer start,Integer end){
 	    	 arrChange=changservice.cHistory(cateId,start,end);
 	 		return arrChange;
@@ -65,7 +65,7 @@ public class ChangeController {
 	     /**
 	      * 经济管理-换一换
 	      */
-	     @RequestMapping(value="/cEconomic",method = RequestMethod.POST)
+	     @RequestMapping(value="/cEconomic")
 		 	public @ResponseBody ArrayList<Book> cEconomic(Integer cateId ,Integer start,Integer end){
 		    	 arrChange=changservice.cEconomic(cateId,start,end);
 		 		return arrChange;
@@ -74,7 +74,7 @@ public class ChangeController {
 	     /**
 	      * 教育学习-换一换
 	      */
-	     @RequestMapping(value="/cEducation",method = RequestMethod.POST)
+	     @RequestMapping(value="/cEducation")
 		 	public @ResponseBody ArrayList<Book> cEducation(Integer secondCateId ,Integer start,Integer end){
 		    	 arrChange=changservice.cEducation(secondCateId,start,end);
 		 		return arrChange;
@@ -83,7 +83,7 @@ public class ChangeController {
 	     /**
 	      * IT科技-换一换
 	      */ 
-	     @RequestMapping(value="/cTechnology",method = RequestMethod.POST)
+	     @RequestMapping(value="/cTechnology")
 		 	public @ResponseBody ArrayList<Book> cTechnology(Integer cateId ,Integer start,Integer end){
 		    	 arrChange=changservice.cTechnology(cateId,start,end);
 		 		return arrChange;
