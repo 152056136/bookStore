@@ -11,11 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="user_gender" property="userGender"/>
 		<result column="user_city" property="userCity"/>
 		<result column="user_province" property="userProvince"/>
-		<result column="user_country" property="userCountry"/>
 		<result column="user_avatarUrl" property="userAvatarUrl"/>
 		<result column="user_telephone" property="userTelephone"/>
 		<result column="user_region" property="userRegion"/>
-		<result column="user_address" property="userAddress"/>
 		<result column="user_postalCode" property="userPostalCode"/>
 		<result column="user_note" property="userNote"/>
 	</resultMap>
