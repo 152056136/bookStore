@@ -9,10 +9,24 @@ public class ThirdCategory {
 	private Integer thirdCateId;
 	private String 	thirdCateAlias;
 	private	String 	thirdCateName;
+	private boolean isDeleted;
+	private String thirdCateNote;
 	//关联属性
 	private SecondCategory secondCategory;
 	
 	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	public String getThirdCateNote() {
+		return thirdCateNote;
+	}
+	public void setThirdCateNote(String thirdCateNote) {
+		this.thirdCateNote = thirdCateNote;
+	}
 	public Integer getThirdCateId() {
 		return thirdCateId;
 	}

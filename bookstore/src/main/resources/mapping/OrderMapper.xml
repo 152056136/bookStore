@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  <selectKey resultType="Integer" order="AFTER" keyProperty="orderId">
           SELECT LAST_INSERT_ID()
       </selectKey>
-      insert into lin.order 
+      insert into bookstore.order 
 		<trim prefix="("  suffix=")"  suffixOverrides=",">
 			<!-- cart_id 不先进行测试  -->
 			<if test="orderId !=null" >
@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey resultType="Integer" order="AFTER" keyProperty="oitemId">
           SELECT LAST_INSERT_ID()
       </selectKey>
-      insert into lin.orderitem 
+      insert into bookstore.orderitem 
       <trim prefix="(" suffix=")" suffixOverrides=",">
      		<if test="oitemUnitPrice !=null">
      			oitem_unitPrice,
@@ -171,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 逻辑删除，orders -->
 	<update id="deleteOrders" >
-		update  lin.order
+		update  bookstore.order
 	    set order_delete = false
 		where order_id in
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
@@ -182,21 +182,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 根据用户openId和state，查询出订单信息 -->
 	<select id="findOrders" resultMap="orderResultMap" >
 		select 
-		lin.order.*,
-		lin.orderitem.*,
-		lin.book.*,
+		bookstore.order.*,
+		bookstore.orderitem.*,
+		bookstore.book.*,
 		address.*
 		from 
 		address,
 		book,
-		lin.order  
+		bookstore.order  
 		left join 
-		lin.orderitem 
-		on lin.order.order_id = orderitem.order_id
-		where lin.order.user_id =#{0} and lin.order.order_state=#{1}
+		bookstore.orderitem 
+		on bookstore.order.order_id = orderitem.order_id
+		where bookstore.order.user_id =#{0} and bookstore.order.order_state=#{1}
 		and book.book_id = orderitem.book_id 
-		and lin.order.order_delete= 1
-		and lin.order.add_id = address.add_id
+		and bookstore.order.order_delete= 1
+		and bookstore.order.add_id = address.add_id
 	</select>
 	
 	

@@ -4,20 +4,30 @@ public class SecondCategory {
 	private Integer secondCateId;
 	private  String secondCateAlias;
 	private  String secondCateName;
-	private  String secondCateImgUrl;
+	private boolean isDeleted;
+	private String secondCateNote;
 	//二级分类属于一级分类
 	private Category category;
+	
+	
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	public String getSecondCateNote() {
+		return secondCateNote;
+	}
+	public void setSecondCateNote(String secondCateNote) {
+		this.secondCateNote = secondCateNote;
+	}
 	public Integer getSecondCateId() {
 		return secondCateId;
 	}
 	public void setSecondCateId(Integer secondCateId) {
 		this.secondCateId = secondCateId;
-	}
-	public String getSecondCateImgUrl() {
-		return secondCateImgUrl;
-	}
-	public void setSecondCateImgUrl(String secondCateImgUrl) {
-		this.secondCateImgUrl = secondCateImgUrl;
 	}
 	public String getSecondCateAlias() {
 		return secondCateAlias;

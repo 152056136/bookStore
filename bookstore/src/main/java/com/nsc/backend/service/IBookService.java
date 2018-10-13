@@ -15,19 +15,19 @@ public interface IBookService {
 	//查找出版社并返回书的所有数据
 	ArrayList<Book> findBookByPress();
     //畅销的查看全部
-	PageBean<Book> bestSelling(Integer pageNum);
+	ArrayList<Book> bestSelling();
 	//降价的查看全部
-	PageBean<Book> priceReduction(Integer pageNum);
+	ArrayList<Book> priceReduction();
 	//文学小说的查看全部
-	PageBean<Book> literaryNovel(Integer cateId,Integer pageNum);
+	ArrayList<Book> literaryNovel(Integer cateId);
 	//人文历史的查看全部
-	PageBean<Book> socialScience(Integer cateId,Integer pageNum);
+	ArrayList<Book> socialScience(Integer cateId);
 	//经济管理的查看全部
-	PageBean<Book> economicManagement(Integer cateId,Integer pageNum);
+    ArrayList<Book> economicManagement(Integer cateId);
     //教育学习的查看全部
-	PageBean<Book> education(Integer secondCateId,Integer pageNum);
+    ArrayList<Book> education(Integer secondCateId);
     //IT科技的查看全部
-	PageBean<Book> technology(Integer cateId,Integer pageNum);
+    ArrayList<Book> technology(Integer cateId);
     
     
 }

@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cart_totalUndiscount" property="cartTotalUndiscount"/>		
 		<result column="cart_unitPrice" property="cartUnitPrice"/>		
 		<result column="cart_count" property="cartCount"/>
+		<result column="cart_isCheck" property="cartIsCheck"/>
 		<!-- 封装user信息 -->
 		<association property="user" javaType="com.nsc.backend.entity.User">
 			<id column="user_id" property="userId"/>

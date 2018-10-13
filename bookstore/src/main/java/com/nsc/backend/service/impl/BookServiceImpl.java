@@ -25,7 +25,7 @@ public class BookServiceImpl implements IBookService {
 		//设置当前页码
 		pageBean.setCurrentPageNum(pageNum);
 		//设置每页显示记录数
-		int limit = 10;
+		int limit = 8;
 		pageBean.setLimit(limit);
 		//设置总的记录数
 		int totalCount = 0;
@@ -60,7 +60,7 @@ public class BookServiceImpl implements IBookService {
 		//设置当前页码
 		pageBean.setCurrentPageNum(pageNum);
 		//设置每页显示记录数
-		int limit = 10;
+		int limit = 8;
 		pageBean.setLimit(limit);
 		//设置总的记录数
 		int totalCount = 0;
@@ -100,142 +100,73 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	//畅销的查看全部
-	public PageBean<Book> bestSelling(Integer pageNum) {
+	public ArrayList<Book> bestSelling() {
 		// TODO Auto-generated method stub
-		PageBean<Book> pageBean = new PageBean<Book>();
-		pageBean=paging(pageNum,"bestSelling");
-		return pageBean;
+		ArrayList<Book> arrBook=new ArrayList<Book>();
+		arrBook=bookMapper.bestSelling();
+		return arrBook;
 	}
 
 	//降价的查看全部
-	public PageBean<Book> priceReduction(Integer pageNum) {
+	public ArrayList<Book> priceReduction() {
 		// TODO Auto-generated method stub
-		PageBean<Book> pageBean = new PageBean<Book>();
-		pageBean=paging(pageNum,"priceReduction");
-		return pageBean;
+		ArrayList<Book> arrBook=new ArrayList<Book>();
+		arrBook=bookMapper.priceReduction();
+		return arrBook;
 	}
 	
 	//文学小说的查看全部
-		public PageBean<Book> literaryNovel(Integer cateId,Integer pageNum) {
+		public ArrayList<Book> literaryNovel(Integer cateId) {
 			// TODO Auto-generated method stub
-			PageBean<Book> pageBean = new PageBean<Book>();
+			ArrayList<Book> arrBook=new ArrayList<Book>();
 			String cateName=bookMapper.findCateNameById(cateId);
 			System.out.println("cateId="+cateId);
 			System.out.println("一级分类名："+cateName);
-			pageBean=paging(pageNum,cateName);
-			return pageBean;
+			arrBook=bookMapper.literaryNovel(cateName);
+			return arrBook;
 		}
 
 		//人文历史的查看全部
-		public PageBean<Book> socialScience(Integer cateId,Integer pageNum) {
+		public ArrayList<Book> socialScience(Integer cateId) {
 			// TODO Auto-generated method stub
-			PageBean<Book> pageBean = new PageBean<Book>();
+			ArrayList<Book> arrBook=new ArrayList<Book>();
 			String cateName=bookMapper.findCateNameById(cateId);
 			System.out.println("cateId="+cateId);
 			System.out.println("一级分类名"+cateName);
-			pageBean=paging(pageNum,cateName);
-			return pageBean;
+			arrBook=bookMapper.socialScience(cateName);
+			return arrBook;
 		}
 
 		//经济管理的查看全部
-		public PageBean<Book> economicManagement(Integer cateId,Integer pageNum) {
+		public ArrayList<Book> economicManagement(Integer cateId) {
 			// TODO Auto-generated method stub
-			PageBean<Book> pageBean = new PageBean<Book>();
+			ArrayList<Book> arrBook=new ArrayList<Book>();
 			String cateName=bookMapper.findCateNameById(cateId);
 			System.out.println("cateId="+cateId);
 			System.out.println("一级分类名"+cateName);
-			pageBean=paging(pageNum,cateName);
-			return pageBean;
+			arrBook=bookMapper.economicManagement(cateName);
+			return arrBook;
 		}
 	
 		//教育学习的查看全部
-		public PageBean<Book> education(Integer secondCateId,Integer pageNum){
-			PageBean<Book> pageBean = new PageBean<Book>();
+		public ArrayList<Book> education(Integer secondCateId){
+			ArrayList<Book> arrBook=new ArrayList<Book>();
 			String secondCateName=bookMapper.findsecCateIdByName(secondCateId);
 			System.out.println("cateId="+secondCateId);
 			System.out.println("二级分类名"+secondCateName);
-			pageBean=paging(pageNum,secondCateName);
-			return pageBean;
+			arrBook=bookMapper.education(secondCateName);
+			return arrBook;
 		}
 		
         //IT科技的查看全部
-		public PageBean<Book> technology(Integer cateId,Integer pageNum) {
+		public ArrayList<Book> technology(Integer cateId) {
 			// TODO Auto-generated method stub
-			PageBean<Book> pageBean = new PageBean<Book>();
+			ArrayList<Book> arrBook=new ArrayList<Book>();
 			String cateName=bookMapper.findCateNameById(cateId);
 			System.out.println("cateId="+cateId);
 			System.out.println("一级分类名"+cateName);
-			pageBean=paging(pageNum,cateName);
-			return pageBean;
-		}
-
-		
-		
-		@Autowired
-		private   BookMapper bookMapperPage;
-
-		public  PageBean paging(Integer pageNum,String str){
-			System.out.println("pageNum="+pageNum);
-			PageBean<Book> pageBean = new PageBean<Book>();
-			//设置当前页码
-			pageBean.setCurrentPageNum(pageNum);
-			//设置每页显示记录数
-			int limit = 10;
-			pageBean.setLimit(limit);
-			//设置总的记录数
-			int totalCount = 0;
-			
-			if("bestSelling".equals(str)){
-				System.out.println(bookMapperPage);
-				totalCount = bookMapperPage.bestSellingCount();
-				System.out.println(totalCount); 
-			}else if("priceReduction".equals(str)){
-				totalCount = bookMapperPage.priceReductionCount();
-			}else if("I 文学".equals(str)){
-				totalCount = bookMapperPage.literaryNovelCount(str);
-			}else if("K 历史、地理".equals(str)){
-				totalCount = bookMapperPage.socialScienceCount(str);
-			}else if("F 经济".equals(str)){
-				totalCount = bookMapperPage.economicManagementCount(str);
-			}else if("G4 教育".equals(str)){
-				totalCount = bookMapperPage.educationCount(str);
-			}else if("IT科技".equals(str)){
-				totalCount = bookMapperPage.technologyCount(str);
-			}
-	     	pageBean.setTotalCount(totalCount);
-			System.out.println("总的数目是+++=================="+totalCount);
-			//设置总页数
-			int totalPage=0;
-			if(totalCount%limit==0){
-				totalPage=totalCount/limit;
-			}else{
-				totalPage=totalCount/limit+1;
-			}
-			pageBean.setTotalPageNum(totalPage);
-			//填充每页显示的数据集合
-			//从第几个元素开始查询
-			int begin = (pageNum-1)*limit;
-			System.out.println("begin======"+begin);
-			List<Book> list = null;
-			
-			if("bestSelling".equals(str)){
-			 list=bookMapperPage.bestSelling(begin,limit);
-			}else if("priceReduction".equals(str)){
-			 list=bookMapperPage.priceReduction(begin,limit);
-			}else if("I 文学".equals(str)){
-				list=bookMapperPage.literaryNovel(str,begin,limit);	
-			}else if("K 历史、地理".equals(str)){
-				list = bookMapperPage.socialScience(str,begin,limit);
-			}else if("F 经济".equals(str)){
-				list = bookMapperPage.economicManagement(str,begin,limit);
-			}else if("G4 教育".equals(str)){
-				list = bookMapperPage.education(str,begin,limit);
-			}else if("IT科技".equals(str)){
-				list = bookMapperPage.technology(str,begin,limit);
-			}
-			
-			pageBean.setList(list);
-			return pageBean;
+			arrBook=bookMapper.technology(cateName);
+			return arrBook;
 		}
 
 		

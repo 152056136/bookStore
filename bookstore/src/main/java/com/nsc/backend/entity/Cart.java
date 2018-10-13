@@ -9,6 +9,7 @@ public class Cart {
 	private Double cartTotalUndiscount;
 	private Double cartUnitPrice;
 	private Integer cartCount;
+	private boolean cartIsCheck;
 	
 	//订单关联的用户,每次加入购物车,只能加入一种商品,加入时先看数据库中是否有次商品，有数量加，没有则创建此商品
 	private User user;
@@ -16,6 +17,12 @@ public class Cart {
 	private Distributor distributor;
 	
 	
+	public boolean isCartIsCheck() {
+		return cartIsCheck;
+	}
+	public void setCartIsCheck(boolean cartIsCheck) {
+		this.cartIsCheck = cartIsCheck;
+	}
 	public Distributor getDistributor() {
 		return distributor;
 	}
