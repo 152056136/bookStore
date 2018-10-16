@@ -55,7 +55,6 @@ public class OrderController {
 		//根据cartId集合将cart信息查询出来，封装进order订单
 		String paralist ="{\"openId\":\"o_1QS0WoXqiTeHge-MzBJ1CnPOL0\","
 				+ "\"cartList\":[{\"cartId\":20},{\"cartId\":21},{\"cartId\":23}]}";
-		System.out.println("cartPara"+cartPara);
 		JSONObject json = JSONObject.parseObject(cartPara);
 		JSONArray arr = (JSONArray) json.get("cartList");
 		String openId = (String) json.get("openId");
@@ -66,15 +65,11 @@ public class OrderController {
 			JSONObject jsonObject = arr.getJSONObject(i);
 			list.add(jsonObject.getInteger("cartId"));
 		}
-		for(Integer i:list) {
-			System.out.println("list===="+i);
-		}
 		//根据cartId的list集合将cart集合查出来
 		List<Cart> clist = cartServiceImpl.findCartByList(list);
 		//生成订单，保存订单的相关详情，并返回orderId主键，进行保存订单项
 		User user = userServiceImpl.findUserByopenId(openId);
 		Address address = addressServiceImpl.findAddressById(addId);
-		System.out.println(address);
 		//生成订单，保存
 		Order order = new Order();
 		BackState state = new BackState();
@@ -86,7 +81,7 @@ public class OrderController {
 			String formate = sdf.format(date);
 			parse = sdf.parse(formate);
 		} catch (ParseException e) {
-			System.out.println("当前日期初始化 错误");
+			System.out.println("当前日期初始化错误");
 			e.printStackTrace();
 		}
 		//处理订单的未打折总价
@@ -105,7 +100,6 @@ public class OrderController {
 		order.setAddress(address);
 		//将订单关联订单项，保存到数据库,并且将order主键返回
 		orderServiceImpl.saveOrder(order);
-		System.out.println("orderId=========="+order.getOrderId());
 		int flag =0;
 		//遍历clist，一次将订单相关的订单项进行保存
 		Iterator<Cart> cit1 = clist.iterator();

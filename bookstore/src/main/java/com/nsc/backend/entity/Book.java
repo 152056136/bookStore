@@ -42,7 +42,7 @@ public class Book {
 		private String bookScores;
 		private Integer bookDiscount;
 		private String bookNote;
-		
+		private String publish_house;
 		
 		//关联外键属性,一本书根据之前的数据，设计两个外键,可以直接关联一级也可以关联二级分类
 		private  Category category;
@@ -274,11 +274,14 @@ public class Book {
 		public void setThirdCate(ThirdCategory thirdCate) {
 			this.thirdCate = thirdCate;
 		}
+		public String getPublish_house() {
+			return publish_house;
+		}
+		public void setPublish_house(String publish_house) {
+			this.publish_house = publish_house;
+		}
 		
 		
-		
-		
-		
-	
+
 	
 }

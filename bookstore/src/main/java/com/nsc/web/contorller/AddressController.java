@@ -119,7 +119,7 @@ public class AddressController {
 		}
 		
 		//修改用户的默认地址
-		@RequestMapping("modifyDeAdd")//N   缺order表
+		@RequestMapping("modifyDeAdd")
 		@ResponseBody
 		public BackState  modifyDeAdd(String openId,Integer addId){
 			System.out.println("openId="+openId+" addId="+addId);

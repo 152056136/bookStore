@@ -24,21 +24,18 @@ public class OrderBaseServiceImpl implements IOrderBaseService{
 	private TradeTableMapper tradeTableMapper;
 	
 	
-	@Override
 	public void saveOrderBase(OrderBase orderbase) {
 		
 		orderbaseMapper.insertSelective(orderbase);
 	}
 
 	//保存交易表
-	@Override
 	public void saveTradeTable(TradeTable tradetable) {
 		
 		tradeTableMapper.insertSelective(tradetable);
 	}
 
 	//更改支付状态
-	@Override
 	public void changeOrderState(Integer orderId,Integer orderState) {
 		orderbaseMapper.updateorderStateByPrimaryKey(orderId,orderState);
 		
@@ -54,8 +51,6 @@ public class OrderBaseServiceImpl implements IOrderBaseService{
 	}
 
 	//生成11位数的随机数
-	@Override
-
 	public String getRandom(int length){		
 		String val = "";
 		Random random = new Random();

@@ -13,7 +13,7 @@ public class Address {
 	private	String	addTele;
 	//选择是否默认地址
 	private	Boolean	addDefault;
-	//一个用户可以有多个地址
+	//一个用户可以有多个地址,但一个地址仅对应一个用户
 	private	User user;
 	
 	

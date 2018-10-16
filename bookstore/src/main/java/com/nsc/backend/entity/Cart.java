@@ -4,6 +4,7 @@ import java.util.Date;
 
 //购物车实体类
 public class Cart {
+	
 	private Integer cartId;
 	private Date	cartJoinTime;
 	private Double cartTotalUndiscount;

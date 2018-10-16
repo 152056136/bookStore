@@ -11,33 +11,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nsc.backend.entity.Book;
 import com.nsc.backend.service.IBookService;
+import com.nsc.web.util.page.PageBean;
 
 /**
  * 查看全部
- * @author linshili
- *
  */
-
 @Controller
 @RequestMapping("/LookAll")
 public class LookAllController {
 	
 	private  ArrayList<Book> arrBook = new ArrayList<Book>();
-	
+	private PageBean<Book> pageBean = new PageBean<Book>();
 	@Autowired
 	private IBookService ibookservice;
-	
-	
-	
+
     /**
-     * 畅销-查看全部
-     *    
+     * 畅销-查看全部    
      */
-	
-	@RequestMapping(value="/best_selling",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Book> bestSelling(){
-	   arrBook=ibookservice.bestSelling();
-	  return arrBook;			
+	@RequestMapping(value="/best_selling")
+	public @ResponseBody PageBean<Book> bestSelling(Integer pageNum){
+		pageBean=ibookservice.bestSelling(pageNum);
+	    return pageBean;			
 	}
 	
 
@@ -45,10 +39,10 @@ public class LookAllController {
 	 * 降价-查看全部
 	 * 
 	 */
-	@RequestMapping(value="/price_reduction",method = RequestMethod.POST)
-	public ArrayList<Book> priceReduction(){
-		arrBook=ibookservice.priceReduction();
-		return arrBook;
+	@RequestMapping(value="/price_reduction")
+	public @ResponseBody PageBean<Book> priceReduction(Integer pageNum){
+		pageBean=ibookservice.priceReduction(pageNum);
+		return pageBean;
 	}
 	
 	
@@ -56,10 +50,10 @@ public class LookAllController {
 	 * 文学小说-查看全部
 	 * 
 	 */
-	@RequestMapping(value="/literary_novel",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Book> literaryNovel(Integer cateId){
-		arrBook=ibookservice.literaryNovel(cateId);
-		return arrBook;
+	@RequestMapping(value="/literary_novel")
+	public @ResponseBody PageBean<Book> literaryNovel(Integer cateId,Integer pageNum){
+		pageBean=ibookservice.literaryNovel(cateId,pageNum);
+		return pageBean;
 	}
 	
 	
@@ -67,38 +61,38 @@ public class LookAllController {
 	 * 人文历史-查看全部
 	 * 
 	 */
-	@RequestMapping(value="/Social_science",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Book> socialScience(Integer cateId){
-		arrBook=ibookservice.socialScience(cateId);
-		return arrBook;
+	@RequestMapping(value="/Social_science")
+	public @ResponseBody PageBean<Book> socialScience(Integer cateId,Integer pageNum){
+		pageBean=ibookservice.socialScience(cateId,pageNum);
+		return pageBean;
 	}
 	
 	
 	/**
 	 * 经济管理-查看全部
 	 */
-	@RequestMapping(value="/economic_management",method = RequestMethod.POST)
-	public  @ResponseBody  ArrayList<Book> economicManagement(Integer cateId){
-		arrBook=ibookservice.economicManagement(cateId);
-		return arrBook;
+	@RequestMapping(value="/economic_management")
+	public  @ResponseBody  PageBean<Book> economicManagement(Integer cateId,Integer pageNum){
+		pageBean=ibookservice.economicManagement(cateId,pageNum);
+		return pageBean;
 	}
 	
 	/**
 	 * 教育学习-查看全部
 	 */
-	@RequestMapping(value="/education",method = RequestMethod.POST)
-	public  @ResponseBody ArrayList<Book> education(Integer secondCateId){
-		arrBook=ibookservice.education(secondCateId);
-		return arrBook;
+	@RequestMapping(value="/education")
+	public @ResponseBody PageBean<Book> education(Integer secondCateId,Integer pageNum){
+		pageBean=ibookservice.education(secondCateId,pageNum);
+		return pageBean;
 	}
 	
 	/**
-	 * IT科技-查看全部s
+	 * IT科技-查看全部
 	 */
-	@RequestMapping(value="/technology",method = RequestMethod.POST)
-	public  @ResponseBody ArrayList<Book> technology(Integer cateId){
-		arrBook=ibookservice.technology(cateId);
-		return arrBook;
+	@RequestMapping(value="/technology")
+	public  @ResponseBody PageBean<Book> technology(Integer cateId,Integer pageNum){
+		pageBean=ibookservice.technology(cateId,pageNum);
+		return pageBean;
 	}
 	
 }

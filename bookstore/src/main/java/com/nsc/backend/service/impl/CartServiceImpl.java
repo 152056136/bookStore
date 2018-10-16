@@ -36,6 +36,7 @@ public class CartServiceImpl implements ICartService{
 	//根据用户id将此用户的购物信息，查找出来
 	public List<Cart> showCart(String openId) {
 		List<Cart> carts = cartMapper.showCart(openId);
+		System.out.println("CartServiceImpl="+carts.size());
 		return carts;
 	}
 	//将list传向持久层，删除购物车信息

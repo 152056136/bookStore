@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -242,10 +243,17 @@ public class CartController {
 	 * @param openId
 	 * @return
 	 */
-	@RequestMapping("showCart")
-	public @ResponseBody List<Cart> showCart(String openId){
+	@RequestMapping(value="showCart",method=RequestMethod.POST)
+	public @ResponseBody List<Cart> showCart(@RequestBody String openId){
 		//根据用户id将此用户的购物信息，查找出来
+		JSONObject json=JSONObject.parseObject(openId);
+		openId=json.getString("openId");
+		System.out.println("======carts========");
+		System.out.println("openId=="+openId);
 		List<Cart> carts = cartServiceImpl.showCart(openId);
+		for(Cart c:carts){
+			System.out.println("carts===="+c.toString());
+		}
 		return carts ;
 	}
 	
