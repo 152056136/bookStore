@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.OrderGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.nsc.backend.entity.OrderGoods" >
+    <id column="orderGoods_id" property="ordergoodsId" jdbcType="INTEGER" />
+    <result column="orderGoods_countorderGoods_count" property="ordergoodsCountordergoodsCount" jdbcType="INTEGER" />
+    <result column="orderGoods_IsReturnGoods" property="ordergoodsIsreturngoods" jdbcType="TINYINT" />
+    <result column="orderGoods_IsGift" property="ordergoodsIsgift" jdbcType="TINYINT" />
+    <result column="orderGoods_IsDiscounts" property="ordergoodsIsdiscounts" jdbcType="TINYINT" />
+    <result column="orderGoods_isStoreDiscount" property="ordergoodsIsstorediscount" jdbcType="TINYINT" />
+    <result column="orderGoods_DiscounAmount" property="ordergoodsDiscounamount" jdbcType="DOUBLE" />
+    <result column="orderGoods_TotalPrice" property="ordergoodsTotalprice" jdbcType="DOUBLE" />
+    <result column="orderGoods_distributionStatus" property="ordergoodsDistributionstatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderGoods_id, orderGoods_countorderGoods_count, orderGoods_IsReturnGoods, orderGoods_IsGift, 
+    orderGoods_IsDiscounts, orderGoods_isStoreDiscount, orderGoods_DiscounAmount, orderGoods_TotalPrice, 
+    orderGoods_distributionStatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_goods
+    where orderGoods_id = #{ordergoodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_goods
+    where orderGoods_id = #{ordergoodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nsc.backend.entity.OrderGoods" >
+    insert into order_goods (orderGoods_id, orderGoods_countorderGoods_count, 
+      orderGoods_IsReturnGoods, orderGoods_IsGift, 
+      orderGoods_IsDiscounts, orderGoods_isStoreDiscount, 
+      orderGoods_DiscounAmount, orderGoods_TotalPrice, 
+      orderGoods_distributionStatus, order_id, 
+      book_id, orderReturn_id)
+    values (#{ordergoodsId,jdbcType=INTEGER}, #{ordergoodsCountordergoodsCount,jdbcType=INTEGER}, 
+      #{ordergoodsIsreturngoods,jdbcType=TINYINT}, #{ordergoodsIsgift,jdbcType=TINYINT}, 
+      #{ordergoodsIsdiscounts,jdbcType=TINYINT}, #{ordergoodsIsstorediscount,jdbcType=TINYINT}, 
+      #{ordergoodsDiscounamount,jdbcType=DOUBLE}, #{ordergoodsTotalprice,jdbcType=DOUBLE}, 
+      #{ordergoodsDistributionstatus,jdbcType=TINYINT}, #{orderId,jdbcType=INTEGER}, 
+      #{bookId,jdbcType=INTEGER}, #{orderreturnId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nsc.backend.entity.OrderGoods" >
+    insert into order_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordergoodsId != null" >
+        orderGoods_id,
+      </if>
+      <if test="ordergoodsCountordergoodsCount != null" >
+        orderGoods_countorderGoods_count,
+      </if>
+      <if test="ordergoodsIsreturngoods != null" >
+        orderGoods_IsReturnGoods,
+      </if>
+      <if test="ordergoodsIsgift != null" >
+        orderGoods_IsGift,
+      </if>
+      <if test="ordergoodsIsdiscounts != null" >
+        orderGoods_IsDiscounts,
+      </if>
+      <if test="ordergoodsIsstorediscount != null" >
+        orderGoods_isStoreDiscount,
+      </if>
+      <if test="ordergoodsDiscounamount != null" >
+        orderGoods_DiscounAmount,
+      </if>
+      <if test="ordergoodsTotalprice != null" >
+        orderGoods_TotalPrice,
+      </if>
+      <if test="ordergoodsDistributionstatus != null" >
+        orderGoods_distributionStatus,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="orderreturnId != null" >
+        orderReturn_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordergoodsId != null" >
+        #{ordergoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="ordergoodsCountordergoodsCount != null" >
+        #{ordergoodsCountordergoodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="ordergoodsIsreturngoods != null" >
+        #{ordergoodsIsreturngoods,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsIsgift != null" >
+        #{ordergoodsIsgift,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsIsdiscounts != null" >
+        #{ordergoodsIsdiscounts,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsIsstorediscount != null" >
+        #{ordergoodsIsstorediscount,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsDiscounamount != null" >
+        #{ordergoodsDiscounamount,jdbcType=DOUBLE},
+      </if>
+      <if test="ordergoodsTotalprice != null" >
+        #{ordergoodsTotalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ordergoodsDistributionstatus != null" >
+        #{ordergoodsDistributionstatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="orderreturnId != null" >
+        #{orderreturnId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nsc.backend.entity.OrderGoods" >
+    update order_goods
+    <set >
+      <if test="ordergoodsCountordergoodsCount != null" >
+        orderGoods_countorderGoods_count = #{ordergoodsCountordergoodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="ordergoodsIsreturngoods != null" >
+        orderGoods_IsReturnGoods = #{ordergoodsIsreturngoods,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsIsgift != null" >
+        orderGoods_IsGift = #{ordergoodsIsgift,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsIsdiscounts != null" >
+        orderGoods_IsDiscounts = #{ordergoodsIsdiscounts,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsIsstorediscount != null" >
+        orderGoods_isStoreDiscount = #{ordergoodsIsstorediscount,jdbcType=TINYINT},
+      </if>
+      <if test="ordergoodsDiscounamount != null" >
+        orderGoods_DiscounAmount = #{ordergoodsDiscounamount,jdbcType=DOUBLE},
+      </if>
+      <if test="ordergoodsTotalprice != null" >
+        orderGoods_TotalPrice = #{ordergoodsTotalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ordergoodsDistributionstatus != null" >
+        orderGoods_distributionStatus = #{ordergoodsDistributionstatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="orderreturnId != null" >
+        orderReturn_id = #{orderreturnId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderGoods_id = #{ordergoodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nsc.backend.entity.OrderGoods" >
+    update order_goods
+    set orderGoods_countorderGoods_count = #{ordergoodsCountordergoodsCount,jdbcType=INTEGER},
+      orderGoods_IsReturnGoods = #{ordergoodsIsreturngoods,jdbcType=TINYINT},
+      orderGoods_IsGift = #{ordergoodsIsgift,jdbcType=TINYINT},
+      orderGoods_IsDiscounts = #{ordergoodsIsdiscounts,jdbcType=TINYINT},
+      orderGoods_isStoreDiscount = #{ordergoodsIsstorediscount,jdbcType=TINYINT},
+      orderGoods_DiscounAmount = #{ordergoodsDiscounamount,jdbcType=DOUBLE},
+      orderGoods_TotalPrice = #{ordergoodsTotalprice,jdbcType=DOUBLE},
+      orderGoods_distributionStatus = #{ordergoodsDistributionstatus,jdbcType=TINYINT},
+      order_id = #{orderId,jdbcType=INTEGER},
+      book_id = #{bookId,jdbcType=INTEGER},
+      orderReturn_id = #{orderreturnId,jdbcType=INTEGER}
+    where orderGoods_id = #{ordergoodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -4,7 +4,6 @@ import java.util.Date;
 
 //购物车实体类
 public class Cart {
-	
 	private Integer cartId;
 	private Date	cartJoinTime;
 	private Double cartTotalUndiscount;
@@ -16,8 +15,16 @@ public class Cart {
 	private User user;
 	private Book book;
 	private Distributor distributor;
+	private Store store;
 	
 	
+	
+	public Store getStore() {
+		return store;
+	}
+	public void setStore(Store store) {
+		this.store = store;
+	}
 	public boolean isCartIsCheck() {
 		return cartIsCheck;
 	}

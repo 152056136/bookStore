@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.nsc.backend.entity.Store" >
+    <id column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_sn" property="storeSn" jdbcType="VARCHAR" />
+    <result column="store_areald1" property="storeAreald1" jdbcType="INTEGER" />
+    <result column="store_areaId2" property="storeAreaid2" jdbcType="INTEGER" />
+    <result column="store_areadId3" property="storeAreadid3" jdbcType="INTEGER" />
+    <result column="store_goodsCatId1" property="storeGoodscatid1" jdbcType="INTEGER" />
+    <result column="store_goodsCatId2" property="storeGoodscatid2" jdbcType="INTEGER" />
+    <result column="store_goodsCatId3" property="storeGoodscatid3" jdbcType="INTEGER" />
+    <result column="store_isSelf" property="storeIsself" jdbcType="TINYINT" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_company" property="storeCompany" jdbcType="VARCHAR" />
+    <result column="store_tel" property="storeTel" jdbcType="VARCHAR" />
+    <result column="store_address" property="storeAddress" jdbcType="VARCHAR" />
+    <result column="store_isInvoice" property="storeIsinvoice" jdbcType="TINYINT" />
+    <result column="store_serviceStartTime" property="storeServicestarttime" jdbcType="REAL" />
+    <result column="store_serviceEndTime" property="storeServiceendtime" jdbcType="REAL" />
+    <result column="store_status" property="storeStatus" jdbcType="TINYINT" />
+    <result column="store_active" property="storeActive" jdbcType="TINYINT" />
+    <result column="store_qqNo" property="storeQqno" jdbcType="VARCHAR" />
+    <result column="store_score" property="storeScore" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    store_id, store_sn, store_areald1, store_areaId2, store_areadId3, store_goodsCatId1, 
+    store_goodsCatId2, store_goodsCatId3, store_isSelf, store_name, store_company, store_tel, 
+    store_address, store_isInvoice, store_serviceStartTime, store_serviceEndTime, store_status, 
+    store_active, store_qqNo, store_score
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nsc.backend.entity.Store" >
+    insert into store (store_id, store_sn, store_areald1, 
+      store_areaId2, store_areadId3, store_goodsCatId1, 
+      store_goodsCatId2, store_goodsCatId3, store_isSelf, 
+      store_name, store_company, store_tel, 
+      store_address, store_isInvoice, store_serviceStartTime, 
+      store_serviceEndTime, store_status, store_active, 
+      store_qqNo, store_score)
+    values (#{storeId,jdbcType=INTEGER}, #{storeSn,jdbcType=VARCHAR}, #{storeAreald1,jdbcType=INTEGER}, 
+      #{storeAreaid2,jdbcType=INTEGER}, #{storeAreadid3,jdbcType=INTEGER}, #{storeGoodscatid1,jdbcType=INTEGER}, 
+      #{storeGoodscatid2,jdbcType=INTEGER}, #{storeGoodscatid3,jdbcType=INTEGER}, #{storeIsself,jdbcType=TINYINT}, 
+      #{storeName,jdbcType=VARCHAR}, #{storeCompany,jdbcType=VARCHAR}, #{storeTel,jdbcType=VARCHAR}, 
+      #{storeAddress,jdbcType=VARCHAR}, #{storeIsinvoice,jdbcType=TINYINT}, #{storeServicestarttime,jdbcType=REAL}, 
+      #{storeServiceendtime,jdbcType=REAL}, #{storeStatus,jdbcType=TINYINT}, #{storeActive,jdbcType=TINYINT}, 
+      #{storeQqno,jdbcType=VARCHAR}, #{storeScore,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nsc.backend.entity.Store" >
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="storeSn != null" >
+        store_sn,
+      </if>
+      <if test="storeAreald1 != null" >
+        store_areald1,
+      </if>
+      <if test="storeAreaid2 != null" >
+        store_areaId2,
+      </if>
+      <if test="storeAreadid3 != null" >
+        store_areadId3,
+      </if>
+      <if test="storeGoodscatid1 != null" >
+        store_goodsCatId1,
+      </if>
+      <if test="storeGoodscatid2 != null" >
+        store_goodsCatId2,
+      </if>
+      <if test="storeGoodscatid3 != null" >
+        store_goodsCatId3,
+      </if>
+      <if test="storeIsself != null" >
+        store_isSelf,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="storeCompany != null" >
+        store_company,
+      </if>
+      <if test="storeTel != null" >
+        store_tel,
+      </if>
+      <if test="storeAddress != null" >
+        store_address,
+      </if>
+      <if test="storeIsinvoice != null" >
+        store_isInvoice,
+      </if>
+      <if test="storeServicestarttime != null" >
+        store_serviceStartTime,
+      </if>
+      <if test="storeServiceendtime != null" >
+        store_serviceEndTime,
+      </if>
+      <if test="storeStatus != null" >
+        store_status,
+      </if>
+      <if test="storeActive != null" >
+        store_active,
+      </if>
+      <if test="storeQqno != null" >
+        store_qqNo,
+      </if>
+      <if test="storeScore != null" >
+        store_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeSn != null" >
+        #{storeSn,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAreald1 != null" >
+        #{storeAreald1,jdbcType=INTEGER},
+      </if>
+      <if test="storeAreaid2 != null" >
+        #{storeAreaid2,jdbcType=INTEGER},
+      </if>
+      <if test="storeAreadid3 != null" >
+        #{storeAreadid3,jdbcType=INTEGER},
+      </if>
+      <if test="storeGoodscatid1 != null" >
+        #{storeGoodscatid1,jdbcType=INTEGER},
+      </if>
+      <if test="storeGoodscatid2 != null" >
+        #{storeGoodscatid2,jdbcType=INTEGER},
+      </if>
+      <if test="storeGoodscatid3 != null" >
+        #{storeGoodscatid3,jdbcType=INTEGER},
+      </if>
+      <if test="storeIsself != null" >
+        #{storeIsself,jdbcType=TINYINT},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCompany != null" >
+        #{storeCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="storeTel != null" >
+        #{storeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAddress != null" >
+        #{storeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="storeIsinvoice != null" >
+        #{storeIsinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="storeServicestarttime != null" >
+        #{storeServicestarttime,jdbcType=REAL},
+      </if>
+      <if test="storeServiceendtime != null" >
+        #{storeServiceendtime,jdbcType=REAL},
+      </if>
+      <if test="storeStatus != null" >
+        #{storeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="storeActive != null" >
+        #{storeActive,jdbcType=TINYINT},
+      </if>
+      <if test="storeQqno != null" >
+        #{storeQqno,jdbcType=VARCHAR},
+      </if>
+      <if test="storeScore != null" >
+        #{storeScore,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nsc.backend.entity.Store" >
+    update store
+    <set >
+      <if test="storeSn != null" >
+        store_sn = #{storeSn,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAreald1 != null" >
+        store_areald1 = #{storeAreald1,jdbcType=INTEGER},
+      </if>
+      <if test="storeAreaid2 != null" >
+        store_areaId2 = #{storeAreaid2,jdbcType=INTEGER},
+      </if>
+      <if test="storeAreadid3 != null" >
+        store_areadId3 = #{storeAreadid3,jdbcType=INTEGER},
+      </if>
+      <if test="storeGoodscatid1 != null" >
+        store_goodsCatId1 = #{storeGoodscatid1,jdbcType=INTEGER},
+      </if>
+      <if test="storeGoodscatid2 != null" >
+        store_goodsCatId2 = #{storeGoodscatid2,jdbcType=INTEGER},
+      </if>
+      <if test="storeGoodscatid3 != null" >
+        store_goodsCatId3 = #{storeGoodscatid3,jdbcType=INTEGER},
+      </if>
+      <if test="storeIsself != null" >
+        store_isSelf = #{storeIsself,jdbcType=TINYINT},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCompany != null" >
+        store_company = #{storeCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="storeTel != null" >
+        store_tel = #{storeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAddress != null" >
+        store_address = #{storeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="storeIsinvoice != null" >
+        store_isInvoice = #{storeIsinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="storeServicestarttime != null" >
+        store_serviceStartTime = #{storeServicestarttime,jdbcType=REAL},
+      </if>
+      <if test="storeServiceendtime != null" >
+        store_serviceEndTime = #{storeServiceendtime,jdbcType=REAL},
+      </if>
+      <if test="storeStatus != null" >
+        store_status = #{storeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="storeActive != null" >
+        store_active = #{storeActive,jdbcType=TINYINT},
+      </if>
+      <if test="storeQqno != null" >
+        store_qqNo = #{storeQqno,jdbcType=VARCHAR},
+      </if>
+      <if test="storeScore != null" >
+        store_score = #{storeScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nsc.backend.entity.Store" >
+    update store
+    set store_sn = #{storeSn,jdbcType=VARCHAR},
+      store_areald1 = #{storeAreald1,jdbcType=INTEGER},
+      store_areaId2 = #{storeAreaid2,jdbcType=INTEGER},
+      store_areadId3 = #{storeAreadid3,jdbcType=INTEGER},
+      store_goodsCatId1 = #{storeGoodscatid1,jdbcType=INTEGER},
+      store_goodsCatId2 = #{storeGoodscatid2,jdbcType=INTEGER},
+      store_goodsCatId3 = #{storeGoodscatid3,jdbcType=INTEGER},
+      store_isSelf = #{storeIsself,jdbcType=TINYINT},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      store_company = #{storeCompany,jdbcType=VARCHAR},
+      store_tel = #{storeTel,jdbcType=VARCHAR},
+      store_address = #{storeAddress,jdbcType=VARCHAR},
+      store_isInvoice = #{storeIsinvoice,jdbcType=TINYINT},
+      store_serviceStartTime = #{storeServicestarttime,jdbcType=REAL},
+      store_serviceEndTime = #{storeServiceendtime,jdbcType=REAL},
+      store_status = #{storeStatus,jdbcType=TINYINT},
+      store_active = #{storeActive,jdbcType=TINYINT},
+      store_qqNo = #{storeQqno,jdbcType=VARCHAR},
+      store_score = #{storeScore,jdbcType=INTEGER}
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+</mapper>

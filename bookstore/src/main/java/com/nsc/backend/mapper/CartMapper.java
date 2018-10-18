@@ -23,7 +23,9 @@ public interface CartMapper {
 	void updateBookCount(Cart cart);
 	//根据cartid查找cart
 	Cart findCartByCartId(Integer cartId);
-	
-	
+	//选中商品
+	void isCheck(Integer cartId);
+	//查找对应商家需要付款的cart
+	List<Cart> findPayCartByStoreId(Integer storeId);
 	
 }

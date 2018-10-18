@@ -112,7 +112,7 @@ public class CartController {
 			cart.setCartTotalUndiscount(cart.getCartCount()*cart.getCartUnitPrice());
 			//将更新的购物车信息，在数据库进行更新
 		    cartServiceImpl.updateCart(cart);
-		  //为小程序返回，操作状态
+		    //为小程序返回，操作状态
 			BackState bs = new BackState();
 			bs.setStateId(Math.random());
 			bs.setStateName("HTTP State 200");
@@ -243,23 +243,31 @@ public class CartController {
 	 * @param openId
 	 * @return
 	 */
-	@RequestMapping(value="showCart",method=RequestMethod.POST)
+	@RequestMapping(value= "showCart",method= RequestMethod.POST)
 	public @ResponseBody List<Cart> showCart(@RequestBody String openId){
 		//根据用户id将此用户的购物信息，查找出来
-		JSONObject json=JSONObject.parseObject(openId);
-		openId=json.getString("openId");
-		System.out.println("======carts========");
-		System.out.println("openId=="+openId);
+		System.out.println(openId);
+		JSONObject json = JSONObject.parseObject(openId);
+		openId = json.getString("openId");
 		List<Cart> carts = cartServiceImpl.showCart(openId);
-		for(Cart c:carts){
-			System.out.println("carts===="+c.toString());
-		}
 		return carts ;
 	}
 	
-	
-	
-	
+	@RequestMapping("isCheck")
+	@ResponseBody
+	public void isCheck(@RequestBody String cartparam) {
+		
+		String param_1 ="{\"cartList\":[{\"cartId\":01},{\"cartId\":01},{\"cartId\":03}]}";
+		JSONObject json = JSONObject.parseObject(cartparam);
+		JSONArray arrcart = (JSONArray) json.get("cartList");
+		List<Integer> cartlist = new ArrayList<Integer>();
+		for(int i=0;i<arrcart.size();i++){
+			JSONObject jsonObject = arrcart.getJSONObject(i);
+			cartlist.add(jsonObject.getInteger("cartId"));
+		}
+		cartServiceImpl.isCheck(cartlist);
+		
+	}
 	
 	
 }

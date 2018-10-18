@@ -103,8 +103,7 @@ public class BookServiceImpl implements IBookService {
 	public PageBean<Book> bestSelling(Integer pageNum) {
 		// TODO Auto-generated method stub
 		PageBean<Book> pageBean = new PageBean<Book>();
-		int totalCount = bookMapperPage.bestSellingCount();
-		pageBean=paging(pageNum,totalCount,4,"bestSelling");
+		pageBean=paging(pageNum,"bestSelling");
 		return pageBean;
 	}
 
@@ -112,8 +111,7 @@ public class BookServiceImpl implements IBookService {
 	public PageBean<Book> priceReduction(Integer pageNum) {
 		// TODO Auto-generated method stub
 		PageBean<Book> pageBean = new PageBean<Book>();
-		int totalCount = bookMapperPage.priceReductionCount();
-		pageBean=paging(pageNum,totalCount,5,"priceReduction");
+		pageBean=paging(pageNum,"priceReduction");
 		return pageBean;
 	}
 	
@@ -121,9 +119,10 @@ public class BookServiceImpl implements IBookService {
 		public PageBean<Book> literaryNovel(Integer cateId,Integer pageNum) {
 			// TODO Auto-generated method stub
 			PageBean<Book> pageBean = new PageBean<Book>();
-			//String cateName=bookMapper.findCateNameById(cateId);
-			int totalCount = bookMapperPage.literaryNovelCount(cateId);
-			pageBean=paging(pageNum,totalCount,cateId,"literaryNovel");
+			String cateName=bookMapper.findCateNameById(cateId);
+			System.out.println("cateId="+cateId);
+			System.out.println("一级分类名："+cateName);
+			pageBean=paging(pageNum,cateName);
 			return pageBean;
 		}
 
@@ -131,9 +130,10 @@ public class BookServiceImpl implements IBookService {
 		public PageBean<Book> socialScience(Integer cateId,Integer pageNum) {
 			// TODO Auto-generated method stub
 			PageBean<Book> pageBean = new PageBean<Book>();
-			//String cateName=bookMapper.findCateNameById(cateId);
-			int totalCount = bookMapperPage.socialScienceCount(cateId);
-			pageBean=paging(pageNum,totalCount,cateId,"socialScience");
+			String cateName=bookMapper.findCateNameById(cateId);
+			System.out.println("cateId="+cateId);
+			System.out.println("一级分类名"+cateName);
+			pageBean=paging(pageNum,cateName);
 			return pageBean;
 		}
 
@@ -141,18 +141,20 @@ public class BookServiceImpl implements IBookService {
 		public PageBean<Book> economicManagement(Integer cateId,Integer pageNum) {
 			// TODO Auto-generated method stub
 			PageBean<Book> pageBean = new PageBean<Book>();
-			//String cateName=bookMapper.findCateNameById(cateId);
-			int totalCount = bookMapperPage.economicManagementCount(cateId);
-			pageBean=paging(pageNum,totalCount,cateId,"economicManagement");
+			String cateName=bookMapper.findCateNameById(cateId);
+			System.out.println("cateId="+cateId);
+			System.out.println("一级分类名"+cateName);
+			pageBean=paging(pageNum,cateName);
 			return pageBean;
 		}
 	
 		//教育学习的查看全部
 		public PageBean<Book> education(Integer secondCateId,Integer pageNum){
 			PageBean<Book> pageBean = new PageBean<Book>();
-			//String secondCateName=bookMapper.findsecCateIdByName(secondCateId);
-			int totalCount = bookMapperPage.educationCount(secondCateId);
-			pageBean=paging(pageNum,totalCount,secondCateId,"education");
+			String secondCateName=bookMapper.findsecCateIdByName(secondCateId);
+			System.out.println("cateId="+secondCateId);
+			System.out.println("二级分类名"+secondCateName);
+			pageBean=paging(pageNum,secondCateName);
 			return pageBean;
 		}
 		
@@ -160,10 +162,10 @@ public class BookServiceImpl implements IBookService {
 		public PageBean<Book> technology(Integer cateId,Integer pageNum) {
 			// TODO Auto-generated method stub
 			PageBean<Book> pageBean = new PageBean<Book>();
-			//String cateName=bookMapper.findCateNameById(cateId);
-			/*pageBean=paging(pageNum,cateName);*/
-			int totalCount = bookMapperPage.technologyCount(cateId);
-			pageBean=paging(pageNum,totalCount,cateId,"technology");
+			String cateName=bookMapper.findCateNameById(cateId);
+			System.out.println("cateId="+cateId);
+			System.out.println("一级分类名"+cateName);
+			pageBean=paging(pageNum,cateName);
 			return pageBean;
 		}
 
@@ -172,7 +174,7 @@ public class BookServiceImpl implements IBookService {
 		@Autowired
 		private   BookMapper bookMapperPage;
 
-		public  PageBean paging(Integer pageNum,Integer totalCount,Integer cateId, String vary){
+		public  PageBean paging(Integer pageNum,String str){
 			System.out.println("pageNum="+pageNum);
 			PageBean<Book> pageBean = new PageBean<Book>();
 			//设置当前页码
@@ -181,13 +183,13 @@ public class BookServiceImpl implements IBookService {
 			int limit = 10;
 			pageBean.setLimit(limit);
 			//设置总的记录数
-			//int totalCount = 0;
+			int totalCount = 0;
 			
-			/*if("bestSelling".equals(vary)){
+			if("bestSelling".equals(str)){
 				System.out.println(bookMapperPage);
 				totalCount = bookMapperPage.bestSellingCount();
 				System.out.println(totalCount); 
-			}else if("priceReduction".equals(vary)){
+			}else if("priceReduction".equals(str)){
 				totalCount = bookMapperPage.priceReductionCount();
 			}else if("I 文学".equals(str)){
 				totalCount = bookMapperPage.literaryNovelCount(str);
@@ -199,7 +201,7 @@ public class BookServiceImpl implements IBookService {
 				totalCount = bookMapperPage.educationCount(str);
 			}else if("IT科技".equals(str)){
 				totalCount = bookMapperPage.technologyCount(str);
-			}*/
+			}
 	     	pageBean.setTotalCount(totalCount);
 			System.out.println("总的数目是+++=================="+totalCount);
 			//设置总页数
@@ -216,27 +218,25 @@ public class BookServiceImpl implements IBookService {
 			System.out.println("begin======"+begin);
 			List<Book> list = null;
 			
-			if("bestSelling".equals(vary)){
+			if("bestSelling".equals(str)){
 			 list=bookMapperPage.bestSelling(begin,limit);
-			}else if("priceReduction".equals(vary)){
+			}else if("priceReduction".equals(str)){
 			 list=bookMapperPage.priceReduction(begin,limit);
-			}else if("literaryNovel".equals(vary)){
-				list=bookMapperPage.literaryNovel(cateId,begin,limit);	
-			}else if("socialScience".equals(vary)){
-				list = bookMapperPage.socialScience(cateId,begin,limit);
-			}else if("economicManagement".equals(vary)){
-				list = bookMapperPage.economicManagement(cateId,begin,limit);
-			}else if("education".equals(vary)){
-				list = bookMapperPage.education(cateId,begin,limit);
-			}else if("technology".equals(vary)){
-				list = bookMapperPage.technology(cateId,begin,limit);
+			}else if("I 文学".equals(str)){
+				list=bookMapperPage.literaryNovel(str,begin,limit);	
+			}else if("K 历史、地理".equals(str)){
+				list = bookMapperPage.socialScience(str,begin,limit);
+			}else if("F 经济".equals(str)){
+				list = bookMapperPage.economicManagement(str,begin,limit);
+			}else if("G4 教育".equals(str)){
+				list = bookMapperPage.education(str,begin,limit);
+			}else if("IT科技".equals(str)){
+				list = bookMapperPage.technology(str,begin,limit);
 			}
 			
 			pageBean.setList(list);
 			return pageBean;
 		}
-
 		
-	
 
 }

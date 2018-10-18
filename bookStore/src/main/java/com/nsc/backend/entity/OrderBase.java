@@ -32,17 +32,26 @@ public class OrderBase {
     private Address address;
     
     //交易表
-    private TradeTable trade;
+    
+    private Book book;
+    
+    private Store store;
     
     
-    
-    
-    public TradeTable getTrade() {
-		return trade;
+    public Store getStore() {
+		return store;
 	}
 
-	public void setTrade(TradeTable trade) {
-		this.trade = trade;
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	public Address getAddress() {
@@ -157,19 +166,5 @@ public class OrderBase {
         this.note = note == null ? null : note.trim();
     }
 
-	@Override
-	public String toString() {
-		return "OrderBase [orderId=" + orderId + ", orderNumber=" + orderNumber + ", orderTime=" + orderTime
-				+ ", orderPaytime=" + orderPaytime + ", orderDistributiontime=" + orderDistributiontime
-				+ ", orderEndtime=" + orderEndtime + ", orderState=" + orderState + ", orderTotalacount="
-				+ orderTotalacount + ", orderFreight=" + orderFreight + ", orderReightrisk=" + orderReightrisk
-				+ ", invoice=" + invoice + ", note=" + note + ",\n user=" + user + ",\n address=" + address + ",\n trade="
-				+ trade + "]";
-	}
-
-	
-
-	
-    
     
 }

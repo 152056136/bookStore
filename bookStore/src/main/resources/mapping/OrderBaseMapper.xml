@@ -41,6 +41,17 @@
 			<result column="user_openId" property="userOpenId"/>
 			<result column="user_nickName" property="userNickName"/>
 		</association>
+		<!-- 封装书籍信息 -->
+		<association property="book" javaType="com.nsc.backend.entity.Book">
+			<id     column="book_id" property="bookId"/>
+			<result column="book_ISBN" property="bookISBN"/>
+			<result column="book_name" property="bookName"/>
+		</association>
+		<!-- 封装商店信息 -->
+		<association property="store" javaType="com.nsc.backend.entity.Store">
+			<id column="store_id" property="storeId" jdbcType="INTEGER" />
+    		<result column="store_sn" property="storeSn" jdbcType="VARCHAR" />
+		</association>
   </resultMap>
   
   <sql id="Base_Column_List" >
@@ -58,11 +69,20 @@
   <!-- 根据订单编号查找订单信息 -->
   <select id="selectByOrderNumber" resultMap="BaseResultMap" parameterType="String" >
     select order_base.*,trade_table.*
-    from order_base , user , address , trade_table
+    from order_base , user , address , trade_table ,book ,store
     where order_number = #{orderNumber,jdbcType=VARCHAR} 
           and order_base.user_id=user.user_id 
           and order_base.add_id=address.add_id 
-          and order_base.tradeTable_id=trade_table.tradeTable_id
+          and order_base.tradeTable_id=trade_table.tradeTable_id 
+          and order_base.book_id=book.book_id 
+          and order_base.store_id=store.store_id 
+  </select>
+  
+  <!-- 根据userId查找order -->
+  <select id="findOrderBaseByUserId" resultMap="BaseResultMap" parameterType="String" >
+    select order_base.*
+    from order_base 
+    where order_id = #{userId}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -132,8 +152,11 @@
       <if test="note != null" >
         note,
       </if>
-       <if test="trade !=null">
-		tradeTable_id,
+	  <if test="book !=null">
+		book_id,
+	  </if>
+	   <if test="store !=null">
+		store_id,
 	  </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -179,8 +202,11 @@
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
       </if>
-      <if test="trade !=null">
-		#{trade.tradetableId,jdbcType=INTEGER},
+	  <if test="book !=null">
+		#{book.bookId,jdbcType=INTEGER},
+	  </if>
+	  <if test="store !=null">
+		#{store.storeId,jdbcType=INTEGER},
 	  </if>
     </trim>
   </insert>
