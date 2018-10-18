@@ -37,23 +37,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="book_measurementUnit" property="bookMeasurementUnit"/>
 		<result column="book_scores" property="bookScores"/>
 		<result column="book_discount" property="bookDiscount"/>
+		<result column="publish_house" property="publish_house"/>
 		<result column="book_note" property="bookNote"/>
 		<!-- 作为book类外键 ,封装到book表中返回-->
 		<!--  -->
 		<association property="secondCate" javaType="com.nsc.backend.entity.SecondCategory" >
 				<id property="secondCateId" column="secondCate_id"/>
 				<result property="secondCateName" column="secondCate_name"/>
-		</association>	
-		<!-- 封装商店 -->
-		<association property="store" javaType="com.nsc.backend.entity.Store" >
-				<id column="store_id" property="storeId" jdbcType="INTEGER" />
-    			<result column="store_sn" property="storeSn" jdbcType="VARCHAR" />
-		</association>
-		
-		
-			
+		</association>		
 	</resultMap>
-	
 	
 	
 	<!-- 根据secondCateId查找出secondCateName -->
@@ -63,22 +55,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from secondcategory sec
 		where sec.secondCate_id = #{secondCateId}
 	</select>
-	
 	<!-- 根据二级分类id，查询出二级分类下面的全部books -->
 	<!-- 直接访问，数据库表的外键，secondCate_name,与hibernate的区别 -->
 	<select id="findCountBySecondCateId" parameterType="String" resultType="Integer">
-		select 	count(*) 
+	    select 	count(*) 
 		from book ,secondcategory sec
 		where sec.secondCate_name = #{0} 
 		and book.secondCate_id=sec.secondCate_id
+		<!-- select 	count(*) 
+		from book 
+		where book.secondCate_name = #{0} -->
 	</select>
 	
 	<select id="findCountBySecondCateIdName" parameterType="String" resultType="Integer">
-		select 	count(*) 
+	    select 	count(*) 
 		from book ,secondcategory sec
 		where sec.secondCate_name = #{1} 
 		and book.secondCate_Id=#{0} 
 		and book.secondCate_Id = sec.secondCate_Id 
+		<!-- select 	count(*) 
+		from book 
+		where book.secondCate_name = #{1}
+		and   book.secondCate_Id=#{0} -->
 	</select>
 	
 	
@@ -92,16 +90,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 根据 secondCateId查找书籍，分页显示 -->
 	<select id="findBooksBySecondCateId"  resultMap="bookResultMap">
-		select 
+	    select 
 		book.*
 		from book ,secondcategory sec
 		where sec.secondCate_name = #{0}
 		and book.secondCate_Id = sec.secondCate_Id 
 		limit #{1},#{2}
+		<!-- select 
+		book.*
+		from book
+		where book.secondCate_name = #{0}
+		limit #{1},#{2} -->
 	</select>
 	<!--根据bookid查找到book -->
 	<select id="findBookById" parameterType="Integer" resultMap="bookResultMap">
-		
 		select 
 		book.*
 		from book
@@ -114,14 +116,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   book.*
 	   from book
 	</select>
+
+	<!-- 畅销-查看全部 -->
+	<select id="bestSellingCount" resultType="Integer">
+		select 	count(*) 
+		from book,orderitem
+	    where orderitem.book_id=book.book_id
+	    order by orderitem.oitem_count DESC
+	    
+	</select>
 	
-	<!-- 畅销的查看全部 -->
 	<select id="bestSelling" resultMap="bookResultMap">
-	    select 
+	    select  
 	    book.*
 	    from book,orderitem
 	    where orderitem.book_id=book.book_id
 	    order by orderitem.oitem_count DESC
+	    limit #{0},#{1}
 	</select>
 	
 	<!-- 根据三级分类Id查找三级分类名 -->
@@ -132,14 +143,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   where thirdcategory.thirdCate_id=#{thirdCate_id}
 	</select>
 	
-	<!-- 文学小说的查看全部 -->
-	<select id="literaryNovel" resultMap="bookResultMap">
+	
+	<!-- 降价-查看全部 -->
+	<select id="priceReductionCount" resultType="Integer">
+	    select count(*)
+	    from book
+	</select>
+	
+	<select id="priceReduction" resultMap="bookResultMap">
 	    select 
 	    book.*
-	    from book ,category
-	    where category.cate_name=#{cateName} 
-	    and book.cate_id=category.cate_id
-	    
+	    from book
+        limit #{0},#{1}
+	</select>
+	
+	
+	<!-- 文学小说的查看全部 -->
+	<select id="literaryNovelCount" parameterType="Integer" resultType="Integer">
+	    select count(*)
+	    from book
+	    where book.cate_id=#{0}
+	</select>
+	
+	
+	<select id="literaryNovel"  resultMap="bookResultMap">
+	    select 
+	    book.*
+	    from book
+	    where book.cate_id=#{0}
+	    order by book.book_id DESC
+	    limit #{1},#{2}
 	</select>
 	
 	<!-- 根据一级分类id查找一级分类名 -->
@@ -151,44 +184,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 人文历史的查看全部 -->
-	<select id="socialScience" resultMap="bookResultMap">
+	<select id="socialScienceCount" parameterType="Integer" resultType="Integer">
+	   select count(*)
+	   from book
+	   where book.cate_id=#{0}
+	</select>
+	<select id="socialScience"  resultMap="bookResultMap">
 	   select 
 	   book.*
-	   from book,category
-	   where category.cate_name=#{cateName}
-	   and book.cate_id = category.cate_id
+	   from book
+	   where book.cate_id=#{0}
+	   order by book.book_id DESC
+	   limit #{1},#{2}
 	</select>
 	
 	
 	<!-- 经济管理的查看全部 -->
-	<select id="economicManagement" resultMap="bookResultMap">
+	
+	<select id="economicManagementCount" parameterType="Integer" resultType="Integer">
+	   select count(*)
+	   from book
+	   where book.cate_id=#{0}
+	</select>
+	<select id="economicManagement"  resultMap="bookResultMap">
 	   select 
 	   book.*
-	   from book,category
-	   where category.cate_name=#{cateName}
-	   and book.cate_id = category.cate_id
+	   from book
+	   where book.cate_id=#{0}
+	   order by book.book_id DESC
+	   limit #{1},#{2}
 	</select>
 	
 	
 	<!-- 教育学习的查看全部 -->
-	<select id="education" resultMap="bookResultMap">
+	<select id="educationCount" parameterType="Integer" resultType="Integer">
+	   select  count(*)
+	   from book
+	   where book.secondCate_id=#{0}
+	</select>
+	<select id="education"  resultMap="bookResultMap">
 	   select 
 	   book.*
-	   from book ,secondcategory sec
-	   where sec.secondCate_name=#{secondCateName} 
-	   and book.secondCate_Id = sec.secondCate_Id 
+	   from book
+	   where book.secondCate_id=#{0}
+	   order by book.book_id DESC
+	   limit #{1},#{2}
 	</select>
 	
 	
 	<!-- IT科技的查看全部 -->
-	<select id="technology" resultMap="bookResultMap">
+	<select id="technologyCount" parameterType="Integer" resultType="Integer">
+	   select count(*)
+	   from book
+	   where book.cate_id=#{0}
+	</select>
+	<select id="technology"  resultMap="bookResultMap">
 	   select 
 	   book.*
-	   from book,category
-	   where category.cate_name=#{cateName}
-	   and book.cate_id = category.cate_id
+	   from book
+       where book.cate_id=#{0}
+       order by book.book_id DESC
+	   limit #{1},#{2}
 	</select>
-	
 </mapper>
-
-

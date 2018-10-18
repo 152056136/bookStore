@@ -23,10 +23,6 @@ public interface ICartService {
 	void updateBookCount(Cart cart);
 	//根据cartid查找cart
 	Cart findCartByCartId(Integer cartId);
-	//选中购物车中的商品
-	void isCheck(List<Integer> cartlist);
-	//查找对应商家需要付款的cart
-	List<Cart> findPayCartByStoreId(Integer storeId);
 	
 	
 	

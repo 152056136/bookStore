@@ -50,12 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="distributor_conPhone" property="disConphone"/>
 			<result column="distributor_landline" property="disLandline"/>
 			<result column="distributor_note" property="disNote"/>
-		</association>	
-		<!-- 封装商店信息 -->	
-		<association property="store" javaType="com.nsc.backend.entity.Store">
-			<id column="store_id" property="storeId" jdbcType="INTEGER" />
-    		<result column="store_sn" property="storeSn" jdbcType="VARCHAR" />
-		</association>	
+		</association>			
 	</resultMap>
 	<!-- 查找出bookId关联的cart表，如果不存在，创建新的cart保存，存在只需要改变count一个属性 -->
 	<select id="getCartByBookId"  resultMap="cartResultMap">
@@ -94,17 +89,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			cart.* from cart
 			where cart_id = #{cartId}
 	</select>
-	
-	<!-- storeid查找出被选中的cart -->
-	<select id="findPayCartByStoreId" parameterType="Integer" resultMap="cartResultMap">
-			select cart.*
-			from  cart , book ,store
-			where cart.cart_isCheck=1 
-				and store.store_id=#{storeId}
-				and book.store_id=store.store_id 
-				and cart.book_id=book.book_id
-	</select>
-	
 	<!--当用户修改购物车数量，更新购物车信息 -->	
 	<update id="updateBookCount" parameterType="cart">
 		update cart 
@@ -118,14 +102,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</trim>
 		where cart_id = #{cartId}
 	</update>
-	
-	<!-- 下单时被选中的cart 需要改其是否被选中的状态 -->
-	<update id="isCheck" parameterType="Integer">
-		update cart 
-			set cart_joinCartTime = 1 
-		where cart_id = #{cartId}
-	</update>
-	
 	<!-- 更新数据库中购物车信息 -->
 	<update id="updateCart" parameterType="cart" >
 		update cart 

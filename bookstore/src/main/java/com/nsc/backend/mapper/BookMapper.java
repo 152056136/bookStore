@@ -28,25 +28,25 @@ public interface BookMapper {
 	//降价的查看全部
 	ArrayList<Book> priceReduction(Integer begin,Integer limit);
 	//查找文学小说的所有书
-	int literaryNovelCount(String cateName);
+	int literaryNovelCount(Integer cateId);
 	//文学小说的查看全部
-	ArrayList<Book> literaryNovel(String cateName,Integer begin,Integer limit);
+	ArrayList<Book> literaryNovel(Integer cateId,Integer begin,Integer limit);
 	//根据一级分类id查找一级分类名
 	String findCateNameById(Integer cateId);
 	//查找人文历史的所有书
-	int socialScienceCount(String cateName);
+	int socialScienceCount(Integer cateId);
 	//人文历史的查看全部
-	ArrayList<Book> socialScience(String cateName,Integer begin,Integer limit);
+	ArrayList<Book> socialScience(Integer cateId,Integer begin,Integer limit);
 	//查找经济管理的所有书
-	int economicManagementCount(String cateName);
+	int economicManagementCount(Integer cateId);
 	//经济管理的查看全部
-	ArrayList<Book> economicManagement(String cateName,Integer begin,Integer limit);
+	ArrayList<Book> economicManagement(Integer cateId,Integer begin,Integer limit);
 	//查找教育学习的所有书
-	int educationCount(String secondCateName);
+	int educationCount(Integer secondCateId);
 	//教育学习的查看全部
-	ArrayList<Book> education(String secondCateName,Integer begin,Integer limit);
+	ArrayList<Book> education(Integer secondCateId,Integer begin,Integer limit);
 	//查看IT科技的所有书
-	int technologyCount(String cateName);
+	int technologyCount(Integer cateId);
 	//IT科技的查看全部
-	ArrayList<Book> technology(String cateName,Integer begin,Integer limit);
+	ArrayList<Book> technology(Integer cateId,Integer begin,Integer limit);
 }
