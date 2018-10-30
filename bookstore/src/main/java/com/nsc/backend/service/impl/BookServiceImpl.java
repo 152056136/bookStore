@@ -236,5 +236,9 @@ public class BookServiceImpl implements IBookService {
 			return pageBean;
 		}
 
+		public int findStoreIdBybookId(Integer bookId) {
+			return bookMapper.findStoreIdBybookId(bookId);
+		}
+	
 
 }

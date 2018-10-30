@@ -2,86 +2,136 @@ package com.nsc.backend.entity;
 
 public class OrderGoods {
     private Integer ordergoodsId;
-    private Integer ordergoodsCountordergoodsCount;
-    private Byte ordergoodsIsreturngoods;
-    private Byte ordergoodsIsgift;
-    private Byte ordergoodsIsdiscounts;
-    private Byte ordergoodsIsstorediscount;
-    private Double ordergoodsDiscounamount;
-    private Double ordergoodsTotalprice;
-    private Byte ordergoodsDistributionstatus;
-    private OrderBase orderbase;
+    private String orderNumber;
+    private String ordergoodsNumber;
+    private Integer orderState;
+    private Integer ordergoodsCount;
+    private Integer Invoice;
+    private Integer ordergoodsIsreturngoods;
+    private Integer ordergoodsTotalprice;
+    private Integer orderreturnStatus;
+    private String orderreturnReason;
+    private OrderBase orderBase;
     private Book book;
+    private Store store;
+
     
-    
-    
-    
-    public OrderBase getOrderbase() {
-		return orderbase;
+    public String getOrderNumber() {
+		return orderNumber;
 	}
-	public void setOrderbase(OrderBase orderbase) {
-		this.orderbase = orderbase;
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
-	public Book getBook() {
-		return book;
+
+	public Integer getInvoice() {
+		return Invoice;
 	}
-	public void setBook(Book book) {
-		this.book = book;
+
+	public void setInvoice(Integer invoice) {
+		Invoice = invoice;
 	}
+
 	public Integer getOrdergoodsId() {
         return ordergoodsId;
     }
+
     public void setOrdergoodsId(Integer ordergoodsId) {
         this.ordergoodsId = ordergoodsId;
     }
-    public Integer getOrdergoodsCountordergoodsCount() {
-        return ordergoodsCountordergoodsCount;
+
+
+    public OrderBase getOrderBase() {
+		return orderBase;
+	}
+
+	public void setOrderBase(OrderBase orderBase) {
+		this.orderBase = orderBase;
+	}
+
+	public String getOrdergoodsNumber() {
+        return ordergoodsNumber;
     }
-    public void setOrdergoodsCountordergoodsCount(Integer ordergoodsCountordergoodsCount) {
-        this.ordergoodsCountordergoodsCount = ordergoodsCountordergoodsCount;
+
+    public void setOrdergoodsNumber(String ordergoodsNumber) {
+        this.ordergoodsNumber = ordergoodsNumber;
     }
-    public Byte getOrdergoodsIsreturngoods() {
+
+    public Integer getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(Integer orderState) {
+        this.orderState = orderState;
+    }
+
+    public Integer getOrdergoodsCount() {
+        return ordergoodsCount;
+    }
+
+    public void setOrdergoodsCount(Integer ordergoodsCount) {
+        this.ordergoodsCount = ordergoodsCount;
+    }
+
+    public Integer getOrdergoodsIsreturngoods() {
         return ordergoodsIsreturngoods;
     }
-    public void setOrdergoodsIsreturngoods(Byte ordergoodsIsreturngoods) {
+
+    public void setOrdergoodsIsreturngoods(Integer ordergoodsIsreturngoods) {
         this.ordergoodsIsreturngoods = ordergoodsIsreturngoods;
     }
 
-    public Byte getOrdergoodsIsgift() {
-        return ordergoodsIsgift;
-    }
-    public void setOrdergoodsIsgift(Byte ordergoodsIsgift) {
-        this.ordergoodsIsgift = ordergoodsIsgift;
-    }
-    public Byte getOrdergoodsIsdiscounts() {
-        return ordergoodsIsdiscounts;
-    }
-    public void setOrdergoodsIsdiscounts(Byte ordergoodsIsdiscounts) {
-        this.ordergoodsIsdiscounts = ordergoodsIsdiscounts;
-    }
-    public Byte getOrdergoodsIsstorediscount() {
-        return ordergoodsIsstorediscount;
-    }
-    public void setOrdergoodsIsstorediscount(Byte ordergoodsIsstorediscount) {
-        this.ordergoodsIsstorediscount = ordergoodsIsstorediscount;
-    }
-    public Double getOrdergoodsDiscounamount() {
-        return ordergoodsDiscounamount;
-    }
-    public void setOrdergoodsDiscounamount(Double ordergoodsDiscounamount) {
-        this.ordergoodsDiscounamount = ordergoodsDiscounamount;
-    }
-    public Double getOrdergoodsTotalprice() {
+    public Integer getOrdergoodsTotalprice() {
         return ordergoodsTotalprice;
     }
-    public void setOrdergoodsTotalprice(Double ordergoodsTotalprice) {
+
+    public void setOrdergoodsTotalprice(Integer ordergoodsTotalprice) {
         this.ordergoodsTotalprice = ordergoodsTotalprice;
     }
-    public Byte getOrdergoodsDistributionstatus() {
-        return ordergoodsDistributionstatus;
+
+    public Book getBook() {
+        return book;
     }
-    public void setOrdergoodsDistributionstatus(Byte ordergoodsDistributionstatus) {
-        this.ordergoodsDistributionstatus = ordergoodsDistributionstatus;
+
+    public void setBook(Book book) {
+        this.book = book;
     }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public Integer getOrderreturnStatus() {
+        return orderreturnStatus;
+    }
+
+    public void setOrderreturnStatus(Integer orderreturnStatus) {
+        this.orderreturnStatus = orderreturnStatus;
+    }
+
+    public String getOrderreturnReason() {
+        return orderreturnReason;
+    }
+
+    public void setOrderreturnReason(String orderreturnReason) {
+        this.orderreturnReason = orderreturnReason == null ? null : orderreturnReason.trim();
+    }
+
+	@Override
+	public String toString() {
+		return "OrderGoods [ordergoodsId=" + ordergoodsId + ", orderBase=" + orderBase + ", orderNumber=" + orderNumber
+				+ ", ordergoodsNumber=" + ordergoodsNumber + ", orderState=" + orderState + ", ordergoodsCount="
+				+ ordergoodsCount + ", Invoice=" + Invoice + ", ordergoodsIsreturngoods=" + ordergoodsIsreturngoods
+				+ ", ordergoodsTotalprice=" + ordergoodsTotalprice + ", orderreturnStatus=" + orderreturnStatus
+				+ ", orderreturnReason=" + orderreturnReason + ", book=" + book + ", store=" + store + "]";
+	}
+
+	
+    
+	
     
 }

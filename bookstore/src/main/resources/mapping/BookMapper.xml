@@ -32,13 +32,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="book_keyWord2" property="bookKeyWord2"/>
 		<result column="book_seriesAb" property="bookSeriesAb"/>
 		<result column="book_publicSort" property="bookPublicSort"/>
+		<result column="book_scores" property="bookScores"/>
 		<result column="book_code" property="bookCode"/>
+		<result column="book_picture" property="bookPicture"/>
 		<result column="book_titles" property="bookTitles"/>
 		<result column="book_measurementUnit" property="bookMeasurementUnit"/>
-		<result column="book_scores" property="bookScores"/>
-		<result column="book_discount" property="bookDiscount"/>
 		<result column="publish_house" property="publish_house"/>
+		<result column="book_discount" property="bookDiscount"/>
 		<result column="book_note" property="bookNote"/>
+		<result column="order_freight" property="orderFreight"/>
+		<result column="store_id" property="storeId"/>
+		<result column="store_name" property="storeName"/>
+		
 		<!-- 作为book类外键 ,封装到book表中返回-->
 		<!--  -->
 		<association property="secondCate" javaType="com.nsc.backend.entity.SecondCategory" >
@@ -47,7 +52,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</association>		
 	</resultMap>
 	
+	<!-- 根据bookId查找storeId -->
+	<select id="findStoreIdBybookId" parameterType="Integer" resultType="Integer">
+		select store_id
+		from book
+		where book_id = #{bookId}
+	</select>
 	
+		
 	<!-- 根据secondCateId查找出secondCateName -->
 	<select id="findsecCateIdByName" parameterType="Integer" resultType="String">
 		select 

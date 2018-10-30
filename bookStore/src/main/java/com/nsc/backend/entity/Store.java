@@ -2,46 +2,37 @@ package com.nsc.backend.entity;
 
 public class Store {
     private Integer storeId;
-
     private String storeSn;
-
     private Integer storeAreald1;
-
     private Integer storeAreaid2;
-
     private Integer storeAreadid3;
-
     private Integer storeGoodscatid1;
-
     private Integer storeGoodscatid2;
-
     private Integer storeGoodscatid3;
-
     private Byte storeIsself;
-
     private String storeName;
-
     private String storeCompany;
-
     private String storeTel;
-
     private String storeAddress;
-
     private Byte storeIsinvoice;
-
     private Float storeServicestarttime;
-
     private Float storeServiceendtime;
-
     private Byte storeStatus;
-
     private Byte storeActive;
-
-    private String storeQqno;
-
     private Integer storeScore;
+    private String orderReightRisk;
+    
+    
+    
+    public String getOrderReightRisk() {
+		return orderReightRisk;
+	}
 
-    public Integer getStoreId() {
+	public void setOrderReightRisk(String orderReightRisk) {
+		this.orderReightRisk = orderReightRisk;
+	}
+
+	public Integer getStoreId() {
         return storeId;
     }
 
@@ -185,13 +176,6 @@ public class Store {
         this.storeActive = storeActive;
     }
 
-    public String getStoreQqno() {
-        return storeQqno;
-    }
-
-    public void setStoreQqno(String storeQqno) {
-        this.storeQqno = storeQqno == null ? null : storeQqno.trim();
-    }
 
     public Integer getStoreScore() {
         return storeScore;

@@ -6,89 +6,42 @@
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
     <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
     <result column="order_payTime" property="orderPaytime" jdbcType="TIMESTAMP" />
-    <result column="order_distributionTime" property="orderDistributiontime" jdbcType="TIMESTAMP" />
     <result column="order_endTime" property="orderEndtime" jdbcType="TIMESTAMP" />
-    <result column="order_state" property="orderState" jdbcType="INTEGER" />
-    <result column="order_totalAcount" property="orderTotalacount" jdbcType="DOUBLE" />
-    <result column="order_freight" property="orderFreight" jdbcType="DOUBLE" />
-    <result column="order_reightRisk" property="orderReightrisk" jdbcType="DOUBLE" />
-    <result column="invoice" property="invoice" jdbcType="TINYINT" />
-    <result column="note" property="note" jdbcType="VARCHAR" />
- 		<!-- 封装交易信息 -->
- 		<association property="trade" javaType="com.nsc.backend.entity.TradeTable">
-			<id column="tradeTable_id" property="tradetableId"/>
-			<result column="tradeTable_method" property="tradetableMethod"/>
-			<result column="tradeTable_number" property="tradetableNumber"/>
-			<result column="tradeTable_merchantNumber" property="tradetableMerchantnumber"/>
-			<result column="tradeTable_BillingClassification" property="tradetableBillingclassification"/>
-			<result column="tradeTable_merchantName" property="tradetableMerchantname"/>
-		</association>
-		<!-- 封装地址信息 -->
-		<association property="address" javaType="com.nsc.backend.entity.Address">
-			<id column="add_id" property="addId"/>
-			<result column="add_userName" property="addUserName"/>
-			<result column="add_postalCode" property="addPostalCode"/>
-			<result column="add_county" property="addCounty"/>
-			<result column="add_province" property="addProvince"/>
-			<result column="add_city" property="addCity"/>
-			<result column="add_detailInfo" property="addDetailInfo"/>
-			<result column="add_nationalCode" property="addNationalCode"/>
-			<result column="add_tele" property="addTele"/>
-		</association>
-		<!-- 封装用户信息 -->
+    <result column="order_totalAcount" property="orderTotalacount" jdbcType="INTEGER" />
+    <result column="tradeTable_method" property="tradetableMethod" jdbcType="INTEGER" />
+    <result column="tradeTable_number" property="tradetableNumber" jdbcType="VARCHAR" />
+    <result column="order_ispay" property="orderIspay" jdbcType="INTEGER" />
+    <result column="order_isequal" property="orderIsequal" jdbcType="INTEGER" />
+    	<!-- 封装用户信息 -->
 		<association property="user" javaType="com.nsc.backend.entity.User">
 			<id column="user_id" property="userId"/>
 			<result column="user_openId" property="userOpenId"/>
 			<result column="user_nickName" property="userNickName"/>
 		</association>
+		<!-- 封装用户地址信息 -->
+		<association property="address" javaType="com.nsc.backend.entity.Address">
+			<id column="add_id" property="addId"/>
+			<result column="add_userName" property="addUserName"/>		
+			<result column="add_postalCode" property="addPostalCode"/>		
+			<result column="add_county" property="addCounty"/>		
+			<result column="add_province" property="addProvince"/>		
+			<result column="add_city" property="addCity"/>		
+			<result column="add_detailInfo" property="addDetailInfo"/>		
+			<result column="add_nationalCode" property="addNationalCode"/>		
+			<result column="add_tele" property="addTele"/>		
+			<result column="add_default" property="addDefault"/>
+			</association>	
   </resultMap>
-  
   <sql id="Base_Column_List" >
-    order_id, order_number, order_time, order_payTime, order_distributionTime, order_endTime, 
-    order_state, order_totalAcount, order_freight, order_reightRisk, invoice, note
+    order_id, order_number, order_time, order_payTime, order_endTime, order_totalAcount, 
+    tradeTable_method, tradeTable_number
   </sql>
-  
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from order_base
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </select>
-  
-  <!-- 根据订单编号查找订单信息 -->
-  <select id="selectByOrderNumber" resultMap="BaseResultMap" parameterType="String" >
-    select order_base.*,trade_table.*
-    from order_base , user , address , trade_table
-    where order_number = #{orderNumber,jdbcType=VARCHAR} 
-          and order_base.user_id=user.user_id 
-          and order_base.add_id=address.add_id 
-          and order_base.tradeTable_id=trade_table.tradeTable_id
-  </select>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order_base
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </delete>
-  
-  <insert id="insert" parameterType="com.nsc.backend.entity.OrderBase" >
-    insert into order_base (order_id, order_number, order_time, 
-      order_payTime, order_distributionTime, 
-      order_endTime, order_state, order_totalAcount, 
-      order_freight, order_reightRisk, user_id, 
-      invoice, note)
-    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{orderPaytime,jdbcType=TIMESTAMP}, #{orderDistributiontime,jdbcType=TIMESTAMP}, 
-      #{orderEndtime,jdbcType=TIMESTAMP}, #{orderState,jdbcType=INTEGER}, #{orderTotalacount,jdbcType=INTEGER}, 
-      #{orderFreight,jdbcType=DOUBLE}, #{orderReightrisk,jdbcType=DOUBLE}, #{userId,jdbcType=INTEGER}, 
-      #{invoice,jdbcType=TINYINT}, #{note,jdbcType=VARCHAR})
-  </insert>
-  
-  <!-- 插入一条新的订单信息 -->
-  <insert id="insertSelective" parameterType="com.nsc.backend.entity.OrderBase" >
-    <selectKey resultType="Integer" order="AFTER" keyProperty="orderId">
-          SELECT LAST_INSERT_ID()
-      </selectKey>
-    insert into bookstore.order_base
+  <!-- 保存主订单 -->
+  <insert id="saveOrderBase" parameterType="com.nsc.backend.entity.OrderBase" >
+  		<selectKey resultType="Integer" order="AFTER" keyProperty="orderId">
+          SELECT LAST_INSERT_ID() 
+      	</selectKey>
+      	insert into bookstore.order_base
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
         order_id,
@@ -102,39 +55,24 @@
       <if test="orderPaytime != null" >
         order_payTime,
       </if>
-      <if test="orderDistributiontime != null" >
-        order_distributionTime,
-      </if>
       <if test="orderEndtime != null" >
         order_endTime,
-      </if>
-      <if test="orderState != null" >
-        order_state,
       </if>
       <if test="orderTotalacount != null" >
         order_totalAcount,
       </if>
-      <if test="orderFreight != null" >
-        order_freight,
-      </if>
-      <if test="orderReightrisk != null" >
-        order_reightRisk,
-      </if>
       <if test="user != null" >
         user_id,
       </if>
-      <if test="address !=null">
-		add_id,
-	  </if>
-      <if test="invoice != null" >
-        invoice,
+      <if test="tradetableMethod != null" >
+        tradeTable_method,
       </if>
-      <if test="note != null" >
-        note,
+      <if test="tradetableNumber != null" >
+        tradeTable_number,
       </if>
-       <if test="trade !=null">
-		tradeTable_id,
-	  </if>
+      <if test="address != null" >
+        add_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -149,47 +87,191 @@
       <if test="orderPaytime != null" >
         #{orderPaytime,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderDistributiontime != null" >
-        #{orderDistributiontime,jdbcType=TIMESTAMP},
-      </if>
       <if test="orderEndtime != null" >
         #{orderEndtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="orderState != null" >
-        #{orderState,jdbcType=INTEGER},
       </if>
       <if test="orderTotalacount != null" >
         #{orderTotalacount,jdbcType=INTEGER},
       </if>
-      <if test="orderFreight != null" >
-        #{orderFreight,jdbcType=DOUBLE},
+      <if test="user != null" >
+        #{user.userId,jdbcType=INTEGER},
       </if>
-      <if test="orderReightrisk != null" >
-        #{orderReightrisk,jdbcType=DOUBLE},
+      <if test="tradetableMethod != null" >
+        #{tradetableMethod,jdbcType=INTEGER},
       </if>
-      <if test="user !=null">
-		#{user.userId ,jdbcType=INTEGER},
-	  </if>
-	  <if test="address !=null">
-		#{address.addId,jdbcType=INTEGER},
-	  </if>
-      <if test="invoice != null" >
-        #{invoice,jdbcType=TINYINT},
+      <if test="tradetableNumber != null" >
+        #{tradetableNumber,jdbcType=VARCHAR},
       </if>
-      <if test="note != null" >
-        #{note,jdbcType=VARCHAR},
+      <if test="address != null" >
+        #{address.addId,jdbcType=INTEGER},
       </if>
-      <if test="trade !=null">
-		#{trade.tradetableId,jdbcType=INTEGER},
-	  </if>
     </trim>
   </insert>
   
+  <!-- 通过主订单编号更新主订单信息 -->
+  <update id="updateOrderBase"  >
+  	update order_base
+  		set order_payTime = #{1},
+  		tradeTable_number = #{2},
+  		order_ispay = 1
+  	where order_number = #{0}
+  </update>
+  
+  <!-- 通过主订单编号查找订单总金额 -->
+  <select id="findtotalAcount" parameterType="String" resultMap="BaseResultMap">
+  	select order_totalAcount,order_ispay
+  	from order_base
+  	where order_number = #{0}
+  </select>
+  
+  <!-- 微信返回数据时与系统后台数据作比较，金额不相等时把 order_isequal设为0-->
+  <update id="setorderIsequal" parameterType="String">
+  	update order_base
+  	 	set order_isequal=0
+  	 	where order_number = #{0}
+  </update>
+  
+  <!-- 获取主订单 -->
+  <select id="getOrderBase" parameterType="String" resultMap="BaseResultMap">
+  	select order_base.*,address.*
+  	from order_base,address
+  	where order_number = #{0}
+  </select>
+  
+  <!-- 设置该订单为无效 -->
+  <update id="setIsValid" parameterType="String">
+  	update order_base
+  	set order_isvalid = 0
+  	where order_number = #{0}
+  </update>
+  
+  <!-- 通过openId查找所有主订单 -->
+	<select id="findOrderBaseByOpenId" parameterType="Integer" resultMap="BaseResultMap">
+		select order_base.*,user.*,address.*
+		from order_base,user,address
+		where order_base.user_id=user.user_id and 
+			  order_base.add_id=address.add_id and 
+			  order_base.order_isvalid=1 and
+			  order_base.user_id=#{0}
+	</select>
+	
+	<!-- 查找用户支付/未支付订单 -->
+	<select id="findOrderBaseByIspay" parameterType="Integer" resultMap="BaseResultMap">
+		select order_base.*,user.*,address.*
+		from order_base,user,address
+		where order_base.user_id=user.user_id and 
+			  order_base.add_id=address.add_id and 
+			  order_base.order_isvalid=1 and
+			  order_base.order_ispay=#{1} and
+			  order_base.user_id=#{0}
+	</select>
+  
+<!--   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_base
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_base
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nsc.backend.entity.OrderBase" >
+    insert into order_base (order_id, order_number, order_time, 
+      order_payTime, order_endTime, order_totalAcount, 
+      user_id, tradeTable_method, tradeTable_number, 
+      tradeTable_merchantNumber, tradeTable_BillingClassification, 
+      tradeTable_merchantName)
+    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{orderPaytime,jdbcType=TIMESTAMP}, #{orderEndtime,jdbcType=TIMESTAMP}, #{orderTotalacount,jdbcType=DOUBLE}, 
+      #{userId,jdbcType=INTEGER}, #{tradetableMethod,jdbcType=INTEGER}, #{tradetableNumber,jdbcType=VARCHAR}, 
+      #{tradetableMerchantnumber,jdbcType=VARCHAR}, #{tradetableBillingclassification,jdbcType=VARCHAR}, 
+      #{tradetableMerchantname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nsc.backend.entity.OrderBase" >
+    insert into order_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="orderPaytime != null" >
+        order_payTime,
+      </if>
+      <if test="orderEndtime != null" >
+        order_endTime,
+      </if>
+      <if test="orderTotalacount != null" >
+        order_totalAcount,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tradetableMethod != null" >
+        tradeTable_method,
+      </if>
+      <if test="tradetableNumber != null" >
+        tradeTable_number,
+      </if>
+      <if test="tradetableMerchantnumber != null" >
+        tradeTable_merchantNumber,
+      </if>
+      <if test="tradetableBillingclassification != null" >
+        tradeTable_BillingClassification,
+      </if>
+      <if test="tradetableMerchantname != null" >
+        tradeTable_merchantName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaytime != null" >
+        #{orderPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderEndtime != null" >
+        #{orderEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTotalacount != null" >
+        #{orderTotalacount,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tradetableMethod != null" >
+        #{tradetableMethod,jdbcType=INTEGER},
+      </if>
+      <if test="tradetableNumber != null" >
+        #{tradetableNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantnumber != null" >
+        #{tradetableMerchantnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableBillingclassification != null" >
+        #{tradetableBillingclassification,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantname != null" >
+        #{tradetableMerchantname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.nsc.backend.entity.OrderBase" >
     update order_base
     <set >
       <if test="orderNumber != null" >
-        order_number = #{orderNumber,jdbcType=INTEGER},
+        order_number = #{orderNumber,jdbcType=VARCHAR},
       </if>
       <if test="orderTime != null" >
         order_time = #{orderTime,jdbcType=TIMESTAMP},
@@ -197,43 +279,46 @@
       <if test="orderPaytime != null" >
         order_payTime = #{orderPaytime,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderDistributiontime != null" >
-        order_distributionTime = #{orderDistributiontime,jdbcType=TIMESTAMP},
-      </if>
       <if test="orderEndtime != null" >
         order_endTime = #{orderEndtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderState != null" >
-        order_state = #{orderState,jdbcType=INTEGER},
-      </if>
       <if test="orderTotalacount != null" >
-        order_totalAcount = #{orderTotalacount,jdbcType=INTEGER},
-      </if>
-      <if test="orderFreight != null" >
-        order_freight = #{orderFreight,jdbcType=DOUBLE},
-      </if>
-      <if test="orderReightrisk != null" >
-        order_reightRisk = #{orderReightrisk,jdbcType=DOUBLE},
+        order_totalAcount = #{orderTotalacount,jdbcType=DOUBLE},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="invoice != null" >
-        invoice = #{invoice,jdbcType=TINYINT},
+      <if test="tradetableMethod != null" >
+        tradeTable_method = #{tradetableMethod,jdbcType=INTEGER},
       </if>
-      <if test="note != null" >
-        note = #{note,jdbcType=VARCHAR},
+      <if test="tradetableNumber != null" >
+        tradeTable_number = #{tradetableNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantnumber != null" >
+        tradeTable_merchantNumber = #{tradetableMerchantnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableBillingclassification != null" >
+        tradeTable_BillingClassification = #{tradetableBillingclassification,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetableMerchantname != null" >
+        tradeTable_merchantName = #{tradetableMerchantname,jdbcType=VARCHAR},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
-  
- <!-- 更改支付状态 -->
-  <update id="updateorderStateByPrimaryKey"  >
+  </update> -->
+<!--   <update id="updateByPrimaryKey" parameterType="com.nsc.backend.entity.OrderBase" >
     update order_base
-    set 
-      <!-- order_payTime = #{orderPaytime,jdbcType=TIMESTAMP}, -->
-      order_state = #{1}
-    where order_id = #{0}
-  </update>
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_payTime = #{orderPaytime,jdbcType=TIMESTAMP},
+      order_endTime = #{orderEndtime,jdbcType=TIMESTAMP},
+      order_totalAcount = #{orderTotalacount,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=INTEGER},
+      tradeTable_method = #{tradetableMethod,jdbcType=INTEGER},
+      tradeTable_number = #{tradetableNumber,jdbcType=VARCHAR},
+      tradeTable_merchantNumber = #{tradetableMerchantnumber,jdbcType=VARCHAR},
+      tradeTable_BillingClassification = #{tradetableBillingclassification,jdbcType=VARCHAR},
+      tradeTable_merchantName = #{tradetableMerchantname,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update> -->
 </mapper>

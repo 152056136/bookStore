@@ -23,7 +23,13 @@ public interface CartMapper {
 	void updateBookCount(Cart cart);
 	//根据cartid查找cart
 	Cart findCartByCartId(Integer cartId);
-	
-	
+	//选中商品
+	void isCheck(List<Integer> cartlist);
+	//查找对应商家需要付款的cart
+	List<Cart> findPayCartByStoreId(Integer storeId);
+	//是否删除
+	void updateIsDelete(List<Integer> cartlist);
+	//选中商品是否删除
+	void changeStatus(String openId ,Integer bookId);
 	
 }

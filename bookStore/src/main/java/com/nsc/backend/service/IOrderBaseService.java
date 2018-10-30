@@ -1,28 +1,26 @@
 package com.nsc.backend.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.nsc.backend.entity.OrderBase;
-import com.nsc.backend.entity.TradeTable;
 
 public interface IOrderBaseService {
-	
-	//加入订单，器订单初始状态为order_state=0:待付款
-	//0:待付款 1:已付款
-	//2:取消订单3:退货
-	//4:无效
-	void saveOrderBase(OrderBase orderbase);
-	
-	//保存交易表
-	void saveTradeTable(TradeTable tradetable);
-	
-	//修改订单支付状态
-	void changeOrderState(Integer orderId,Integer orderState);
-	
-	//订单详情
-	OrderBase showOrderBase(String orderNumber);
-	
-	//生成11位数的随机数
-	String getRandom(int length);
-	
+
+	//保存主订单
+	int saveOrderbase(OrderBase orderbase);
+	//通过订单编号更新
+	void updateOrderBase(String orderNumber,String payTime,String tMerchantnumber);
+	//通过主订单编号查找订单总金额 
+	OrderBase findtotalAcount(String orderNumber);
+	//设置order_isequal字段为1（相等）
+    void setorderIsequal(String orderNumber);
+    //获取主订单
+    OrderBase getOrderBase(String baseNumber);
+    //设置该订单为无效
+    void setIsValid(String orderNumber);
+    //通过openId查找所有主订单
+    List<OrderBase> findOrderBaseByOpenId(Integer userId);
+    //查找用户支付/未支付订单
+    List<OrderBase> findOrderBaseByIspay(Integer userId,Integer state);
 }

@@ -48,9 +48,9 @@ public class ChangeService implements IChangeService{
 	 */
 	public ArrayList<Book> cNovel(Integer cateId ,Integer start,Integer end) {
 		// TODO Auto-generated method stub
-		System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
-		String cateName=bookMapper.findCateNameById(cateId);
-		ArrayList<Book> list=changeMapper.cNovel(cateName,start,end);
+		//System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
+		//String cateName=bookMapper.findCateNameById(cateId);
+		ArrayList<Book> list=changeMapper.cNovel(cateId,start,end);
 	    return list;
 	}
      
@@ -59,9 +59,9 @@ public class ChangeService implements IChangeService{
 	 */
 	public ArrayList<Book> cHistory(Integer cateId, Integer start, Integer end) {
 		// TODO Auto-generated method stub
-		System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
-		String cateName=bookMapper.findCateNameById(cateId);
-		ArrayList<Book> list=changeMapper.cHistory(cateName,start,end);
+		//System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
+		//String cateName=bookMapper.findCateNameById(cateId);
+		ArrayList<Book> list=changeMapper.cHistory(cateId,start,end);
 	    return list;
 	}
 
@@ -70,9 +70,9 @@ public class ChangeService implements IChangeService{
 	 */
 	public ArrayList<Book> cEconomic(Integer cateId, Integer start, Integer end) {
 		// TODO Auto-generated method stub
-		System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
-		String cateName=bookMapper.findCateNameById(cateId);
-		ArrayList<Book> list=changeMapper.cEconomic(cateName,start,end);
+		//System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
+		//String cateName=bookMapper.findCateNameById(cateId);
+		ArrayList<Book> list=changeMapper.cEconomic(cateId,start,end);
 	    return list;
 	}
 	
@@ -81,9 +81,9 @@ public class ChangeService implements IChangeService{
      */
 	public ArrayList<Book> cEducation(Integer secondCateId, Integer start, Integer end) {
 		// TODO Auto-generated method stub
-		System.out.println("cateId="+secondCateId+"  start="+start+"  end="+end);
-		String secondCateName=bookMapper.findsecCateIdByName(secondCateId);
-		ArrayList<Book> list=changeMapper.cEducation(secondCateName,start,end);
+		//System.out.println("cateId="+secondCateId+"  start="+start+"  end="+end);
+		//String secondCateName=bookMapper.findsecCateIdByName(secondCateId);
+		ArrayList<Book> list=changeMapper.cEducation(secondCateId,start,end);
 	    return list;
 	}
 
@@ -93,9 +93,9 @@ public class ChangeService implements IChangeService{
 	public ArrayList<Book> cTechnology(Integer cateId, Integer start, Integer end) {
 		// TODO Auto-generated method stub
 		System.out.println("cateId="+cateId+"  start="+start+"  end="+end);
-		String cateName=bookMapper.findCateNameById(cateId);
-		System.out.println(cateName);
-		ArrayList<Book> list=changeMapper.cTechnology(cateName,start,end);
+		//String cateName=bookMapper.findCateNameById(cateId);
+		//System.out.println(cateName);
+		ArrayList<Book> list=changeMapper.cTechnology(cateId,start,end);
 	    return list;
 	}
 

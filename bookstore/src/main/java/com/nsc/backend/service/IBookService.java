@@ -1,6 +1,7 @@
 package com.nsc.backend.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.nsc.backend.entity.Book;
 import com.nsc.web.util.page.PageBean;
@@ -29,5 +30,5 @@ public interface IBookService {
     //IT科技的查看全部
 	PageBean<Book> technology(Integer cateId,Integer pageNum);
     
-    
+    int findStoreIdBybookId(Integer bookId);
 }

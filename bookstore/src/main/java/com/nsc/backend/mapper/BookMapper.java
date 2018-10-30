@@ -49,4 +49,7 @@ public interface BookMapper {
 	int technologyCount(Integer cateId);
 	//IT科技的查看全部
 	ArrayList<Book> technology(Integer cateId,Integer begin,Integer limit);
+	
+	//查找storeId
+	int findStoreIdBybookId(Integer bookId);
 }

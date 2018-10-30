@@ -33,4 +33,11 @@ public class Json {
     public void setData(Object data) {
         this.data = data;
     }
+
+	@Override
+	public String toString() {
+		return "Json [success=" + success + ", msg=" + msg + ", data=" + data + "]";
+	}
+    
+    
 }

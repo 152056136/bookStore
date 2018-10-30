@@ -4,53 +4,34 @@ import java.util.Date;
 
 public class OrderBase {
     private Integer orderId;
-
     private String orderNumber;
-
     private Date orderTime;
-
     private Date orderPaytime;
-
-    private Date orderDistributiontime;
-
     private Date orderEndtime;
-
-    private Integer orderState;
-
-    private Double orderTotalacount;
-
-    private Double orderFreight;
-
-    private Double orderReightrisk;
-
-    private Byte invoice;
-
-    private String note;
-
+    private Integer orderTotalacount;
     private User user;
-    
+    private Integer tradetableMethod;
+    private String tradetableNumber;
     private Address address;
+    private Integer orderIspay;
+    private Integer orderIsequal;
+
+
     
-    //交易表
-    private TradeTable trade;
-    
-    
-    
-    
-    public TradeTable getTrade() {
-		return trade;
+    public Integer getOrderIspay() {
+		return orderIspay;
 	}
 
-	public void setTrade(TradeTable trade) {
-		this.trade = trade;
+	public void setOrderIspay(Integer orderIspay) {
+		this.orderIspay = orderIspay;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Integer getOrderIsequal() {
+		return orderIsequal;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setOrderIsequal(Integer orderIsequal) {
+		this.orderIsequal = orderIsequal;
 	}
 
 	public User getUser() {
@@ -59,6 +40,14 @@ public class OrderBase {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public Integer getOrderId() {
@@ -74,7 +63,7 @@ public class OrderBase {
     }
 
     public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+        this.orderNumber = orderNumber == null ? null : orderNumber.trim();
     }
 
     public Date getOrderTime() {
@@ -93,14 +82,6 @@ public class OrderBase {
         this.orderPaytime = orderPaytime;
     }
 
-    public Date getOrderDistributiontime() {
-        return orderDistributiontime;
-    }
-
-    public void setOrderDistributiontime(Date orderDistributiontime) {
-        this.orderDistributiontime = orderDistributiontime;
-    }
-
     public Date getOrderEndtime() {
         return orderEndtime;
     }
@@ -109,67 +90,45 @@ public class OrderBase {
         this.orderEndtime = orderEndtime;
     }
 
-    public Integer getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(Integer orderState) {
-        this.orderState = orderState;
-    }
-
-    public Double getOrderTotalacount() {
+    public Integer getOrderTotalacount() {
         return orderTotalacount;
     }
 
-    public void setOrderTotalacount(Double orderTotalacount) {
+    public void setOrderTotalacount(Integer orderTotalacount) {
         this.orderTotalacount = orderTotalacount;
     }
 
-    public Double getOrderFreight() {
-        return orderFreight;
+    public User getUserId() {
+        return user;
     }
 
-    public void setOrderFreight(Double orderFreight) {
-        this.orderFreight = orderFreight;
+    public void setUserId(User user) {
+        this.user = user;
     }
 
-    public Double getOrderReightrisk() {
-        return orderReightrisk;
+    public Integer getTradetableMethod() {
+		return tradetableMethod;
+	}
+
+	public void setTradetableMethod(Integer tradetableMethod) {
+		this.tradetableMethod = tradetableMethod;
+	}
+
+	public String getTradetableNumber() {
+        return tradetableNumber;
     }
 
-    public void setOrderReightrisk(Double orderReightrisk) {
-        this.orderReightrisk = orderReightrisk;
-    }
-
-    public Byte getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Byte invoice) {
-        this.invoice = invoice;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+    public void setTradetableNumber(String tradetableNumber) {
+        this.tradetableNumber = tradetableNumber == null ? null : tradetableNumber.trim();
     }
 
 	@Override
 	public String toString() {
 		return "OrderBase [orderId=" + orderId + ", orderNumber=" + orderNumber + ", orderTime=" + orderTime
-				+ ", orderPaytime=" + orderPaytime + ", orderDistributiontime=" + orderDistributiontime
-				+ ", orderEndtime=" + orderEndtime + ", orderState=" + orderState + ", orderTotalacount="
-				+ orderTotalacount + ", orderFreight=" + orderFreight + ", orderReightrisk=" + orderReightrisk
-				+ ", invoice=" + invoice + ", note=" + note + ",\n user=" + user + ",\n address=" + address + ",\n trade="
-				+ trade + "]";
+				+ ", orderPaytime=" + orderPaytime + ", orderEndtime=" + orderEndtime + ", orderTotalacount="
+				+ orderTotalacount + ", user=" + user + ", tradetableMethod=" + tradetableMethod + ", tradetableNumber="
+				+ tradetableNumber + ", address=" + address + "]";
 	}
-
-	
-
-	
     
     
 }

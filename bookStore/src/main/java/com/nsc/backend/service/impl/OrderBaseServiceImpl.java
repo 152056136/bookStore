@@ -1,65 +1,68 @@
 package com.nsc.backend.service.impl;
 
-import java.util.Random;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nsc.backend.entity.OrderBase;
-import com.nsc.backend.entity.TradeTable;
 import com.nsc.backend.mapper.OrderBaseMapper;
-import com.nsc.backend.mapper.TradeTableMapper;
 import com.nsc.backend.service.IOrderBaseService;
 
-
-@Service
 @Transactional
+@Service
 public class OrderBaseServiceImpl implements IOrderBaseService{
 
 	@Autowired
 	private OrderBaseMapper orderbaseMapper;
 	
-	@Autowired
-	private TradeTableMapper tradeTableMapper;
 	
-	
-	public void saveOrderBase(OrderBase orderbase) {
+	//保存主订单
+	public int saveOrderbase(OrderBase orderbase) {
 		
-		orderbaseMapper.insertSelective(orderbase);
-	}
-
-	//保存交易表
-	public void saveTradeTable(TradeTable tradetable) {
-		
-		tradeTableMapper.insertSelective(tradetable);
-	}
-
-	//更改支付状态
-	public void changeOrderState(Integer orderId,Integer orderState) {
-		orderbaseMapper.updateorderStateByPrimaryKey(orderId,orderState);
-		
+		return orderbaseMapper.saveOrderBase(orderbase);
 		
 	}
-
-	//订单详情
-	public OrderBase showOrderBase(String orderNumber) {
-		System.out.println(orderNumber);
-		OrderBase orderbase = orderbaseMapper.selectByOrderNumber(orderNumber);
-		System.out.println(orderbase);
-		return orderbase;
+	//通过订单编号更新主订单
+	public void updateOrderBase(String orderNumber,String payTime,String tMerchantnumber) {
+		System.out.println("updateOrderBase————————start");
+		System.out.println(orderbaseMapper+"==============================");
+		orderbaseMapper.updateOrderBase(orderNumber, payTime, tMerchantnumber);
+		System.out.println("updateOrderBase————————end");
 	}
-
-	//生成11位数的随机数
-	public String getRandom(int length){		
-		String val = "";
-		Random random = new Random();
-			for (int i = 0; i < length; i++) {
-				val += String.valueOf(random.nextInt(10));
-				}
-			return val;
-	}
-
-	
-
+	//通过主订单编号查找订单总金额 
+    public OrderBase findtotalAcount(String orderNumber) {
+    	System.out.println("1111111111");
+    	OrderBase i = orderbaseMapper.findtotalAcount(orderNumber);
+    	System.out.println("2222222222");
+    	return i;
+    }
+    //设置order_isequal字段为1（相等）
+    public void setorderIsequal(String orderNumber) {
+    	orderbaseMapper.setorderIsequal(orderNumber);
+    }
+    
+    //获取主订单
+    public OrderBase getOrderBase(String baseNumber) {
+    	
+    	OrderBase orderbase;
+    	orderbase = orderbaseMapper.getOrderBase(baseNumber);
+    	return orderbase;
+    }
+    //设置该订单为无效
+    public void setIsValid(String orderNumber) {
+    	orderbaseMapper.setIsValid(orderNumber);
+    	
+    }
+    //通过openId查找所有主订单
+    public List<OrderBase> findOrderBaseByOpenId(Integer userId) {
+    	List<OrderBase> list = orderbaseMapper.findOrderBaseByOpenId(userId);
+    	return list;
+    }
+    //查找用户支付/未支付订单
+    public List<OrderBase> findOrderBaseByIspay(Integer userId,Integer state){
+    	List<OrderBase> list = orderbaseMapper.findOrderBaseByIspay(userId,state);
+    	return list;
+    }
 }

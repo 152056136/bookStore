@@ -20,8 +20,8 @@
     <result column="store_serviceEndTime" property="storeServiceendtime" jdbcType="REAL" />
     <result column="store_status" property="storeStatus" jdbcType="TINYINT" />
     <result column="store_active" property="storeActive" jdbcType="TINYINT" />
-    <result column="store_qqNo" property="storeQqno" jdbcType="VARCHAR" />
     <result column="store_score" property="storeScore" jdbcType="INTEGER" />
+    <result column="order_reightRisk" property="orderReightRisk" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     store_id, store_sn, store_areald1, store_areaId2, store_areadId3, store_goodsCatId1, 
@@ -29,7 +29,15 @@
     store_address, store_isInvoice, store_serviceStartTime, store_serviceEndTime, store_status, 
     store_active, store_qqNo, store_score
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  
+  <!-- 通过storeId查找store -->
+  <select id="findStoreByStoreId" resultMap="BaseResultMap">
+  	select store.*
+  	from store
+  	where store_id = #{storeId}
+  </select>
+  
+  <!-- <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from store
@@ -267,5 +275,5 @@
       store_qqNo = #{storeQqno,jdbcType=VARCHAR},
       store_score = #{storeScore,jdbcType=INTEGER}
     where store_id = #{storeId,jdbcType=INTEGER}
-  </update>
+  </update> -->
 </mapper>

@@ -44,9 +44,13 @@ public class PayUtil {
      * @return 签名结果  
      */   
     public static boolean verify(String text, String sign, String key, String input_charset) {   
-        text = text + key;   
-        String mysign = DigestUtils.md5Hex(getContentBytes(text, input_charset));   
-        if (mysign.equals(sign)) {   
+        //text = text + key;   
+    	text = text + "&key=" + key;
+        String mysign = DigestUtils.md5Hex(getContentBytes(text, input_charset));  
+        mysign=mysign.toUpperCase();
+        System.err.println("mysign==="+mysign);
+        System.err.println("sign==="+sign);
+        if (mysign.equals(sign)) {
             return true;   
         } else {   
             return false;   
@@ -124,7 +128,8 @@ public class PayUtil {
             } else {   
                 prestr = prestr + key + "=" + value + "&";   
             }   
-        }   
+        }  
+        System.err.println("参数=参数值”的模式用“&”字符拼接成字符串\n"+prestr);
         return prestr;   
     }   
     /**  

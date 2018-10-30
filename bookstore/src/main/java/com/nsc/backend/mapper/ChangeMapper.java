@@ -13,17 +13,17 @@ public interface ChangeMapper {
     ArrayList<Book> cPrice(Integer start,Integer end);
     
     //文学小说-换一换
-    ArrayList<Book> cNovel(String cateName ,Integer start,Integer end);
+    ArrayList<Book> cNovel(Integer cateId ,Integer start,Integer end);
     
     //人文历史-换一换
-    ArrayList<Book> cHistory(String cateName ,Integer start,Integer end);
+    ArrayList<Book> cHistory(Integer cateId ,Integer start,Integer end);
     
     //经济管理-换一换
-    ArrayList<Book>  cEconomic(String cateName ,Integer start,Integer end);
+    ArrayList<Book>  cEconomic(Integer cateId ,Integer start,Integer end);
     
     //教育学习-换一换
-    ArrayList<Book> cEducation(String secondCateId ,Integer start,Integer end);
+    ArrayList<Book> cEducation(Integer secondCateId ,Integer start,Integer end);
     
     //IT科技-换一换
-    ArrayList<Book> cTechnology(String cateName ,Integer start,Integer end);
+    ArrayList<Book> cTechnology(Integer cateId ,Integer start,Integer end);
 }

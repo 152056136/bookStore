@@ -23,6 +23,7 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
 	@Autowired
 	private IUserService userServiceImpl;
 	

@@ -36,22 +36,56 @@ public class Book {
 		private String bookKeyWord2;
 		private String bookSeriesAb;
 		private String bookPublicSort;
+		private String bookScores;
 		private String bookCode;
+		private String bookPicture;
 		private String bookTitles;
 		private String bookMeasurementUnit;
-		private String bookScores;
+		private String publish_house;
 		private Integer bookDiscount;
 		private String bookNote;
-		private String publish_house;
-		
+		private Double orderFreight;
 		//关联外键属性,一本书根据之前的数据，设计两个外键,可以直接关联一级也可以关联二级分类
 		private  Category category;
 		private  SecondCategory  secondCate;
 		private	 ThirdCategory	thirdCate;
 		//关联供应商
 		private	Distributor distributor;
+		private Integer storeId; 
+		private String storeName;
 		
 		
+		
+		public Integer getStoreId() {
+			return storeId;
+		}
+		public void setStoreId(Integer storeId) {
+			this.storeId = storeId;
+		}
+		public String getStoreName() {
+			return storeName;
+		}
+		public void setStoreName(String storeName) {
+			this.storeName = storeName;
+		}
+		public String getBookPicture() {
+			return bookPicture;
+		}
+		public void setBookPicture(String bookPicture) {
+			this.bookPicture = bookPicture;
+		}
+		public Double getOrderFreight() {
+			return orderFreight;
+		}
+		public void setOrderFreight(Double orderFreight) {
+			this.orderFreight = orderFreight;
+		}
+		public Integer getStore() {
+			return storeId;
+		}
+		public void setStore(Integer storeId) {
+			this.storeId = storeId;
+		}
 		public Distributor getDistributor() {
 			return distributor;
 		}
@@ -282,6 +316,8 @@ public class Book {
 		}
 		
 		
-
+		
+		
+	
 	
 }

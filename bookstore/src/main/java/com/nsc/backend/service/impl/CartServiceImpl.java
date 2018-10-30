@@ -18,6 +18,7 @@ import com.nsc.backend.service.ICartService;
 @Transactional
 public class CartServiceImpl implements ICartService{
 	
+	private static final int Integer = 0;
 	@Autowired
 	private CartMapper cartMapper;
 	//判断购物车是否有此商品
@@ -36,7 +37,6 @@ public class CartServiceImpl implements ICartService{
 	//根据用户id将此用户的购物信息，查找出来
 	public List<Cart> showCart(String openId) {
 		List<Cart> carts = cartMapper.showCart(openId);
-		System.out.println("CartServiceImpl="+carts.size());
 		return carts;
 	}
 	//将list传向持久层，删除购物车信息
@@ -58,6 +58,31 @@ public class CartServiceImpl implements ICartService{
 		return cart;
 	}
 	
+	//选中购物车中的商品
+	public void isCheck(List<Integer> cartlist) {
+			
+				cartMapper.isCheck(cartlist);
+		}
+	
+	//查找对应商家需要付款的cart
+	public List<Cart> findPayCartByStoreId(Integer storeId) {
+		return cartMapper.findPayCartByStoreId(storeId);
+		
+	}
+	//是否删除
+	public void updateIsDelete(List<Integer> cartlist) {
+			cartMapper.updateIsDelete(cartlist);
+			
+	}
 	
 	
+	//选中商品是否删除
+	public void changeStatus(String openId ,Integer bookId) {
+		
+		System.out.println("openId==="+openId);
+		System.out.println("bookId==="+bookId);
+		cartMapper.changeStatus(openId, bookId);
+		System.out.println("======end");
+		
+	}
 }
