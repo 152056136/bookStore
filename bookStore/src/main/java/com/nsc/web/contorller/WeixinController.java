@@ -242,7 +242,7 @@ public class WeixinController extends WeixinSupport{
         	String time_end = (String)map.get("time_end");
         	String transaction_id = (String)map.get("transaction_id");
         	String total_fee = (String)map.get("total_fee");
-        	OrderBase o = orderBaseServiceImpl.findtotalAcount(order_number);
+        	OrderBase o = orderBaseServiceImpl.findtotalAcount(order_number);//加了排他锁
         	//查看返回的支付金额是否与系统中(主订单)的金额相同
         	if(!o.getOrderTotalacount().toString().equals(total_fee)) {
         		orderBaseServiceImpl.setorderIsequal(order_number);

@@ -122,6 +122,7 @@
   	select order_totalAcount,order_ispay
   	from order_base
   	where order_number = #{0}
+  	FOR UPDATE
   </select>
   
   <!-- 微信返回数据时与系统后台数据作比较，金额不相等时把 order_isequal设为0-->
