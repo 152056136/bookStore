@@ -19,21 +19,59 @@
 	     	
      	</bean> -->
      	 <!-- 连接过程，引入的数据库文件，怎么读取到数据 -->
-    	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"   destroy-method="close">  
+    	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"   destroy-method="close">  
         <property name="driverClassName" value="${driver}" />  
         <property name="url" value="${url}" />  
         <property name="username" value="${username}" />  
         <property name="password" value="${password}" />  
-        <!-- 初始化连接大小 -->  
+        初始化连接大小  
         <property name="initialSize" value="${initialSize}"></property>  
-        <!-- 连接池最大数量 -->  
+        连接池最大数量  
         <property name="maxActive" value="${maxActive}"></property>  
-        <!-- 连接池最大空闲 -->  
+        连接池最大空闲  
         <property name="maxIdle" value="${maxIdle}"></property>  
-        <!-- 连接池最小空闲 -->  
+        连接池最小空闲  
         <property name="minIdle" value="${minIdle}"></property>  
-        <!-- 获取连接最大等待时间 -->  
+        获取连接最大等待时间  
         <property name="maxWait" value="${maxWait}"></property>  
-    </bean> 
+    </bean>  -->
      	
+     	
+     	
+     	<!-- 配置第一个数据源 -->
+    <bean id="defultdataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${maxWait}"></property>
+    </bean>
+ 
+    <!-- 配置第二个数据源 -->
+    <bean id="jrt_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${_driver}"/>
+        <property name="url" value="${_url}"/>
+        <property name="username" value="${_username}"/>
+        <property name="password" value="${_password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${maxWait}"></property>
+    </bean>
      </beans>

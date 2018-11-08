@@ -9,6 +9,16 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:application-context.xml</param-value>
 	</context-param>
+	
+	   <!-- 加载log4j配置文件 -->
+    <context-param>
+      <param-name>log4jConfigLocation</param-name>
+      <param-value>classpath:properties/log4j.properties</param-value>
+      <!-- <param-value>/WEB-INF/log4j.xml</param-value> -->
+    </context-param>
+    <listener>
+       <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
 	<!-- 编码过滤器  Spring自带的字符编码过滤器主要针对“POST”请求，对“GET”请求无效。
 		 修改tomcat编码设置server.xml，解决get请求
 	-->
