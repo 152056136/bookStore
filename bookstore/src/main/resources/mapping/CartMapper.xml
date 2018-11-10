@@ -240,6 +240,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and book_id = #{1}
 	</update>
 	
+	<update id="updateCount" parameterType="java.util.Map">
+		<foreach collection="params.entrySet()" item="value" index="key" separator=";">
+			update cart
+			set	cart_count =  #{value} 
+			where cart_id = ${key}
+		</foreach>
+	</update>
+	
+<!-- 	<update id="updateCount" parameterType="java.util.Map">
+		update cart
+		<trim prefix="set" suffixOverrides=",">
+	
+			<trim prefix="ALREADY_SOLD_NUM = case" suffix="end,">
+				<foreach collection="params.keys" item="key" index="index">
+					when cart_id=#{key} then ALREADY_SOLD_NUM+#{params[${key}]}
+				</foreach>
+			</trim>
+	
+		</trim>
+		where
+		循环key
+		<foreach collection="params.keys" separator="or" item="key"
+			index="index">
+			cart_id=#{key}
+		</foreach>
+	</update> -->
+
+
+	
 </mapper>
 
 

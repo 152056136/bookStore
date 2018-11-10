@@ -1,6 +1,7 @@
 package com.nsc.backend.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,5 +85,9 @@ public class CartServiceImpl implements ICartService{
 		cartMapper.changeStatus(openId, bookId);
 		System.out.println("======end");
 		
+	}
+	
+	public void updateCount(Map<String,Integer> map) {
+		cartMapper.updateCount(map);
 	}
 }

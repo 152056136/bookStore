@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -296,6 +295,30 @@ public class CartController {
 		cartlist.add(66);
 		
 		cartServiceImpl.updateIsDelete(cartlist);
+		
+	}
+	
+	
+	@RequestMapping("updateCount")
+	@ResponseBody
+	void updateCount(@RequestBody String para) {
+		String s= "{cartList:[{cartId:64,cartCount:5},{cartId:65,cartCount:9},{cartId:68,cartCount:3}]}";
+		
+		JSONObject json = JSONObject.parseObject(para);
+		JSONArray arrcart = (JSONArray)json.get("cartList");
+		
+		Map<String,Integer> cartmap = new HashMap<String,Integer>();
+		for(int i=0;i<arrcart.size();i++) {
+			JSONObject jsonObject = arrcart.getJSONObject(i);
+			String cartId = jsonObject.getString("cartId");
+			Integer cartCount = jsonObject.getInteger("cartCount");
+			cartmap.put(cartId, cartCount);
+		}
+		
+		for (Map.Entry<String, Integer> entry : cartmap.entrySet()) { 
+			  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
+		}
+		cartServiceImpl.updateCount(cartmap);
 		
 	}
 	

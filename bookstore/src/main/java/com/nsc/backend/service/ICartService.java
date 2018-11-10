@@ -1,9 +1,9 @@
 package com.nsc.backend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nsc.backend.entity.Cart;
-import com.nsc.backend.entity.User;
 
 //处理购物车信息接口
 public interface ICartService {
@@ -30,5 +30,8 @@ public interface ICartService {
 	//是否删除
 	void updateIsDelete(List<Integer> cartlist);
 	void changeStatus(String openId ,Integer bookId);
+	
+	//修改购物车数量
+	void updateCount(Map<String,Integer> map);
 	
 }

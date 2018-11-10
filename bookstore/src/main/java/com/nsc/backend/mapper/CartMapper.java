@@ -1,6 +1,9 @@
 package com.nsc.backend.mapper;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.nsc.backend.entity.Cart;
 
@@ -31,5 +34,8 @@ public interface CartMapper {
 	void updateIsDelete(List<Integer> cartlist);
 	//选中商品是否删除
 	void changeStatus(String openId ,Integer bookId);
+	
+	//修改购物车数量
+	void updateCount(@Param("params")Map<String,Integer> params);
 	
 }
