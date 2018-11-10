@@ -4,8 +4,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nsc.backend.mapper.ChangeMapper">
 
+    <resultMap type="book" id="bookResultMap">
+		<id     column="book_id" property="bookId"/>
+		<result column="book_ISBN" property="bookISBN"/>
+		<result column="book_name" property="bookName"/>
+		<result column="book_unitPrice" property="bookUnitPrice"/>
+		<result column="book_preface" property="bookPreface"/>
+		<result column="book_conBrief" property="bookConBrief"/>
+		<result column="book_authorBrief" property="bookAuthorBrief"/>
+		<result column="book_catalog" property="bookCatalog"/>
+		<result column="book_author" property="bookAuthor"/>
+		<result column="book_pubTime" property="bookPubTime"/>
+		<result column="book_priTime" property="bookPriTime"/>
+		<result column="book_edtion" property="bookEdtion"/>
+		<result column="book_impression" property="bookImpression"/>
+		<result column="book_size" property="bookSize"/>
+		<result column="book_paper" property="bookPaper"/>
+		<result column="book_packing" property="bookPacking"/>
+		<result column="book_suit" property="bookSuit"/>
+		<result column="book_imgUrl" property="bookImgUrl"/>
+		<result column="book_stock" property="bookStock"/>
+		<result column="book_validityPeriod" property="bookValidityPeriod"/>
+		<result column="book_originalPrice" property="bookOriginalPrice"/>
+		<result column="book_isDetele" property="bookIsDetele"/>
+		<result column="book_keyWord1" property="bookKeyWord1"/>
+		<result column="book_keyWord2" property="bookKeyWord2"/>
+		<result column="book_seriesAb" property="bookSeriesAb"/>
+		<result column="book_publicSort" property="bookPublicSort"/>
+		<result column="book_scores" property="bookScores"/>
+		<result column="book_code" property="bookCode"/>
+		<result column="book_picture" property="bookPicture"/>
+		<result column="book_titles" property="bookTitles"/>
+		<result column="book_measurementUnit" property="bookMeasurementUnit"/>
+		<result column="publish_house" property="publish_house"/>
+		<result column="book_discount" property="bookDiscount"/>
+		<result column="book_note" property="bookNote"/>
+		<result column="order_freight" property="orderFreight"/>
+		<result column="store_id" property="storeId"/>
+		<result column="store_name" property="storeName"/>
+		
+		<!-- 作为book类外键 ,封装到book表中返回-->
+		<!--  -->
+		<association property="secondCate" javaType="com.nsc.backend.entity.SecondCategory" >
+				<id property="secondCateId" column="secondCate_id"/>
+				<result property="secondCateName" column="secondCate_name"/>
+		</association>		
+	</resultMap>
+
      <!--畅销 换一换  -->
-      <select id="cBestSelling" resultType="java.util.Map">
+      <select id="cBestSelling" resultMap="bookResultMap">
            select
            book.*
            from book,orderitem
@@ -15,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </select>
       
       <!-- 降价-换一换 -->
-      <select id="cPrice" resultType="java.util.Map">
+      <select id="cPrice" resultMap="bookResultMap">
            select
            book.*
            from book
@@ -24,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </select>
       
       <!-- 文学小说-换一换 -->
-      <select id="cNovel" resultType="java.util.Map">
+      <select id="cNovel" resultMap="bookResultMap">
            select 
            book.*
            from book
@@ -34,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </select>
       
       <!-- 人文历史-换一换 -->
-      <select id="cHistory" resultType="java.util.Map">
+      <select id="cHistory" resultMap="bookResultMap">
            select 
            book.*
            from book
@@ -44,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </select>
       
       <!-- 经济管理-换一换 -->
-      <select id="cEconomic" resultType="java.util.Map">
+      <select id="cEconomic" resultMap="bookResultMap">
            select 
            book.*
            from book
@@ -54,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </select>
       
        <!-- 教育学习-换一换 -->
-       <select id="cEducation" resultType="java.util.Map">
+       <select id="cEducation" resultMap="bookResultMap">
            select 
            book.*
            from book
@@ -64,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </select>
 
          <!-- IT科技-换一换 -->
-       <select id="cTechnology" resultType="java.util.Map">
+       <select id="cTechnology" resultMap="bookResultMap">
            select 
            book.*
            from book

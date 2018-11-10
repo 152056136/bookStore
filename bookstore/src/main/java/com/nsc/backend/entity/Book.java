@@ -53,45 +53,6 @@ public class Book {
 		private	Distributor distributor;
 		private Integer storeId; 
 		private String storeName;
-		
-		
-		
-		public Integer getStoreId() {
-			return storeId;
-		}
-		public void setStoreId(Integer storeId) {
-			this.storeId = storeId;
-		}
-		public String getStoreName() {
-			return storeName;
-		}
-		public void setStoreName(String storeName) {
-			this.storeName = storeName;
-		}
-		public String getBookPicture() {
-			return bookPicture;
-		}
-		public void setBookPicture(String bookPicture) {
-			this.bookPicture = bookPicture;
-		}
-		public Double getOrderFreight() {
-			return orderFreight;
-		}
-		public void setOrderFreight(Double orderFreight) {
-			this.orderFreight = orderFreight;
-		}
-		public Integer getStore() {
-			return storeId;
-		}
-		public void setStore(Integer storeId) {
-			this.storeId = storeId;
-		}
-		public Distributor getDistributor() {
-			return distributor;
-		}
-		public void setDistributor(Distributor distributor) {
-			this.distributor = distributor;
-		}
 		public Integer getBookId() {
 			return bookId;
 		}
@@ -110,7 +71,12 @@ public class Book {
 		public void setBookName(String bookName) {
 			this.bookName = bookName;
 		}
-		
+		public Double getBookUnitPrice() {
+			return bookUnitPrice;
+		}
+		public void setBookUnitPrice(Double bookUnitPrice) {
+			this.bookUnitPrice = bookUnitPrice;
+		}
 		public String getBookPreface() {
 			return bookPreface;
 		}
@@ -141,7 +107,6 @@ public class Book {
 		public void setBookAuthor(String bookAuthor) {
 			this.bookAuthor = bookAuthor;
 		}
-		
 		public Date getBookPubTime() {
 			return bookPubTime;
 		}
@@ -154,12 +119,23 @@ public class Book {
 		public void setBookPriTime(Date bookPriTime) {
 			this.bookPriTime = bookPriTime;
 		}
-		
+		public String getBookEdtion() {
+			return bookEdtion;
+		}
+		public void setBookEdtion(String bookEdtion) {
+			this.bookEdtion = bookEdtion;
+		}
 		public String getBookImpression() {
 			return bookImpression;
 		}
 		public void setBookImpression(String bookImpression) {
 			this.bookImpression = bookImpression;
+		}
+		public String getBookSize() {
+			return bookSize;
+		}
+		public void setBookSize(String bookSize) {
+			this.bookSize = bookSize;
 		}
 		public String getBookPaper() {
 			return bookPaper;
@@ -197,33 +173,6 @@ public class Book {
 		public void setBookValidityPeriod(Date bookValidityPeriod) {
 			this.bookValidityPeriod = bookValidityPeriod;
 		}
-		
-		
-		public Category getCategory() {
-			return category;
-		}
-		public void setCategory(Category category) {
-			this.category = category;
-		}
-		
-		public Double getBookUnitPrice() {
-			return bookUnitPrice;
-		}
-		public void setBookUnitPrice(Double bookUnitPrice) {
-			this.bookUnitPrice = bookUnitPrice;
-		}
-		public String getBookEdtion() {
-			return bookEdtion;
-		}
-		public void setBookEdtion(String bookEdtion) {
-			this.bookEdtion = bookEdtion;
-		}
-		public String getBookSize() {
-			return bookSize;
-		}
-		public void setBookSize(String bookSize) {
-			this.bookSize = bookSize;
-		}
 		public String getBookOriginalPrice() {
 			return bookOriginalPrice;
 		}
@@ -260,11 +209,23 @@ public class Book {
 		public void setBookPublicSort(String bookPublicSort) {
 			this.bookPublicSort = bookPublicSort;
 		}
+		public String getBookScores() {
+			return bookScores;
+		}
+		public void setBookScores(String bookScores) {
+			this.bookScores = bookScores;
+		}
 		public String getBookCode() {
 			return bookCode;
 		}
 		public void setBookCode(String bookCode) {
 			this.bookCode = bookCode;
+		}
+		public String getBookPicture() {
+			return bookPicture;
+		}
+		public void setBookPicture(String bookPicture) {
+			this.bookPicture = bookPicture;
 		}
 		public String getBookTitles() {
 			return bookTitles;
@@ -278,11 +239,11 @@ public class Book {
 		public void setBookMeasurementUnit(String bookMeasurementUnit) {
 			this.bookMeasurementUnit = bookMeasurementUnit;
 		}
-		public String getBookScores() {
-			return bookScores;
+		public String getPublish_house() {
+			return publish_house;
 		}
-		public void setBookScores(String bookScores) {
-			this.bookScores = bookScores;
+		public void setPublish_house(String publish_house) {
+			this.publish_house = publish_house;
 		}
 		public Integer getBookDiscount() {
 			return bookDiscount;
@@ -296,6 +257,18 @@ public class Book {
 		public void setBookNote(String bookNote) {
 			this.bookNote = bookNote;
 		}
+		public Double getOrderFreight() {
+			return orderFreight;
+		}
+		public void setOrderFreight(Double orderFreight) {
+			this.orderFreight = orderFreight;
+		}
+		public Category getCategory() {
+			return category;
+		}
+		public void setCategory(Category category) {
+			this.category = category;
+		}
 		public SecondCategory getSecondCate() {
 			return secondCate;
 		}
@@ -308,12 +281,27 @@ public class Book {
 		public void setThirdCate(ThirdCategory thirdCate) {
 			this.thirdCate = thirdCate;
 		}
-		public String getPublish_house() {
-			return publish_house;
+		public Distributor getDistributor() {
+			return distributor;
 		}
-		public void setPublish_house(String publish_house) {
-			this.publish_house = publish_house;
+		public void setDistributor(Distributor distributor) {
+			this.distributor = distributor;
 		}
+		public Integer getStoreId() {
+			return storeId;
+		}
+		public void setStoreId(Integer storeId) {
+			this.storeId = storeId;
+		}
+		public String getStoreName() {
+			return storeName;
+		}
+		public void setStoreName(String storeName) {
+			this.storeName = storeName;
+		}
+		
+		
+		
 		
 		
 		

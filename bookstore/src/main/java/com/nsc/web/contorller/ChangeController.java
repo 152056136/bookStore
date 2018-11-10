@@ -47,6 +47,7 @@ public class ChangeController {
 	  
 	     @RequestMapping(value="cNovel")
 		 public @ResponseBody ArrayList<Book> cNovel(Integer cateId ,Integer start,Integer end){
+	    	 System.out.println("This is cNovel");
 			 arrChange=changservice.cNovel(cateId,start,end);
 			 return arrChange;
 		 }

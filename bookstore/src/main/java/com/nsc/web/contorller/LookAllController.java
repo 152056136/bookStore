@@ -24,7 +24,8 @@ public class LookAllController {
 	private PageBean<Book> pageBean = new PageBean<Book>();
 	@Autowired
 	private IBookService ibookservice;
-
+	
+	
     /**
      * 畅销-查看全部    
      */

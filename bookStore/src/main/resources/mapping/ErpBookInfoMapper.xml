@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nsc.backend.mapper.ErpBookInfoMapper">
+   <resultMap type="book" id="bookResultMap">
+		<id     column="id" property="id"/>
+		<result column="Book_ID" property="Book_ID"/>
+		<result column="Book_Name" property="Book_Name"/>
+		<result column="ISBN" property="ISBN"/>
+		<result column="Sort1" property="Sort1"/>
+		<result column="Sort2" property="Sort2"/>
+		<result column="Editor_house" property="Editor_house"/>
+		<result column="Duty_editor" property="Duty_editor"/>
+		<result column="Author" property="Author"/>
+		<result column="if_Series" property="if_Series"/>
+		<result column="SeriesAb" property="SeriesAb"/>
+		<result column="Unit_Price" property="Unit_Price"/>
+		<result column="Tatol_Printnumber_Begin" property="Tatol_Printnumber_Begin"/>
+		<result column="Tatol_Printnumber_End" property="Tatol_Printnumber_End"/>
+		<result column="Exclusive_num" property="Exclusive_num"/>
+		<result column="Sample_amount" property="Sample_amount"/>
+		<result column="Publish_Date" property="Publish_Date"/>
+		<result column="Edition" property="Edition"/>
+		<result column="Orders" property="Orders"/>
+		<result column="Book_No" property="Book_No"/>
+		<result column="Reprint" property="Reprint"/>
+		<result column="Frame" property="Frame"/>
+		<result column="Weight_Per_Volume" property="Weight_Per_Volume"/>
+		<result column="Volume_Per_Bag" property="Volume_Per_Bag"/>
+		<result column="Bag_Per_RailwayPiece" property="Bag_Per_RailwayPiece"/>
+		<result column="Receive_Discount" property="Receive_Discount"/>
+		<result column="Min_Discount" property="Min_Discount"/>
+		<result column="Min_Storage" property="Min_Storage"/>
+		<result column="Register_Date" property="Register_Date"/>
+		<result column="Register_Person" property="Register_Person"/>
+		<result column="book_code" property="book_code"/>
+		<result column="provider" property="provider"/>
+		<result column="if_foreign" property="if_foreign"/>
+		<result column="older" property="older"/>
+		<result column="backup_date" property="backup_date"/>
+		<result column="Publish_house" property="Publish_house"/>
+		<result column="cn_mark" property="cn_mark"/>
+		<result column="First_Receive_date" property="First_Receive_date"/>
+		<result column="if_repair_date" property="if_repair_date"/>
+		<result column="Publish_Sort" property="Publish_Sort"/>
+		<result column="Sort3" property="Sort3"/>
+		<result column="Bar_code" property="Bar_code"/>
+		<result column="Tax_rate" property="Tax_rate"/>
+		<result column="sort1_id" property="sort1_id"/>
+		<result column="ISRC" property="ISRC"/>
+		<result column="fh_flag" property="fh_flag"/>
+		<result column="th_flag" property="th_flag"/>
+		<result column="check_flag" property="check_flag"/>
+		<result column="if_duties" property="if_duties"/>
+		<result column="if_initiative" property="if_initiative"/>
+		<result column="update_time" property="update_time"/>
+		<result column="if_export" property="if_export"/>
+		<result column="series_name" property="series_name"/>
+		<result column="Key_word3" property="Key_word3"/>
+		<result column="Key_word4" property="Key_word4"/>
+		<result column="uf_code" property="uf_code"/>
+		<result column="uf_ch_code" property="uf_ch_code"/>	
+		<result column="update_or_insert" property="update_or_insert"/>
+		<result column="minrepertory" property="minrepertory"/>
+		<result column="saferepertory" property="saferepertory"/>
+		<result column="discount" property="discount"/>
+		<result column="if_specials" property="if_specials"/>
+		<result column="Format" property="Format"/>
+		<result column="Word_face" property="Word_face"/>
+		<result column="goodsallocation" property="goodsallocation"/>
+		<result column="Ornament" property="Ornament"/>
+		<result column="Words" property="Words"/>		
+		<result column="Finished_size" property="Finished_size"/>
+		<result column="Print_color" property="Print_color"/>
+		<result column="Reader" property="Reader"/>
+		<result column="default_location" property="default_location"/>
+		<result column="retail_discount" property="retail_discount"/>
+		<result column="ismanual" property="ismanual"/>
+		<result column="new_publish_house" property="new_publish_house"/>
+		<result column="online_discount" property="online_discount"/>
+		<result column="gift" property="gift"/>		
+	</resultMap>
+	<!-- <resultMap type="ErpBookInfo" id="Bookdata">
+		<id     column="id" property="id"/>
+		<result column="price" property="price"/>
+		<result column="data" property="data"/>
+		<result column="create_date" property="create_date"/>
+		<result column="update_date" property="update_date"/>
+		<result column="outer_id" property="outer_id"/>
+		<result column="shopid" property="shopid"/>
+		<result column="num_iid" property="num_iid"/>
+		<result column="title" property="title"/>
+		<result column="props_name" property="props_name"/>
+		<result column="version" property="version"/>
+		<result column="pic_url" property="pic_url"/>
+		<result column="author" property="author"/>
+		<result column="print_date" property="print_date"/>
+		<result column="print_house" property="print_house"/>
+		<result column="frame" property="frame"/>
+		<result column="if_series" property="if_series"/>
+		<result column="is_update" property="is_update"/>
+		<result column="is_show" property="is_show"/>		
+	</resultMap> -->
+	
+
+	
+	
+	
+	
+	<sql id="data">
+	   title,props_name,version,pic_url,author,print_date,print_house,frame
+	</sql>
+	
+	<!-- <select id="selData"  resultType="Map">
+		select  
+		    <include refid="data"></include>
+		from order_originalgoods
+		where shopid = '2' AND contrast_flag = '1'
+		order by num_iid desc
+		limit 1,20
+		
+	</select> -->
+	
+	<select id="selData"  resultType="java.util.Map">
+		select  
+		    <include refid="data"></include>
+		from order_originalgoods
+		where shopid = '2' AND contrast_flag = '1'
+		order by num_iid desc
+		limit 1,20
+		
+	</select>
+	
+	
+	<!-- <select id="selData2"  resultType="Map">
+	
+		
+		select  
+		    <include refid="data"></include>
+		from order_originalgoods
+		where shopid = '2' AND contrast_flag = '1'
+		order by num_id desc
+		limit 1,1
+	</select> -->
+	
+	<insert id="insert"  parameterType="java.util.List" useGeneratedKeys="true">
+	     insert into book(
+	      book_name,
+	      book_imgUrl,
+	      publish_house,
+	      )
+	     values(
+	         <foreach collection="list" item="item" index="index" separator="," >
+			      (
+			           
+				       #{item.title,javaType=String,jdbcType=VARCHAR},
+				       #{item.pic_url,javaType=String,jdbcType=VARCHAR},	             
+				       #{item.print_house,javaType=String,jdbcType=VARCHAR}
+				  )
+             </foreach>
+	     )
+	     
+	     
+	</insert>
+	
+	
+	
+<!-- 	<insert id="insert2"  parameterType="java.util.List">
+	     insert into book(
+	     book_name,
+	     book_preface,
+	     book_edtion,
+	     book_imgUrl,
+	     book_author,
+	     book_pubTime,
+	     publish_house,
+	     book_packing
+	     )
+	     values(
+
+
+			        ${item.title},
+			        ${item.props_name},
+			        ${item.version},
+			        ${item.pic_url},
+			        ${item.author},
+			        ${item.print_date},
+			        ${item.print_house},
+			        ${item.frame}
+			     )
+	     )
+	     
+	</insert> -->
+</mapper>
