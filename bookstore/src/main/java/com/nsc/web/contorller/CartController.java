@@ -301,7 +301,7 @@ public class CartController {
 	
 	@RequestMapping("updateCount")
 	@ResponseBody
-	void updateCount(@RequestBody String para) {
+	BackState updateCount(@RequestBody String para) {
 		String s= "{cartList:[{cartId:64,cartCount:5},{cartId:65,cartCount:9},{cartId:68,cartCount:3}]}";
 		
 		JSONObject json = JSONObject.parseObject(para);
@@ -319,7 +319,9 @@ public class CartController {
 			  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
 		}
 		cartServiceImpl.updateCount(cartmap);
-		
+		BackState bs = new BackState();
+		bs.setStateName("HTTP State 200");
+		return bs;
 	}
 	
 	
