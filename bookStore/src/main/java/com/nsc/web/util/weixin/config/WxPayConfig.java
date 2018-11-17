@@ -11,9 +11,9 @@ public class WxPayConfig {
     //微信支付的商户id
     public static final String mch_id = "1349830601";
     //微信支付的商户密钥
-    public static final String key = "BeiJingNanSheCunSoftwareCoLtddcb";
+    public static final String key = "DcbBeiJingNanSheCunSoftwareCoLtd";
     //支付成功后的服务器回调url(本地测试使用http)
-    public static final String notify_url = "http://xcxpxn.natappfree.cc/bookStore/weixin/wxNotify";
+    public static final String notify_url = "http://phc446.natappfree.cc/bookStore/weixin/wxNotify";
     //public static final String notify_url = "http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php";
     //签名方式
     public static final String SIGNTYPE = "MD5";
